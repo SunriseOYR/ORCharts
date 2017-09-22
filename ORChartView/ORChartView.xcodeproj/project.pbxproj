@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		891723371F73BB1400181F60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723361F73BB1400181F60 /* main.m */; };
+		8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723391F73BB1400181F60 /* AppDelegate.m */; };
+		8917233D1F73BB1400181F60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917233C1F73BB1400181F60 /* ViewController.m */; };
+		891723401F73BB1400181F60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8917233E1F73BB1400181F60 /* Main.storyboard */; };
+		891723421F73BB1400181F60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 891723411F73BB1400181F60 /* Assets.xcassets */; };
+		891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891723431F73BB1400181F60 /* LaunchScreen.storyboard */; };
+		891723501F73BB1400181F60 /* ORChartViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917234F1F73BB1400181F60 /* ORChartViewTests.m */; };
+		8917235B1F73BB1400181F60 /* ORChartViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917235A1F73BB1400181F60 /* ORChartViewUITests.m */; };
+		891723751F73BB2D00181F60 /* ORChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917236A1F73BB2D00181F60 /* ORChartView.m */; };
+		891723761F73BB2D00181F60 /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236B1F73BB2D00181F60 /* Oval.png */; };
+		891723771F73BB2D00181F60 /* Oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236C1F73BB2D00181F60 /* Oval@2x.png */; };
+		891723781F73BB2D00181F60 /* Oval@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236D1F73BB2D00181F60 /* Oval@3x.png */; };
+		891723791F73BB2D00181F60 /* Ovalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236E1F73BB2D00181F60 /* Ovalk.png */; };
+		8917237A1F73BB2D00181F60 /* Ovalk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236F1F73BB2D00181F60 /* Ovalk@2x.png */; };
+		8917237B1F73BB2D00181F60 /* Ovalk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891723701F73BB2D00181F60 /* Ovalk@3x.png */; };
+		8917237C1F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */; };
+		8917237D1F73BB2D00181F60 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723741F73BB2D00181F60 /* UIColor+expanded.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8917234C1F73BB1400181F60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8917232A1F73BB1400181F60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 891723311F73BB1400181F60;
+			remoteInfo = ORChartView;
+		};
+		891723571F73BB1400181F60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8917232A1F73BB1400181F60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 891723311F73BB1400181F60;
+			remoteInfo = ORChartView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		891723321F73BB1400181F60 /* ORChartView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORChartView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		891723361F73BB1400181F60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		891723381F73BB1400181F60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		891723391F73BB1400181F60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8917233B1F73BB1400181F60 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8917233C1F73BB1400181F60 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8917233F1F73BB1400181F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		891723411F73BB1400181F60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		891723441F73BB1400181F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		891723461F73BB1400181F60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8917234B1F73BB1400181F60 /* ORChartViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORChartViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8917234F1F73BB1400181F60 /* ORChartViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORChartViewTests.m; sourceTree = "<group>"; };
+		891723511F73BB1400181F60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		891723561F73BB1400181F60 /* ORChartViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORChartViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8917235A1F73BB1400181F60 /* ORChartViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORChartViewUITests.m; sourceTree = "<group>"; };
+		8917235C1F73BB1400181F60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		891723691F73BB2D00181F60 /* ORChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartView.h; sourceTree = "<group>"; };
+		8917236A1F73BB2D00181F60 /* ORChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartView.m; sourceTree = "<group>"; };
+		8917236B1F73BB2D00181F60 /* Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Oval.png; sourceTree = "<group>"; };
+		8917236C1F73BB2D00181F60 /* Oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@2x.png"; sourceTree = "<group>"; };
+		8917236D1F73BB2D00181F60 /* Oval@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@3x.png"; sourceTree = "<group>"; };
+		8917236E1F73BB2D00181F60 /* Ovalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ovalk.png; sourceTree = "<group>"; };
+		8917236F1F73BB2D00181F60 /* Ovalk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@2x.png"; sourceTree = "<group>"; };
+		891723701F73BB2D00181F60 /* Ovalk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@3x.png"; sourceTree = "<group>"; };
+		891723711F73BB2D00181F60 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
+		891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
+		891723731F73BB2D00181F60 /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
+		891723741F73BB2D00181F60 /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8917232F1F73BB1400181F60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723481F73BB1400181F60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723531F73BB1400181F60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		891723291F73BB1400181F60 = {
+			isa = PBXGroup;
+			children = (
+				891723341F73BB1400181F60 /* ORChartView */,
+				8917234E1F73BB1400181F60 /* ORChartViewTests */,
+				891723591F73BB1400181F60 /* ORChartViewUITests */,
+				891723331F73BB1400181F60 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		891723331F73BB1400181F60 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				891723321F73BB1400181F60 /* ORChartView.app */,
+				8917234B1F73BB1400181F60 /* ORChartViewTests.xctest */,
+				891723561F73BB1400181F60 /* ORChartViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		891723341F73BB1400181F60 /* ORChartView */ = {
+			isa = PBXGroup;
+			children = (
+				891723681F73BB2D00181F60 /* ORChartView */,
+				891723381F73BB1400181F60 /* AppDelegate.h */,
+				891723391F73BB1400181F60 /* AppDelegate.m */,
+				8917233B1F73BB1400181F60 /* ViewController.h */,
+				8917233C1F73BB1400181F60 /* ViewController.m */,
+				8917233E1F73BB1400181F60 /* Main.storyboard */,
+				891723411F73BB1400181F60 /* Assets.xcassets */,
+				891723431F73BB1400181F60 /* LaunchScreen.storyboard */,
+				891723461F73BB1400181F60 /* Info.plist */,
+				891723351F73BB1400181F60 /* Supporting Files */,
+			);
+			path = ORChartView;
+			sourceTree = "<group>";
+		};
+		891723351F73BB1400181F60 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				891723361F73BB1400181F60 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8917234E1F73BB1400181F60 /* ORChartViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				8917234F1F73BB1400181F60 /* ORChartViewTests.m */,
+				891723511F73BB1400181F60 /* Info.plist */,
+			);
+			path = ORChartViewTests;
+			sourceTree = "<group>";
+		};
+		891723591F73BB1400181F60 /* ORChartViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8917235A1F73BB1400181F60 /* ORChartViewUITests.m */,
+				8917235C1F73BB1400181F60 /* Info.plist */,
+			);
+			path = ORChartViewUITests;
+			sourceTree = "<group>";
+		};
+		891723681F73BB2D00181F60 /* ORChartView */ = {
+			isa = PBXGroup;
+			children = (
+				891723691F73BB2D00181F60 /* ORChartView.h */,
+				8917236A1F73BB2D00181F60 /* ORChartView.m */,
+				8917236B1F73BB2D00181F60 /* Oval.png */,
+				8917236C1F73BB2D00181F60 /* Oval@2x.png */,
+				8917236D1F73BB2D00181F60 /* Oval@3x.png */,
+				8917236E1F73BB2D00181F60 /* Ovalk.png */,
+				8917236F1F73BB2D00181F60 /* Ovalk@2x.png */,
+				891723701F73BB2D00181F60 /* Ovalk@3x.png */,
+				891723711F73BB2D00181F60 /* UIButton+EnlargeTouchArea.h */,
+				891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */,
+				891723731F73BB2D00181F60 /* UIColor+expanded.h */,
+				891723741F73BB2D00181F60 /* UIColor+expanded.m */,
+			);
+			path = ORChartView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		891723311F73BB1400181F60 /* ORChartView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8917235F1F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartView" */;
+			buildPhases = (
+				8917232E1F73BB1400181F60 /* Sources */,
+				8917232F1F73BB1400181F60 /* Frameworks */,
+				891723301F73BB1400181F60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ORChartView;
+			productName = ORChartView;
+			productReference = 891723321F73BB1400181F60 /* ORChartView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8917234A1F73BB1400181F60 /* ORChartViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 891723621F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewTests" */;
+			buildPhases = (
+				891723471F73BB1400181F60 /* Sources */,
+				891723481F73BB1400181F60 /* Frameworks */,
+				891723491F73BB1400181F60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8917234D1F73BB1400181F60 /* PBXTargetDependency */,
+			);
+			name = ORChartViewTests;
+			productName = ORChartViewTests;
+			productReference = 8917234B1F73BB1400181F60 /* ORChartViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		891723551F73BB1400181F60 /* ORChartViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 891723651F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewUITests" */;
+			buildPhases = (
+				891723521F73BB1400181F60 /* Sources */,
+				891723531F73BB1400181F60 /* Frameworks */,
+				891723541F73BB1400181F60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				891723581F73BB1400181F60 /* PBXTargetDependency */,
+			);
+			name = ORChartViewUITests;
+			productName = ORChartViewUITests;
+			productReference = 891723561F73BB1400181F60 /* ORChartViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8917232A1F73BB1400181F60 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "欧阳荣";
+				TargetAttributes = {
+					891723311F73BB1400181F60 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					8917234A1F73BB1400181F60 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 891723311F73BB1400181F60;
+					};
+					891723551F73BB1400181F60 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 891723311F73BB1400181F60;
+					};
+				};
+			};
+			buildConfigurationList = 8917232D1F73BB1400181F60 /* Build configuration list for PBXProject "ORChartView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 891723291F73BB1400181F60;
+			productRefGroup = 891723331F73BB1400181F60 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				891723311F73BB1400181F60 /* ORChartView */,
+				8917234A1F73BB1400181F60 /* ORChartViewTests */,
+				891723551F73BB1400181F60 /* ORChartViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		891723301F73BB1400181F60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8917237B1F73BB2D00181F60 /* Ovalk@3x.png in Resources */,
+				891723771F73BB2D00181F60 /* Oval@2x.png in Resources */,
+				891723781F73BB2D00181F60 /* Oval@3x.png in Resources */,
+				891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */,
+				891723791F73BB2D00181F60 /* Ovalk.png in Resources */,
+				891723761F73BB2D00181F60 /* Oval.png in Resources */,
+				891723421F73BB1400181F60 /* Assets.xcassets in Resources */,
+				8917237A1F73BB2D00181F60 /* Ovalk@2x.png in Resources */,
+				891723401F73BB1400181F60 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723491F73BB1400181F60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723541F73BB1400181F60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8917232E1F73BB1400181F60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
+				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
+				8917237D1F73BB2D00181F60 /* UIColor+expanded.m in Sources */,
+				8917237C1F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m in Sources */,
+				891723751F73BB2D00181F60 /* ORChartView.m in Sources */,
+				891723371F73BB1400181F60 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723471F73BB1400181F60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				891723501F73BB1400181F60 /* ORChartViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		891723521F73BB1400181F60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8917235B1F73BB1400181F60 /* ORChartViewUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8917234D1F73BB1400181F60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 891723311F73BB1400181F60 /* ORChartView */;
+			targetProxy = 8917234C1F73BB1400181F60 /* PBXContainerItemProxy */;
+		};
+		891723581F73BB1400181F60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 891723311F73BB1400181F60 /* ORChartView */;
+			targetProxy = 891723571F73BB1400181F60 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8917233E1F73BB1400181F60 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8917233F1F73BB1400181F60 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		891723431F73BB1400181F60 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				891723441F73BB1400181F60 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8917235D1F73BB1400181F60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8917235E1F73BB1400181F60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		891723601F73BB1400181F60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ORChartView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		891723611F73BB1400181F60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ORChartView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		891723631F73BB1400181F60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ORChartViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORChartView.app/ORChartView";
+			};
+			name = Debug;
+		};
+		891723641F73BB1400181F60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ORChartViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORChartView.app/ORChartView";
+			};
+			name = Release;
+		};
+		891723661F73BB1400181F60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ORChartViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ORChartView;
+			};
+			name = Debug;
+		};
+		891723671F73BB1400181F60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ORChartViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ORChartView;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8917232D1F73BB1400181F60 /* Build configuration list for PBXProject "ORChartView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8917235D1F73BB1400181F60 /* Debug */,
+				8917235E1F73BB1400181F60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8917235F1F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				891723601F73BB1400181F60 /* Debug */,
+				891723611F73BB1400181F60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		891723621F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				891723631F73BB1400181F60 /* Debug */,
+				891723641F73BB1400181F60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		891723651F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				891723661F73BB1400181F60 /* Debug */,
+				891723671F73BB1400181F60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8917232A1F73BB1400181F60 /* Project object */;
+}
