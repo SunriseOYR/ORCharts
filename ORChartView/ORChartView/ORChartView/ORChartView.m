@@ -455,6 +455,7 @@
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(leftLabel.center.x - 0.5, 0, 1, _lineView.bounds.size.height)];
             label.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
             [_curveView addSubview:label];
+            [_curveView sendSubviewToBack:label];
         }
     }
 }

@@ -28,8 +28,8 @@
     _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:@[@"90",@"30",@"10",@"20.5",@"91.5",@"44",@"66.6"] countFoyY:7];
 
     
-//    _chartView.titleForX = @"日期/日";
-//    _chartView.titleForY = @"收益/元";
+    _chartView.titleForX = @"日期/日";
+    _chartView.titleForY = @"收益/元";
     
     [self.view addSubview:_chartView];
 
