@@ -17,6 +17,8 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray<NSString *>*)dataSource  countFoyY:(NSInteger)countY;
 
+- (instancetype)initWithFrame:(CGRect)frame countFoyY:(NSInteger)countY;
+
 //数据源 （赋值可重绘）
 @property (nonatomic,strong) NSArray *dataSource;
 

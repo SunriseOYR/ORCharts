@@ -16,14 +16,14 @@
 		891723501F73BB1400181F60 /* ORChartViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917234F1F73BB1400181F60 /* ORChartViewTests.m */; };
 		8917235B1F73BB1400181F60 /* ORChartViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917235A1F73BB1400181F60 /* ORChartViewUITests.m */; };
 		891723751F73BB2D00181F60 /* ORChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917236A1F73BB2D00181F60 /* ORChartView.m */; };
-		891723761F73BB2D00181F60 /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236B1F73BB2D00181F60 /* Oval.png */; };
-		891723771F73BB2D00181F60 /* Oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236C1F73BB2D00181F60 /* Oval@2x.png */; };
-		891723781F73BB2D00181F60 /* Oval@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236D1F73BB2D00181F60 /* Oval@3x.png */; };
-		891723791F73BB2D00181F60 /* Ovalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236E1F73BB2D00181F60 /* Ovalk.png */; };
-		8917237A1F73BB2D00181F60 /* Ovalk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8917236F1F73BB2D00181F60 /* Ovalk@2x.png */; };
-		8917237B1F73BB2D00181F60 /* Ovalk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891723701F73BB2D00181F60 /* Ovalk@3x.png */; };
-		8917237C1F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */; };
-		8917237D1F73BB2D00181F60 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723741F73BB2D00181F60 /* UIColor+expanded.m */; };
+		89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */; };
+		89B428EC1F95F42E00452677 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B428E31F95F42E00452677 /* UIColor+expanded.m */; };
+		89B428ED1F95F42E00452677 /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E51F95F42E00452677 /* Oval.png */; };
+		89B428EE1F95F42E00452677 /* Oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E61F95F42E00452677 /* Oval@2x.png */; };
+		89B428EF1F95F42E00452677 /* Oval@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E71F95F42E00452677 /* Oval@3x.png */; };
+		89B428F01F95F42E00452677 /* Ovalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E81F95F42E00452677 /* Ovalk.png */; };
+		89B428F11F95F42E00452677 /* Ovalk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E91F95F42E00452677 /* Ovalk@2x.png */; };
+		89B428F21F95F42E00452677 /* Ovalk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428EA1F95F42E00452677 /* Ovalk@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,16 +62,16 @@
 		8917235C1F73BB1400181F60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		891723691F73BB2D00181F60 /* ORChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartView.h; sourceTree = "<group>"; };
 		8917236A1F73BB2D00181F60 /* ORChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartView.m; sourceTree = "<group>"; };
-		8917236B1F73BB2D00181F60 /* Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Oval.png; sourceTree = "<group>"; };
-		8917236C1F73BB2D00181F60 /* Oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@2x.png"; sourceTree = "<group>"; };
-		8917236D1F73BB2D00181F60 /* Oval@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@3x.png"; sourceTree = "<group>"; };
-		8917236E1F73BB2D00181F60 /* Ovalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ovalk.png; sourceTree = "<group>"; };
-		8917236F1F73BB2D00181F60 /* Ovalk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@2x.png"; sourceTree = "<group>"; };
-		891723701F73BB2D00181F60 /* Ovalk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@3x.png"; sourceTree = "<group>"; };
-		891723711F73BB2D00181F60 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
-		891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
-		891723731F73BB2D00181F60 /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
-		891723741F73BB2D00181F60 /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+		89B428E01F95F42E00452677 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
+		89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
+		89B428E21F95F42E00452677 /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
+		89B428E31F95F42E00452677 /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+		89B428E51F95F42E00452677 /* Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Oval.png; sourceTree = "<group>"; };
+		89B428E61F95F42E00452677 /* Oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@2x.png"; sourceTree = "<group>"; };
+		89B428E71F95F42E00452677 /* Oval@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@3x.png"; sourceTree = "<group>"; };
+		89B428E81F95F42E00452677 /* Ovalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ovalk.png; sourceTree = "<group>"; };
+		89B428E91F95F42E00452677 /* Ovalk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@2x.png"; sourceTree = "<group>"; };
+		89B428EA1F95F42E00452677 /* Ovalk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,20 +165,36 @@
 		891723681F73BB2D00181F60 /* ORChartView */ = {
 			isa = PBXGroup;
 			children = (
+				89B428DF1F95F42E00452677 /* categary */,
+				89B428E41F95F42E00452677 /* image */,
 				891723691F73BB2D00181F60 /* ORChartView.h */,
 				8917236A1F73BB2D00181F60 /* ORChartView.m */,
-				8917236B1F73BB2D00181F60 /* Oval.png */,
-				8917236C1F73BB2D00181F60 /* Oval@2x.png */,
-				8917236D1F73BB2D00181F60 /* Oval@3x.png */,
-				8917236E1F73BB2D00181F60 /* Ovalk.png */,
-				8917236F1F73BB2D00181F60 /* Ovalk@2x.png */,
-				891723701F73BB2D00181F60 /* Ovalk@3x.png */,
-				891723711F73BB2D00181F60 /* UIButton+EnlargeTouchArea.h */,
-				891723721F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m */,
-				891723731F73BB2D00181F60 /* UIColor+expanded.h */,
-				891723741F73BB2D00181F60 /* UIColor+expanded.m */,
 			);
 			path = ORChartView;
+			sourceTree = "<group>";
+		};
+		89B428DF1F95F42E00452677 /* categary */ = {
+			isa = PBXGroup;
+			children = (
+				89B428E01F95F42E00452677 /* UIButton+EnlargeTouchArea.h */,
+				89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */,
+				89B428E21F95F42E00452677 /* UIColor+expanded.h */,
+				89B428E31F95F42E00452677 /* UIColor+expanded.m */,
+			);
+			path = categary;
+			sourceTree = "<group>";
+		};
+		89B428E41F95F42E00452677 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				89B428E51F95F42E00452677 /* Oval.png */,
+				89B428E61F95F42E00452677 /* Oval@2x.png */,
+				89B428E71F95F42E00452677 /* Oval@3x.png */,
+				89B428E81F95F42E00452677 /* Ovalk.png */,
+				89B428E91F95F42E00452677 /* Ovalk@2x.png */,
+				89B428EA1F95F42E00452677 /* Ovalk@3x.png */,
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,14 +303,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8917237B1F73BB2D00181F60 /* Ovalk@3x.png in Resources */,
-				891723771F73BB2D00181F60 /* Oval@2x.png in Resources */,
-				891723781F73BB2D00181F60 /* Oval@3x.png in Resources */,
+				89B428F21F95F42E00452677 /* Ovalk@3x.png in Resources */,
+				89B428EE1F95F42E00452677 /* Oval@2x.png in Resources */,
+				89B428EF1F95F42E00452677 /* Oval@3x.png in Resources */,
 				891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */,
-				891723791F73BB2D00181F60 /* Ovalk.png in Resources */,
-				891723761F73BB2D00181F60 /* Oval.png in Resources */,
+				89B428F01F95F42E00452677 /* Ovalk.png in Resources */,
+				89B428ED1F95F42E00452677 /* Oval.png in Resources */,
 				891723421F73BB1400181F60 /* Assets.xcassets in Resources */,
-				8917237A1F73BB2D00181F60 /* Ovalk@2x.png in Resources */,
+				89B428F11F95F42E00452677 /* Ovalk@2x.png in Resources */,
 				891723401F73BB1400181F60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,8 +338,8 @@
 			files = (
 				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
-				8917237D1F73BB2D00181F60 /* UIColor+expanded.m in Sources */,
-				8917237C1F73BB2D00181F60 /* UIButton+EnlargeTouchArea.m in Sources */,
+				89B428EC1F95F42E00452677 /* UIColor+expanded.m in Sources */,
+				89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */,
 				891723751F73BB2D00181F60 /* ORChartView.m in Sources */,
 				891723371F73BB1400181F60 /* main.m in Sources */,
 			);
@@ -557,6 +573,7 @@
 				891723611F73BB1400181F60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		891723621F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewTests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +582,7 @@
 				891723641F73BB1400181F60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		891723651F73BB1400181F60 /* Build configuration list for PBXNativeTarget "ORChartViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -573,6 +591,7 @@
 				891723671F73BB1400181F60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
