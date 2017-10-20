@@ -25,8 +25,11 @@
     
     self.view.backgroundColor = [UIColor cyanColor];
     
-    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) countFoyY:7];
+    //
+//    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) countFoyY:7];
 
+    
+    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:@[@"12", @"120", @"32.6", @"68.9",@"55.3",@"110.4", @"4.98"] countFoyY:7];
     
     _chartView.titleForX = @"日期/日";
     _chartView.titleForY = @"收益/元";

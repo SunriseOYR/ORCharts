@@ -139,6 +139,10 @@
 
 -(void)setDataSource:(NSArray *)dataSource{
     
+    if ([dataSource isEqualToArray:_dataSource] && !_reSetUIWhenSameData) {
+        return;
+    }
+    
     _dataSource = dataSource;
     [self.chartScrollView setContentOffset:CGPointZero animated:NO];
     [self resetLeftDataSource];
@@ -517,5 +521,7 @@
     }
     return aMArray;
 }
+
+
 
 @end
