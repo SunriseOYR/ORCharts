@@ -8,19 +8,21 @@
 
 #import "ORChartView.h"
 #import "UIButton+EnlargeTouchArea.h"
-#import "UIColor+Expanded.h"
 
 #define btnW 8
 #define BottowH 80
 
 @interface ORChartView ()<UIScrollViewDelegate>
 {
-    CGFloat Xmargin;//X轴方向的偏移
-    CGFloat Ymargin;//Y轴方向的偏移
-    CGPoint lastPoint;//最后一个坐标点
+    CGFloat _xMargin;//X轴方向的偏移
+    CGFloat _yMargin;//Y轴方向的偏移
+    CGPoint _lastPoint;//最后一个坐标点
     
     NSInteger _countY; //y轴增值个数
     CGFloat _leftTitleW;
+    
+    UIImage *_pointImage;
+    UIImage *_selectedPointImage;
 }
 
 @property (nonatomic,strong)UIScrollView *chartScrollView;
@@ -37,6 +39,8 @@
 @property (nonatomic,strong)CAShapeLayer *shapeLayer;
 @property (nonatomic,strong)CALayer *baseLayer;
 
+@property (nonatomic,copy)void(^block)(NSString *value, NSInteger index);
+
 
 @end
 
@@ -47,15 +51,21 @@
         self.points = [NSMutableArray array];
         self.detailLabelArr = [NSMutableArray array];
         
+        _lineColor = [UIColor colorWithRed:65/255.0 green:156/255.0 blue:187/255.0 alpha:1];
+        
         _countY = MAX(countY, 2);
         _dataSource = dataSource;
         [self resetLeftDataSource];
         
         CGFloat marginWidth = (frame.size.width-_leftTitleW - 60)/6;
-        Xmargin = marginWidth;
+        _xMargin = marginWidth;
         
         [self addDetailViews];
-        [self resetUIAndData];
+        
+        if (_dataSource != nil) {
+            [self resetUIAndData];
+        }
+        
     }
     
     return self;
@@ -92,67 +102,6 @@
     [self.lineView addSubview:self.titleLForY];
     
     self.backgroundColor = [UIColor whiteColor];
-}
-
-// getter && setter
--(UIView *)curveView{
-    if (!_curveView) {
-        _curveView = [[UIView alloc]initWithFrame:CGRectMake(5, 40, self.chartScrollView.bounds.size.width-5, self.chartScrollView.bounds.size.height)];
-    }
-    return _curveView;
-}
-
--(UIView *)lineView{
-    if (!_lineView) {
-        _lineView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame) , 0 + 40, self.chartScrollView.bounds.size.width - 5, self.chartScrollView.bounds.size.height-80)];
-    }
-    return _lineView;
-}
-
-- (UILabel *)titleLForY {
-    if (!_titleLForY) {
-        _titleLForY = [[UILabel alloc] initWithFrame:CGRectMake(-30, -30, 60, 20)];
-        _titleLForY.font = [UIFont systemFontOfSize:10.0f];
-        _titleLForY.textAlignment = kCTTextAlignmentCenter;
-        _titleLForY.textColor = [UIColor lightGrayColor];
-    }
-    return _titleLForY;
-}
-
-- (UILabel *)titleLForX {
-    if (!_titleLForX) {
-        _titleLForX = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.lineView.frame) - 90, CGRectGetMaxY(self.chartScrollView.frame) - Ymargin * 2 - 25, 60, 20)];
-        _titleLForX.font = [UIFont systemFontOfSize:10.0f];
-        _titleLForX.textAlignment = kCTTextAlignmentRight;
-        _titleLForX.textColor = [UIColor lightGrayColor];
-    }
-    return _titleLForX;
-}
-
-- (void)setTitleForY:(NSString *)titleForY {
-    _titleLForY.text = titleForY;
-}
-
-- (void)setTitleForX:(NSString *)titleForX {
-    _titleLForX.text = titleForX;
-}
-
--(void)setDataSource:(NSArray *)dataSource{
-    
-    _dataSource = dataSource;
-    [self.chartScrollView setContentOffset:CGPointZero animated:NO];
-    [self resetLeftDataSource];
-    [self resetUIAndData];
-}
-
-- (void)setIsBrokenLine:(BOOL)isBrokenLine {
-    _isBrokenLine = isBrokenLine;
-    [self setDataSource:_dataSource];
-}
-
-- (void)setIsMatrix:(BOOL)isMatrix {
-    _isMatrix = isMatrix;
-    [self setDataSource:_dataSource];
 }
 
 //重置数据源
@@ -262,7 +211,7 @@
             
             if (i == self.points.count-1) {
                 [beizer moveToPoint:nowPoint];//添加连线
-                lastPoint = nowPoint;
+                _lastPoint = nowPoint;
             }
         }
     }
@@ -270,12 +219,12 @@
     CGFloat bgViewHeight = self.lineView.bounds.size.height;
     
     //获取最后一个点的X值
-    CGFloat lastPointX = lastPoint.x;
+    CGFloat _lastPointX = _lastPoint.x;
     
     //最后一个点对应的X轴的值
-    CGPoint lastPointX1 = CGPointMake(lastPointX, bgViewHeight);
+    CGPoint _lastPointX1 = CGPointMake(_lastPointX, bgViewHeight);
     
-    [bezier1 addLineToPoint:lastPointX1];
+    [bezier1 addLineToPoint:_lastPointX1];
     
     //回到原点
     [bezier1 addLineToPoint:CGPointMake(p1.x, bgViewHeight)];
@@ -294,8 +243,9 @@
     gradientLayer.endPoint = CGPointMake(0, 1);
     gradientLayer.cornerRadius = 5;
     gradientLayer.masksToBounds = YES;
-    gradientLayer.colors = @[(__bridge id)[UIColor colorWithHexString:@"0x3C9CBD" andAlpha:0.2].CGColor,(__bridge id)[UIColor colorWithHexString:@"0x3C9CBD" andAlpha:0.1].CGColor];
+    gradientLayer.colors = [self getMaskColors];
     gradientLayer.locations = @[@(0.5f)];
+    
     
     CALayer *baseLayer = [CALayer layer];
     [baseLayer addSublayer:gradientLayer];
@@ -306,7 +256,7 @@
     CABasicAnimation *anmi1 = [CABasicAnimation animation];
     anmi1.keyPath = @"bounds";
     anmi1.duration = 2.0f;
-    anmi1.toValue = [NSValue valueWithCGRect:CGRectMake(5, 0, 2*lastPoint.x, self.curveView.bounds.size.height-0)];
+    anmi1.toValue = [NSValue valueWithCGRect:CGRectMake(5, 0, 2*_lastPoint.x, self.curveView.bounds.size.height-0)];
     anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     anmi1.fillMode = kCAFillModeForwards;
     anmi1.autoreverses = NO;
@@ -318,7 +268,7 @@
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = beizer.CGPath;
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.strokeColor = [UIColor colorWithHexString:@"0x3C9CBD" andAlpha:1.0].CGColor;
+    shapeLayer.strokeColor = self.lineColor.CGColor;
     shapeLayer.lineWidth = 2;
     [self.curveView.layer addSublayer:shapeLayer];
     
@@ -368,7 +318,7 @@
         
         CGFloat percent = ([arr[i] floatValue] - tempMin) * 1 / dfValue ;
 
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((Xmargin)*i-Xmargin*0.7, height *(1 - percent) - btnW/2 , btnW, btnW)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((_xMargin)*i-_xMargin*0.7, height *(1 - percent) - btnW/2 , btnW, btnW)];
         
         btn.layer.borderColor = [UIColor clearColor].CGColor;
         btn.layer.borderWidth = 1;
@@ -381,11 +331,19 @@
             
             btn.selected = YES;
         }
-        [btn setBackgroundImage:[UIImage imageNamed:@"Ovalk"] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:@"Oval"] forState:UIControlStateSelected];
-        [btn addTarget:self action:@selector(TopBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setEnlargeEdgeWithTop:15 right:15 bottom:15 left:15];
         
+        if (_pointImage == nil) {
+            _pointImage = [UIImage imageNamed:@"circle"];
+        }
+        
+        if (_selectedPointImage == nil) {
+            _selectedPointImage = [UIImage imageNamed:@"point"];
+        }
+        
+        [btn setBackgroundImage:_pointImage forState:UIControlStateNormal];
+        [btn setBackgroundImage:_selectedPointImage forState:UIControlStateSelected];
+        [btn addTarget:self action:@selector(pointBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setEnlargeEdgeWithTop:15 right:15 bottom:15 left:15];
         
         [self.points addObject:btn];
         
@@ -397,7 +355,7 @@
         detailLabel.font = [UIFont systemFontOfSize:14.0f];
         NSString *str = arr[i];
         CGSize textSize = [str boundingRectWithSize:CGSizeMake(200, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]} context:nil].size;;
-        [detailLabel setFrame:CGRectMake((Xmargin)*i-Xmargin*0.7-textSize.width/2+btnW/2, height *(1 - percent)-30 , textSize.width, textSize.height)];
+        [detailLabel setFrame:CGRectMake((_xMargin)*i-_xMargin*0.7-textSize.width/2+btnW/2, height *(1 - percent)-30 , textSize.width, textSize.height)];
         detailLabel.text = str;
         detailLabel.backgroundColor = [UIColor colorWithRed:0.94f green:0.64f blue:0.27f alpha:1.00f];
         detailLabel.textAlignment = NSTextAlignmentCenter;
@@ -421,7 +379,7 @@
     
     for (int i = 0;i< _dataArrOfY.count ;i++ ) {
         
-        UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, i*(Ymargin)+40-Ymargin/2, _leftTitleW, Ymargin)];
+        UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, i*(_yMargin)+40-_yMargin/2, _leftTitleW, _yMargin)];
         leftLabel.font = [UIFont systemFontOfSize:10.0f];
         leftLabel.textColor =[UIColor colorWithRed:0.61f green:0.61f blue:0.61f alpha:1.00f];
         leftLabel.textAlignment = NSTextAlignmentRight;
@@ -440,7 +398,7 @@
     
     for (int i = 0;i< _dataArrOfX.count ;i++ ) {
         
-        UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(5+Xmargin/2+i*Xmargin-Xmargin*0.7, (_countY - 1)*Ymargin + 10, Xmargin, 20)];
+        UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(5+_xMargin/2+i*_xMargin-_xMargin*0.7, (_countY - 1)*_yMargin + 10, _xMargin, 20)];
         leftLabel.font = [UIFont systemFontOfSize:12.0f];
         leftLabel.tag = 1000+i;
         leftLabel.textColor = [UIColor colorWithRed:0.29f green:0.29f blue:0.29f alpha:1.00f];
@@ -460,7 +418,7 @@
     }
 }
 
--(void)TopBtnAction:(UIButton *)sender{
+-(void)pointBtnAction:(UIButton *)sender{
     
     for (UIButton*btn in _points) {
         if (sender.tag == btn.tag) {
@@ -477,6 +435,10 @@
     UILabel *label = [self viewWithTag:1000+sender.tag-1];
     label.textColor = [UIColor colorWithRed:0.98f green:0.31f blue:0.29f alpha:1.00f];
     [self showDetailLabel:sender];
+    
+    if (_block) {
+        _block(_dataSource[label.tag - 1], label.tag);
+    }
     
 }
 
@@ -496,7 +458,7 @@
     
     CGFloat magrginHeight = (_lineView.bounds.size.height)/ (_countY - 1);
     CGFloat labelWith = _lineView.bounds.size.width;
-    Ymargin = magrginHeight;
+    _yMargin = magrginHeight;
     
     for (int i = 0;i< _countY ;i++ ) {
         
@@ -517,5 +479,133 @@
     }
     return aMArray;
 }
+
+//获取遮罩颜色
+- (NSArray *)getMaskColors {
+    
+    if (_maskColors.count <= 0) {
+        _maskColors = @[self.lineColor];
+    }
+    
+    NSArray *colors = @[[self getCGColorWithColor:_maskColors.firstObject alpha:0.2], [self getCGColorWithColor:_maskColors.lastObject alpha:0.1]];
+    return colors;
+}
+
+- (id)getCGColorWithColor:(UIColor *)color alpha:(CGFloat)alpha {
+    
+    CGFloat red = 0.0, green = 0.0, blue = 0, al = 0.0;
+    [color getRed:&red green:&green blue:&blue alpha:&al];
+    return  (__bridge id)[UIColor colorWithRed:red green:green blue:blue alpha:alpha].CGColor;
+}
+
+- (void)pointDidTapedCompletion:(void (^)(NSString *, NSInteger))block {
+    _block = block;
+}
+
+#pragma mark -- getter
+
+-(UIView *)curveView{
+    if (!_curveView) {
+        _curveView = [[UIView alloc]initWithFrame:CGRectMake(5, 40, self.chartScrollView.bounds.size.width-5, self.chartScrollView.bounds.size.height)];
+    }
+    return _curveView;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame) , 0 + 40, self.chartScrollView.bounds.size.width - 5, self.chartScrollView.bounds.size.height-80)];
+    }
+    return _lineView;
+}
+
+- (UILabel *)titleLForY {
+    if (!_titleLForY) {
+        _titleLForY = [[UILabel alloc] initWithFrame:CGRectMake(-30, -30, 60, 20)];
+        _titleLForY.font = [UIFont systemFontOfSize:10.0f];
+        _titleLForY.textAlignment = kCTTextAlignmentCenter;
+        _titleLForY.textColor = [UIColor lightGrayColor];
+    }
+    return _titleLForY;
+}
+
+- (UILabel *)titleLForX {
+    if (!_titleLForX) {
+        _titleLForX = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.lineView.frame) - 90, CGRectGetMaxY(self.chartScrollView.frame) - _yMargin * 2 - 25, 60, 20)];
+        _titleLForX.font = [UIFont systemFontOfSize:10.0f];
+        _titleLForX.textAlignment = kCTTextAlignmentRight;
+        _titleLForX.textColor = [UIColor lightGrayColor];
+    }
+    return _titleLForX;
+}
+
+- (void)setPointImage:(UIImage *)image pointselectedImage:(UIImage *)selectedImg {
+    
+    if ((image == _pointImage) && (selectedImg == _selectedPointImage)) {
+        return;
+    }
+    _pointImage = image;
+    _selectedPointImage = image;
+    [self resetUIAndData];
+}
+
+- (void)setTitleForY:(NSString *)titleForY {
+    _titleLForY.text = titleForY;
+}
+
+- (void)setTitleForX:(NSString *)titleForX {
+    _titleLForX.text = titleForX;
+}
+
+-(void)setDataSource:(NSArray *)dataSource{
+    
+    if ([dataSource isEqualToArray:_dataSource] && !_reSetUIWhenSameData) {
+        return;
+    }
+    
+    _dataSource = dataSource;
+    [self.chartScrollView setContentOffset:CGPointZero animated:NO];
+    [self resetLeftDataSource];
+    [self resetUIAndData];
+}
+
+- (void)setIsBrokenLine:(BOOL)isBrokenLine {
+    if (isBrokenLine == _isBrokenLine) {
+        return;
+    }
+    _isBrokenLine = isBrokenLine;
+    [self resetUIAndData];
+}
+
+- (void)setIsMatrix:(BOOL)isMatrix {
+    if (isMatrix == _isMatrix) {
+        return;
+    }
+    _isMatrix = isMatrix;
+    [self resetUIAndData];
+}
+
+- (void)setLineColor:(UIColor *)lineColor {
+    if (lineColor == _lineColor) {
+        return;
+    }
+    
+    if (_maskColors.count == 1 && _maskColors.firstObject == _lineColor) {
+        _maskColors = nil;
+    }
+    
+    _lineColor = lineColor;
+    [self resetUIAndData];
+}
+
+- (void)setMaskColors:(NSArray<UIColor *> *)maskColors {
+    
+    if ([maskColors isEqual:_maskColors]) {
+        return;
+    }
+    
+    _maskColors = maskColors;
+    [self resetUIAndData];
+}
+
 
 @end

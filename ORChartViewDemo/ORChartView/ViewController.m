@@ -7,9 +7,7 @@
 //
 
 #import "ViewController.h"
-
 #import "ORChartView.h"
-
 
 @interface ViewController ()
 
@@ -30,16 +28,16 @@
 
     
     _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:@[@"12", @"120", @"32.6", @"68.9",@"55.3",@"110.4", @"4.98"] countFoyY:7];
-    
-    _chartView.titleForX = @"日期/日";
-    _chartView.titleForY = @"收益/元";
+
+    [_chartView pointDidTapedCompletion:^(NSString *value, NSInteger index) {
+        NSLog(@"....%@....%ld", value, index);
+    }];
     
     [self.view addSubview:_chartView];
 
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
     
     /*
      随机数据源
@@ -57,6 +55,8 @@
     _chartView.dataSource = [array copy];
     _chartView.isMatrix = arc4random() % 2;
     _chartView.isBrokenLine = arc4random() % 2;
+    
+    _chartView.lineColor = [UIColor colorWithRed:arc4random() % 255 /255.f green:arc4random() % 255 /255.f blue:arc4random() % 255 /255.f alpha:1];
     
 }
 

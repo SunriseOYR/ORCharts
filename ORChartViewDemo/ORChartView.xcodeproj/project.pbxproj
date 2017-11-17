@@ -17,13 +17,12 @@
 		8917235B1F73BB1400181F60 /* ORChartViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917235A1F73BB1400181F60 /* ORChartViewUITests.m */; };
 		891723751F73BB2D00181F60 /* ORChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917236A1F73BB2D00181F60 /* ORChartView.m */; };
 		89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */; };
-		89B428EC1F95F42E00452677 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B428E31F95F42E00452677 /* UIColor+expanded.m */; };
-		89B428ED1F95F42E00452677 /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E51F95F42E00452677 /* Oval.png */; };
-		89B428EE1F95F42E00452677 /* Oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E61F95F42E00452677 /* Oval@2x.png */; };
-		89B428EF1F95F42E00452677 /* Oval@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E71F95F42E00452677 /* Oval@3x.png */; };
-		89B428F01F95F42E00452677 /* Ovalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E81F95F42E00452677 /* Ovalk.png */; };
-		89B428F11F95F42E00452677 /* Ovalk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E91F95F42E00452677 /* Ovalk@2x.png */; };
-		89B428F21F95F42E00452677 /* Ovalk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428EA1F95F42E00452677 /* Ovalk@3x.png */; };
+		89B428ED1F95F42E00452677 /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E51F95F42E00452677 /* point.png */; };
+		89B428EE1F95F42E00452677 /* point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E61F95F42E00452677 /* point@2x.png */; };
+		89B428EF1F95F42E00452677 /* point@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E71F95F42E00452677 /* point@3x.png */; };
+		89B428F01F95F42E00452677 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E81F95F42E00452677 /* circle.png */; };
+		89B428F11F95F42E00452677 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428E91F95F42E00452677 /* circle@2x.png */; };
+		89B428F21F95F42E00452677 /* circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B428EA1F95F42E00452677 /* circle@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,14 +63,12 @@
 		8917236A1F73BB2D00181F60 /* ORChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartView.m; sourceTree = "<group>"; };
 		89B428E01F95F42E00452677 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
 		89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
-		89B428E21F95F42E00452677 /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
-		89B428E31F95F42E00452677 /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
-		89B428E51F95F42E00452677 /* Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Oval.png; sourceTree = "<group>"; };
-		89B428E61F95F42E00452677 /* Oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@2x.png"; sourceTree = "<group>"; };
-		89B428E71F95F42E00452677 /* Oval@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@3x.png"; sourceTree = "<group>"; };
-		89B428E81F95F42E00452677 /* Ovalk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ovalk.png; sourceTree = "<group>"; };
-		89B428E91F95F42E00452677 /* Ovalk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@2x.png"; sourceTree = "<group>"; };
-		89B428EA1F95F42E00452677 /* Ovalk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ovalk@3x.png"; sourceTree = "<group>"; };
+		89B428E51F95F42E00452677 /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
+		89B428E61F95F42E00452677 /* point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point@2x.png"; sourceTree = "<group>"; };
+		89B428E71F95F42E00452677 /* point@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point@3x.png"; sourceTree = "<group>"; };
+		89B428E81F95F42E00452677 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		89B428E91F95F42E00452677 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
+		89B428EA1F95F42E00452677 /* circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +175,6 @@
 			children = (
 				89B428E01F95F42E00452677 /* UIButton+EnlargeTouchArea.h */,
 				89B428E11F95F42E00452677 /* UIButton+EnlargeTouchArea.m */,
-				89B428E21F95F42E00452677 /* UIColor+expanded.h */,
-				89B428E31F95F42E00452677 /* UIColor+expanded.m */,
 			);
 			path = categary;
 			sourceTree = "<group>";
@@ -187,12 +182,12 @@
 		89B428E41F95F42E00452677 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				89B428E51F95F42E00452677 /* Oval.png */,
-				89B428E61F95F42E00452677 /* Oval@2x.png */,
-				89B428E71F95F42E00452677 /* Oval@3x.png */,
-				89B428E81F95F42E00452677 /* Ovalk.png */,
-				89B428E91F95F42E00452677 /* Ovalk@2x.png */,
-				89B428EA1F95F42E00452677 /* Ovalk@3x.png */,
+				89B428E51F95F42E00452677 /* point.png */,
+				89B428E61F95F42E00452677 /* point@2x.png */,
+				89B428E71F95F42E00452677 /* point@3x.png */,
+				89B428E81F95F42E00452677 /* circle.png */,
+				89B428E91F95F42E00452677 /* circle@2x.png */,
+				89B428EA1F95F42E00452677 /* circle@3x.png */,
 			);
 			path = image;
 			sourceTree = "<group>";
@@ -303,14 +298,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89B428F21F95F42E00452677 /* Ovalk@3x.png in Resources */,
-				89B428EE1F95F42E00452677 /* Oval@2x.png in Resources */,
-				89B428EF1F95F42E00452677 /* Oval@3x.png in Resources */,
+				89B428F21F95F42E00452677 /* circle@3x.png in Resources */,
+				89B428EE1F95F42E00452677 /* point@2x.png in Resources */,
+				89B428EF1F95F42E00452677 /* point@3x.png in Resources */,
 				891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */,
-				89B428F01F95F42E00452677 /* Ovalk.png in Resources */,
-				89B428ED1F95F42E00452677 /* Oval.png in Resources */,
+				89B428F01F95F42E00452677 /* circle.png in Resources */,
+				89B428ED1F95F42E00452677 /* point.png in Resources */,
 				891723421F73BB1400181F60 /* Assets.xcassets in Resources */,
-				89B428F11F95F42E00452677 /* Ovalk@2x.png in Resources */,
+				89B428F11F95F42E00452677 /* circle@2x.png in Resources */,
 				891723401F73BB1400181F60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +333,6 @@
 			files = (
 				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
-				89B428EC1F95F42E00452677 /* UIColor+expanded.m in Sources */,
 				89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */,
 				891723751F73BB2D00181F60 /* ORChartView.m in Sources */,
 				891723371F73BB1400181F60 /* main.m in Sources */,
