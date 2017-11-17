@@ -41,8 +41,9 @@
 
             _chartView.lineColor = [UIColor colorWithRed:arc4random() % 255 /255.f green:arc4random() % 255 /255.f blue:arc4random() % 255 /255.f alpha:1];
         }
-        
-接口
+        
+* 接口  
+
 
     /**
     * countY y轴 递增值的个数
