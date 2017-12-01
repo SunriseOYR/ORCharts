@@ -27,7 +27,7 @@
 //    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) countFoyY:7];
 
     
-    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:@[@"12", @"120", @"32.6", @"68.9"] countFoyY:7];
+    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:nil countFoyY:7];
 
     _chartView.titleForX = @"日期/日";
     _chartView.titleForY = @"收益/元";
@@ -51,7 +51,7 @@
     NSMutableArray *array = [NSMutableArray array];
     
     for (int i = 0; i < 20; i ++) {
-        NSInteger num = arc4random() % 300;
+        NSInteger num = arc4random() % 3000;
         [array addObject:[NSString stringWithFormat:@"%ld",(long)num]];
     }
     

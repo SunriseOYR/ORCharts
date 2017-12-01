@@ -120,7 +120,7 @@
     }];
     //
     min = 0;
-    CGFloat average = (max - min) / (_countY - 2);
+    CGFloat average = (max - min) / (_countY - 2.0);
     
     if (average - (int)average > 0.5) {
         average += 1;
@@ -134,7 +134,9 @@
     
     if (array.count > 0) {
         _leftTitleW = [array.firstObject boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil].size.width + 2;
-    }else {
+    }
+    
+    if (_leftTitleW < 30) {
         _leftTitleW = 30;
     }
     
@@ -200,7 +202,7 @@
             CGPoint prePoint = [[self.points objectAtIndex:i-1] center];
             CGPoint nowPoint = [[self.points objectAtIndex:i] center];
             
-            if (!_isBrokenLine) {
+            if (_style == ChatViewStyleSingleCurve || _style == ChatViewStyleMatrixCurve) {
                 [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
                 
                 [bezier1 addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
@@ -315,6 +317,10 @@
     CGFloat dfValue = fabsf([self.dataArrOfY.firstObject floatValue] - [self.dataArrOfY.lastObject floatValue]);
 
     for (int i = 0; i<arr.count; i++) {
+
+        if (dfValue == 0) {
+            dfValue = 1;
+        }
         
         CGFloat percent = ([arr[i] floatValue] - tempMin) * 1 / dfValue ;
 
@@ -409,7 +415,7 @@
         }
         [_curveView addSubview:leftLabel];
         
-        if (_isMatrix) {
+        if (_style == ChatViewStyleMatrixCurve || _style == ChatViewStyleMatrixBroken) {
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(leftLabel.center.x - 0.5, 0, 1, _lineView.bounds.size.height)];
             label.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
             [_curveView addSubview:label];
@@ -568,20 +574,13 @@
     [self resetUIAndData];
 }
 
-- (void)setIsBrokenLine:(BOOL)isBrokenLine {
-    if (isBrokenLine == _isBrokenLine) {
+- (void)setStyle:(ChatViewStyle)style {
+    if (style == _style) {
         return;
     }
-    _isBrokenLine = isBrokenLine;
+    _style = style;
     [self resetUIAndData];
-}
 
-- (void)setIsMatrix:(BOOL)isMatrix {
-    if (isMatrix == _isMatrix) {
-        return;
-    }
-    _isMatrix = isMatrix;
-    [self resetUIAndData];
 }
 
 - (void)setLineColor:(UIColor *)lineColor {

@@ -120,7 +120,7 @@
     }];
     //
     min = 0;
-    CGFloat average = (max - min) / (_countY - 2);
+    CGFloat average = (max - min) / (_countY - 2.0);
     
     if (average - (int)average > 0.5) {
         average += 1;
@@ -134,7 +134,9 @@
     
     if (array.count > 0) {
         _leftTitleW = [array.firstObject boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil].size.width + 2;
-    }else {
+    }
+    
+    if (_leftTitleW < 30) {
         _leftTitleW = 30;
     }
     
@@ -315,6 +317,10 @@
     CGFloat dfValue = fabsf([self.dataArrOfY.firstObject floatValue] - [self.dataArrOfY.lastObject floatValue]);
 
     for (int i = 0; i<arr.count; i++) {
+
+        if (dfValue == 0) {
+            dfValue = 1;
+        }
         
         CGFloat percent = ([arr[i] floatValue] - tempMin) * 1 / dfValue ;
 
