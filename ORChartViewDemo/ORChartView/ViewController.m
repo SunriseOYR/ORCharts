@@ -27,7 +27,7 @@
 //    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) countFoyY:7];
 
     
-    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:nil countFoyY:7];
+    _chartView = [[ORChartView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 300) dataSource:@[@"123",@"88", @"45",@"33"] countFoyY:7];
 
     _chartView.titleForX = @"日期/日";
     _chartView.titleForY = @"收益/元";

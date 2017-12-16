@@ -332,7 +332,7 @@
         btn.layer.masksToBounds = YES;
         btn.tag = i;
         if (i == 0) {
-            btn.hidden = YES;
+//            btn.hidden = NO;
         }else if ( i == arr.count - 1){
             
             btn.selected = YES;
@@ -375,6 +375,8 @@
         }
         [self.detailLabelArr addObject:detailLabel];
     }
+    
+    NSLog(@"a");
     
 }
 
@@ -443,7 +445,7 @@
     [self showDetailLabel:sender];
     
     if (_block) {
-        _block(_dataSource[label.tag - 1], label.tag);
+        _block(_dataSource[label.tag - 1000], label.tag - 1000);
     }
     
 }
