@@ -30,12 +30,17 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat infoLineWidth;
 @property (nonatomic, assign) CGFloat ringLineWidth;
 
+/*
+ * if _dataSource responds To Selector 'viewForRingCenterOfChartView:' OR style != ORChartStyleRing. This value will be invalid
+ * 如果 代理实现了 viewForRingCenterOfChartView: 方法 或者 style != ORChartStyleRing  这个值将无效
+*/
+@property (nonatomic, assign) CGFloat ringWidth;
 
 @property (nonatomic, assign) BOOL clockwise;
 
-// 
 @property (nonatomic, assign) CGFloat startAngle;
 
+- (void)reloadData;
 
 @end
 

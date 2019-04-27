@@ -11,6 +11,8 @@
 
 @interface ORRingViewController ()<ORRingChartViewDatasource>
 
+@property (nonatomic, strong) ORRingChartView *ringView;
+
 @end
 
 @implementation ORRingViewController
@@ -18,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor cyanColor];
+    
     ORRingChartView *ringView = [ORRingChartView new];
     
     ringView.dataSource = self;
@@ -28,15 +33,28 @@
     
     [self.view addSubview:ringView];
     
+    self.ringView = ringView;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.ringView.style = arc4random() % 3;
+    [self.ringView reloadData];
+}
 
 - (NSInteger)numberOfRingsOfChartView:(ORRingChartView *)chartView {
-    return 8;
+    return 5;
 }
 
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index {
-    return 15;
+    return arc4random() % 50 + 10;
+}
+
+- (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index {
+    UILabel *label = [UILabel new];
+    label.text = @"12345";
+    label.font = [UIFont systemFontOfSize:12];
+    [label sizeToFit];
+    return label;
 }
 
 @end

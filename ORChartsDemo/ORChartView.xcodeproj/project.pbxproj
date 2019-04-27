@@ -108,10 +108,10 @@
 		4D398B19227467AC007DDE80 /* ORRingChartView */ = {
 			isa = PBXGroup;
 			children = (
-				4D398B1A2274694C007DDE80 /* ORRingChartView.h */,
-				4D398B1D2274694C007DDE80 /* ORRingChartView.m */,
 				4D398B1B2274694C007DDE80 /* ORRingConfiger.h */,
 				4D398B1C2274694C007DDE80 /* ORRingConfiger.m */,
+				4D398B1A2274694C007DDE80 /* ORRingChartView.h */,
+				4D398B1D2274694C007DDE80 /* ORRingChartView.m */,
 			);
 			path = ORRingChartView;
 			sourceTree = "<group>";
@@ -152,9 +152,9 @@
 			children = (
 				4D398B19227467AC007DDE80 /* ORRingChartView */,
 				891723681F73BB2D00181F60 /* ORChartView */,
+				4D398B2322746B05007DDE80 /* Controller */,
 				891723381F73BB1400181F60 /* AppDelegate.h */,
 				891723391F73BB1400181F60 /* AppDelegate.m */,
-				4D398B2322746B05007DDE80 /* Controller */,
 				8917233E1F73BB1400181F60 /* Main.storyboard */,
 				891723411F73BB1400181F60 /* Assets.xcassets */,
 				891723431F73BB1400181F60 /* LaunchScreen.storyboard */,
@@ -519,6 +519,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ORChartView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -530,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ORChartView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -39,6 +39,7 @@
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @property (nonatomic, strong) CAShapeLayer *ringLineLayer;
 @property (nonatomic, strong) CAShapeLayer *infoLineLayer;
+@property (nonatomic, strong) CALayer *infoLinePointLayer;
 @property (nonatomic, strong) UIView *topInfoView;
 @property (nonatomic, strong) UIView *bottomInfoView;
 
@@ -71,12 +72,17 @@
 }
 
 - (UIView *)topInfoView {
-    return [self labelWithText:[NSString stringWithFormat:@"value : %lf", self.value]];
+    
+    if (!_topInfoView) {
+        _topInfoView = [self labelWithText:[NSString stringWithFormat:@"value : %lf", self.value]];
+    }
+    return _topInfoView;
 }
 
 - (UILabel *)labelWithText:(NSString *)text {
     UILabel *label = [UILabel new];
     label.frame = CGRectMake(0, 0, 60, 25);
+    label.font = [UIFont systemFontOfSize:12];
     label.text = text;
     return label;
 }
@@ -144,7 +150,7 @@
         model.ringInfoColor = [_dataSource chartView:self lineColorForInfoLineAtRingIndex:i];
         
         model.topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
-        model.topInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+        model.bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
 
         model.margin = [_delegate chartView:self marginForInfoLineAtRingIndex:i] ?: 10;
         model.inMargin = [_delegate chartView:self marginForInfoLineToRingAtRingIndex:i] ?: 10;
@@ -184,6 +190,8 @@
     _ringLineWidth = 2;
     _infoLineWidth = 1;
     
+    _ringWidth = 60;
+    
     _startAngle = M_PI * 3 / 2;
     _ringModels = [NSMutableArray array];
     
@@ -198,15 +206,18 @@
 
     CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum ) * 2, self.bounds.size.height - (_maxMarginHeightSum) * 2);
 
-    CGFloat ringWidth = (width - MAX(self.centerInfoView.bounds.size.width, self.centerInfoView.bounds.size.height)) / 2;
+    CGFloat ringWidth = _ringWidth;
+    
+    if (self.centerInfoView) {
+        ringWidth = (width - MAX(self.centerInfoView.bounds.size.width, self.centerInfoView.bounds.size.height)) / 2;
+    }
     
     ringWidth = MAX(ringWidth, 10);
-    ringWidth = MIN(ringWidth, width / 2.0 + 1);
+    ringWidth = MIN(ringWidth, width / 2.0);
     
-    if (self.style == ORChartStyleFan) {
-        ringWidth = width / 2.0 + 1;
+    if (self.style == ORChartStyleFan || self.style == ORChartStylePie) {
+        ringWidth = width / 2.0;
     }
-    ringWidth = 80;
     
     CGRect bounds = CGRectMake(0, 0, width, width);
     CGPoint position = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
@@ -216,16 +227,35 @@
         obj.gradientLayer.bounds = bounds;
         obj.gradientLayer.position = position;
         CAShapeLayer *shapeLayer = obj.gradientLayer.mask;
-        CGPathRef path = [ORRingConfiger or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.clockwise].CGPath;;
+        CGPathRef path = [ORRingConfiger or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.clockwise isPie:self.style == ORChartStylePie].CGPath;
         shapeLayer.path = path;
         
         obj.ringLineLayer.bounds = bounds;
         obj.ringLineLayer.position = position;
         obj.ringLineLayer.path = path;
         
-        CGPathRef linePath = [ORRingConfiger or_breakLinePathWithRawRect:self.bounds circleWidth:width startAngle:obj.startAngle endAngle:obj.endAngle margin:obj.margin inMargin:obj.inMargin breakMargin:obj.breakMargin pointSize:obj.pointWidth].CGPath;
+        CGPathRef linePath = [ORRingConfiger or_breakLinePathWithRawRect:self.bounds circleWidth:width startAngle:obj.startAngle endAngle:obj.endAngle margin:obj.margin inMargin:obj.inMargin breakMargin:obj.breakMargin detailInfoBlock:^(CGPoint edgePoint, CGPoint endPoint) {
+            
+            obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - obj.pointWidth / 2.0, endPoint.y - obj.pointWidth / 2.0, obj.pointWidth, obj.pointWidth);
+            obj.infoLinePointLayer.cornerRadius = obj.pointWidth / 2.0;
+
+            CGRect frame = obj.topInfoView.frame;
+            CGFloat fx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - frame.size.width : edgePoint.x;
+            frame.origin = CGPointMake(fx, edgePoint.y - obj.infoMargin - frame.size.height);
+            obj.topInfoView.frame = frame;
+
+            CGRect bottomFrame = obj.bottomInfoView.frame;
+            CGFloat bfx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - bottomFrame.size.width : edgePoint.x;
+            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + obj.infoMargin - bottomFrame.size.height);
+            obj.bottomInfoView.frame = bottomFrame;
+            
+        }].CGPath;
         obj.infoLineLayer.path = linePath;
         
+        [shapeLayer addAnimation:[ORRingConfiger animationWithDurantion:2] forKey:nil];
+        [obj.ringLineLayer addAnimation:[ORRingConfiger animationWithDurantion:2] forKey:nil];
+        [obj.infoLineLayer addAnimation:[ORRingConfiger animationWithDurantion:2] forKey:nil];
+
     }];
 }
 
@@ -241,9 +271,14 @@
     CAShapeLayer *infoLineLayer = [ORRingConfiger or_shapelayerWithLineWidth:self.infoLineWidth strokeColor:model.ringInfoColor];
     [self.layer addSublayer:infoLineLayer];
   
+    CALayer *infoLinePointLayer = [CALayer layer];
+    infoLinePointLayer.backgroundColor = model.ringInfoColor.CGColor;
+    [self.layer addSublayer:infoLinePointLayer];
+    
     model.gradientLayer = gradientLayer;
     model.ringLineLayer = ringLineLayer;
     model.infoLineLayer = infoLineLayer;
+    model.infoLinePointLayer = infoLinePointLayer;
 }
 
 
@@ -256,6 +291,12 @@
             [self reloadData];
         }
     }
+}
+
+
+- (void)setStyle:(ORChartStyle)style {
+    _style = style;
+    [self setNeedsLayout];
 }
 
 @end

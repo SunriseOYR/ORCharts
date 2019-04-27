@@ -10,6 +10,14 @@
 
 @implementation ORRingConfiger
 
++ (CAAnimation *)animationWithDurantion:(NSTimeInterval)duration {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animation.fromValue = @(0.0);
+    animation.toValue = @(1.0);
+    animation.duration = duration;
+    return animation;
+}
+
 + (CAGradientLayer *)or_grandientLayerWithColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight {
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -41,7 +49,7 @@
     return  shapeLayer;
 }
 
-+ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin pointSize:(CGFloat)pointSize {
++ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
     
     CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
 
@@ -64,9 +72,12 @@
         edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
     }
     
-    CGRect inPointRect = CGRectMake(inPoint.x - pointSize / 2.0, inPoint.y - pointSize / 2.0, pointSize, pointSize);
+    if (detailInfoBlock) {
+        detailInfoBlock(edgePoint,inPoint);
+    }
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:inPointRect cornerRadius:pointSize / 2.0];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:inPoint];
     [path addLineToPoint:breakPoint];
     [path addLineToPoint:edgePoint];
     
@@ -74,7 +85,7 @@
 }
 
 // 圆环
-+ (UIBezierPath *)or_ringPathWithRect:(CGRect)rect startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle ringWidth:(CGFloat)ringWidth closckWise:(BOOL)clockWidth {
++ (UIBezierPath *)or_ringPathWithRect:(CGRect)rect startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle ringWidth:(CGFloat)ringWidth closckWise:(BOOL)clockWidth isPie:(BOOL)isPie {
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint center = CGPointMake(rect.origin.x + rect.size.width / 2.0, rect.origin.y + rect.size.height / 2.0);
@@ -83,14 +94,21 @@
     
     [path addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     
-    CGPoint squreCenter = [self or_centerWithRect:rect angle:endAngle ringWidth:ringWidth];
+    if (isPie) {
+        CGRect inRect = CGRectMake(rect.origin.x + ringWidth, rect.origin.y + ringWidth, rect.size.width - 2 * ringWidth, rect.size.height - 2 * ringWidth);
+        
+        [path addLineToPoint:[self or_pointWithCircleRect:inRect angle:endAngle]];
+        [path addArcWithCenter:center radius:radius - ringWidth startAngle:endAngle endAngle:startAngle clockwise:NO];
+        [path addLineToPoint:[self or_pointWithCircleRect:rect angle:startAngle]];
+        return path;
+    }
     
+    CGPoint squreCenter = [self or_centerWithRect:rect angle:endAngle ringWidth:ringWidth];
     [path addArcWithCenter:squreCenter radius:ringWidth / 2.0 startAngle:endAngle endAngle:[self or_opposingAngleWithAngle:endAngle] clockwise:clockWidth];
     
     [path addArcWithCenter:center radius:radius - ringWidth startAngle:endAngle endAngle:startAngle clockwise:NO];
-    //
-    CGPoint squreCenter1 = [self or_centerWithRect:rect angle:startAngle ringWidth:ringWidth];
     
+    CGPoint squreCenter1 = [self or_centerWithRect:rect angle:startAngle ringWidth:ringWidth];
     [path addArcWithCenter:squreCenter1 radius:ringWidth / 2.0 startAngle:[self or_opposingAngleWithAngle:startAngle] endAngle:startAngle clockwise:!clockWidth];
     
     return path;
