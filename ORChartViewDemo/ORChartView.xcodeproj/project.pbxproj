@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D398B1E2274694C007DDE80 /* ORRingConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1C2274694C007DDE80 /* ORRingConfiger.m */; };
+		4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1D2274694C007DDE80 /* ORRingChartView.m */; };
+		4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B2122746978007DDE80 /* ORRingViewController.m */; };
 		891723371F73BB1400181F60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723361F73BB1400181F60 /* main.m */; };
 		8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723391F73BB1400181F60 /* AppDelegate.m */; };
 		8917233D1F73BB1400181F60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917233C1F73BB1400181F60 /* ViewController.m */; };
@@ -43,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D398B1A2274694C007DDE80 /* ORRingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartView.h; sourceTree = "<group>"; };
+		4D398B1B2274694C007DDE80 /* ORRingConfiger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingConfiger.h; sourceTree = "<group>"; };
+		4D398B1C2274694C007DDE80 /* ORRingConfiger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingConfiger.m; sourceTree = "<group>"; };
+		4D398B1D2274694C007DDE80 /* ORRingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingChartView.m; sourceTree = "<group>"; };
+		4D398B2022746978007DDE80 /* ORRingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingViewController.h; sourceTree = "<group>"; };
+		4D398B2122746978007DDE80 /* ORRingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORRingViewController.m; sourceTree = "<group>"; };
 		891723321F73BB1400181F60 /* ORChartView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORChartView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		891723361F73BB1400181F60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		891723381F73BB1400181F60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +105,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D398B19227467AC007DDE80 /* ORRingChartView */ = {
+			isa = PBXGroup;
+			children = (
+				4D398B1A2274694C007DDE80 /* ORRingChartView.h */,
+				4D398B1D2274694C007DDE80 /* ORRingChartView.m */,
+				4D398B1B2274694C007DDE80 /* ORRingConfiger.h */,
+				4D398B1C2274694C007DDE80 /* ORRingConfiger.m */,
+			);
+			path = ORRingChartView;
+			sourceTree = "<group>";
+		};
+		4D398B2322746B05007DDE80 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8917233B1F73BB1400181F60 /* ViewController.h */,
+				8917233C1F73BB1400181F60 /* ViewController.m */,
+				4D398B2022746978007DDE80 /* ORRingViewController.h */,
+				4D398B2122746978007DDE80 /* ORRingViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		891723291F73BB1400181F60 = {
 			isa = PBXGroup;
 			children = (
@@ -119,11 +150,11 @@
 		891723341F73BB1400181F60 /* ORChartView */ = {
 			isa = PBXGroup;
 			children = (
+				4D398B19227467AC007DDE80 /* ORRingChartView */,
 				891723681F73BB2D00181F60 /* ORChartView */,
 				891723381F73BB1400181F60 /* AppDelegate.h */,
 				891723391F73BB1400181F60 /* AppDelegate.m */,
-				8917233B1F73BB1400181F60 /* ViewController.h */,
-				8917233C1F73BB1400181F60 /* ViewController.m */,
+				4D398B2322746B05007DDE80 /* Controller */,
 				8917233E1F73BB1400181F60 /* Main.storyboard */,
 				891723411F73BB1400181F60 /* Assets.xcassets */,
 				891723431F73BB1400181F60 /* LaunchScreen.storyboard */,
@@ -332,8 +363,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
+				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
+				4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */,
 				89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */,
+				4D398B1E2274694C007DDE80 /* ORRingConfiger.m in Sources */,
 				891723751F73BB2D00181F60 /* ORChartView.m in Sources */,
 				891723371F73BB1400181F60 /* main.m in Sources */,
 			);
