@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     ORRingChartView *ringView = [ORRingChartView new];
     
@@ -42,7 +42,7 @@
 }
 
 - (NSInteger)numberOfRingsOfChartView:(ORRingChartView *)chartView {
-    return 5;
+    return 1;
 }
 
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index {
@@ -53,6 +53,16 @@
     UILabel *label = [UILabel new];
     label.text = @"12345";
     label.font = [UIFont systemFontOfSize:12];
+    label.textColor = [UIColor redColor];
+    [label sizeToFit];
+    return label;
+}
+
+- (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {
+    UILabel *label = [UILabel new];
+    label.text = @"12345";
+    label.font = [UIFont systemFontOfSize:12];
+    label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
     return label;
 }

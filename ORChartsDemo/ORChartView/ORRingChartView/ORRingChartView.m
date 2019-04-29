@@ -246,7 +246,7 @@
 
             CGRect bottomFrame = obj.bottomInfoView.frame;
             CGFloat bfx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - bottomFrame.size.width : edgePoint.x;
-            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + obj.infoMargin - bottomFrame.size.height);
+            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + obj.infoMargin);
             obj.bottomInfoView.frame = bottomFrame;
             
         }].CGPath;

@@ -87,6 +87,19 @@
 // 圆环
 + (UIBezierPath *)or_ringPathWithRect:(CGRect)rect startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle ringWidth:(CGFloat)ringWidth closckWise:(BOOL)clockWidth isPie:(BOOL)isPie {
     
+    
+    if (startAngle == endAngle || startAngle == endAngle - M_PI * 2) {
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:rect.size.width / 2.0];
+//        if (!isPie) {
+            CGRect inReck = CGRectMake(rect.origin.x + ringWidth, rect.origin.y + ringWidth, rect.size.width - 2 * ringWidth, rect.size.height - 2 * ringWidth);
+            [path appendPath:[[UIBezierPath bezierPathWithRoundedRect:inReck cornerRadius:inReck.size.width / 2.0] bezierPathByReversingPath]];
+//        }
+        return path;
+    }
+    
+    
+    
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint center = CGPointMake(rect.origin.x + rect.size.width / 2.0, rect.origin.y + rect.size.height / 2.0);
     CGFloat radius = MIN(rect.size.width, rect.size.height) / 2.0;
