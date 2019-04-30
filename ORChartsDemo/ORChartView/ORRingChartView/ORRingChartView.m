@@ -222,6 +222,8 @@
     CGRect bounds = CGRectMake(0, 0, width, width);
     CGPoint position = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
     
+    self.centerInfoView.center = position;
+    
     [self.ringModels enumerateObjectsUsingBlock:^(ORRingModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.gradientLayer.bounds = bounds;
