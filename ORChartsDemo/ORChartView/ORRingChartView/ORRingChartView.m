@@ -139,7 +139,6 @@
     CGFloat maxValue = 0;
     
     _centerInfoView = [_dataSource viewForRingCenterOfChartView:self];
-    [self addSubview:_centerInfoView];
     
     for (int i = 0; i < items; i ++) {
         ORRingModel *model  = [ORRingModel new];
@@ -182,6 +181,9 @@
         [self _or_addLayerstWithModel:obj];
     }];
     
+    [self addSubview:_centerInfoView];
+
+    
     [self setNeedsLayout];
 }
 
@@ -206,9 +208,13 @@
 
     CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum ) * 2, self.bounds.size.height - (_maxMarginHeightSum) * 2);
 
+    CGRect bounds = CGRectMake(0, 0, width, width);
+    CGPoint position = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
+    
     CGFloat ringWidth = _ringWidth;
     
     if (self.centerInfoView) {
+        self.centerInfoView.center = position;
         ringWidth = (width - MAX(self.centerInfoView.bounds.size.width, self.centerInfoView.bounds.size.height)) / 2;
     }
     
@@ -217,13 +223,11 @@
     
     if (self.style == ORChartStyleFan || self.style == ORChartStylePie) {
         ringWidth = width / 2.0;
+        if (_centerInfoView) {
+            [_centerInfoView removeFromSuperview];
+        }
     }
-    
-    CGRect bounds = CGRectMake(0, 0, width, width);
-    CGPoint position = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
-    
-    self.centerInfoView.center = position;
-    
+
     [self.ringModels enumerateObjectsUsingBlock:^(ORRingModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.gradientLayer.bounds = bounds;
