@@ -182,7 +182,6 @@
     }];
     
     [self addSubview:_centerInfoView];
-
     
     [self setNeedsLayout];
 }
@@ -287,11 +286,25 @@
     model.infoLinePointLayer = infoLinePointLayer;
 }
 
+- (void)_or_setDelegateData {
+    
+    [self.ringModels enumerateObjectsUsingBlock:^(ORRingModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        obj.margin = [self.delegate chartView:self marginForInfoLineAtRingIndex:idx] ?: 10;
+        obj.inMargin = [self.delegate chartView:self marginForInfoLineToRingAtRingIndex:idx] ?: 10;
+        obj.breakMargin = [self.delegate chartView:self breakMarginForInfoLineAtRingIndex:idx] ?: 15;
+        obj.infoMargin = [self.delegate chartView:self marginForInfoViewToLineAtRingIndex:idx] ?: 4;
+        obj.pointWidth = [self.delegate chartView:self pointWidthForInfoLineAtRingIndex:idx] ?: 4;
+        
+        self.maxMarginWidthSum = MAX(MAX(obj.topInfoView.bounds.size.width, obj.bottomInfoView.bounds.size.width) + obj.margin + obj.inMargin, _maxMarginWidthSum);
+        self.maxMarginHeightSum = MAX(obj.topInfoView.bounds.size.height + obj.bottomInfoView.bounds.size.height + obj.margin + obj.inMargin + obj.infoMargin * 2 + obj.breakMargin, _maxMarginHeightSum);
+    }];
+}
 
+#pragma mark -- delegate
 - (void)setDataSource:(id<ORRingChartViewDatasource>)dataSource {
     
     if (_dataSource != dataSource) {
-        
         _dataSource = dataSource;
         if (_dataSource) {
             [self reloadData];
@@ -299,6 +312,16 @@
     }
 }
 
+- (void)setDelegate:(id<ORRingChartViewDelegate>)delegate {
+    
+    if (_delegate != delegate) {
+        _delegate = delegate;
+        if (_dataSource) {
+            [self _or_setDelegateData];
+            [self setNeedsLayout];
+        }
+    }
+}
 
 - (void)setStyle:(ORChartStyle)style {
     _style = style;
