@@ -1,16 +1,16 @@
 //
-//  ORRingConfiger.m
-//  QLAnimateTest
+//  ORChartUtilities.m
+//  ORAnimateTest
 //
 //  Created by 欧阳荣 on 2019/4/24.
 //  Copyright © 2019 欧阳荣. All rights reserved.
 //
 
-#import "ORRingConfiger.h"
+#import "ORChartUtilities.h"
 
-@implementation ORRingConfiger
+@implementation ORChartUtilities
 
-+ (CAAnimation *)animationWithDurantion:(NSTimeInterval)duration {
++ (CAAnimation *)or_strokeAnimationWithDurantion:(NSTimeInterval)duration {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation.fromValue = @(0.0);
     animation.toValue = @(1.0);
@@ -21,6 +21,12 @@
 + (CAGradientLayer *)or_grandientLayerWithColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight {
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    
+    [self or_configGrandientLayer:gradientLayer withColors:colors leftToRight:leftToRight];
+    return gradientLayer;
+}
+
++ (void)or_configGrandientLayer:(CAGradientLayer *)gradientLayer withColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight {
     
     if (leftToRight) {
         gradientLayer.startPoint = CGPointMake(0, 0);
@@ -33,9 +39,8 @@
     if (colors.count > 0) {
         gradientLayer.colors = @[(__bridge id)colors.firstObject.CGColor, (__bridge id)colors.lastObject.CGColor];
     }
-    
-    return gradientLayer;
 }
+
 
 + (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)color {
     
@@ -62,6 +67,50 @@
     CGPoint inPoint = [self or_pointWithCircleRect:inReck angle:middAngle];
     CGPoint breakPoint = [self or_pointWithCircleRect:breakReck angle:middAngle];
 
+    CGFloat centerX = CGRectGetMidX(rect);
+    
+    CGPoint edgePoint = CGPointZero;
+    
+    if (inPoint.x < centerX) {
+        edgePoint = CGPointMake(margin, breakPoint.y);
+    }else {
+        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
+    }
+    
+    if (detailInfoBlock) {
+        detailInfoBlock(edgePoint,inPoint);
+    }
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:inPoint];
+    [path addLineToPoint:breakPoint];
+    [path addLineToPoint:edgePoint];
+    
+    return path;
+}
+
++ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
+    
+    CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
+    
+    CGFloat middAngle = [self or_middleAngleWithStartAngle:startAngle endAngle:endAngle];
+    
+    CGRect inReck = CGRectMake(rect.origin.x - inMargin, rect.origin.y - inMargin, rect.size.width + 2 * inMargin, rect.size.height + 2 * inMargin);
+    
+    CGRect breakReck = CGRectMake(inReck.origin.x - breakMargin, inReck.origin.y - breakMargin, inReck.size.width + 2 * breakMargin, inReck.size.height + 2 * breakMargin);
+    
+    CGPoint inPoint = [self or_pointWithCircleRect:inReck angle:middAngle];
+    CGPoint breakPoint = [self or_pointWithCircleRect:breakReck angle:middAngle];
+    
+    if (checkBlock) {
+        
+        NSLog(@"%.2lf  -- %.2lf", breakPoint.y,checkBlock(breakPoint));
+        
+        breakPoint.y += checkBlock(breakPoint);
+        NSLog(@"qq %.2lf", breakPoint.y );
+
+    }
+    
     CGFloat centerX = CGRectGetMidX(rect);
     
     CGPoint edgePoint = CGPointZero;

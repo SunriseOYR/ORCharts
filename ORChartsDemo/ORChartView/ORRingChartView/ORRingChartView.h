@@ -1,6 +1,6 @@
 //
 //  ORRingChartView.h
-//  QLAnimateTest
+//  ORAnimateTest
 //
 //  Created by 欧阳荣 on 2019/4/24.
 //  Copyright © 2019 欧阳荣. All rights reserved.
@@ -22,7 +22,6 @@ typedef enum : NSUInteger {
 @interface ORRingChartView : UIView
 
 @property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDatasource> dataSource;
-
 @property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDelegate> delegate;
 
 @property (nonatomic, assign) ORChartStyle style;
@@ -39,6 +38,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL clockwise;
 
 @property (nonatomic, assign) CGFloat startAngle;
+
+@property (nonatomic, assign) NSTimeInterval animateDuration;
 
 - (void)reloadData;
 

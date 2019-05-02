@@ -1,6 +1,6 @@
 //
-//  ORRingConfiger.h
-//  QLAnimateTest
+//  ORChartUtilities.h
+//  ORAnimateTest
 //
 //  Created by 欧阳荣 on 2019/4/24.
 //  Copyright © 2019 欧阳荣. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 #ifndef HEXA
 #define HEXA(_hex_, _alpha_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_)) alpha:(_alpha_)]
@@ -19,19 +19,37 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
     return from + (to - from) * ratio;
 }
 
-@interface ORRingConfiger : NSObject
+@interface ORChartUtilities : NSObject
 
-+ (CAAnimation *)animationWithDurantion:(NSTimeInterval)duration;
++ (CAAnimation *)or_strokeAnimationWithDurantion:(NSTimeInterval)duration;
 
 + (CAGradientLayer *)or_grandientLayerWithColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight;
++ (void)or_configGrandientLayer:(CAGradientLayer *)gradientLayer withColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight;
 
 + (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)color;
 
 // 折线
 + (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin detailInfoBlock:(void(^)(CGPoint edgePoint, CGPoint endPoint))detailInfoBlock;
 
+// 折线
++ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect
+                                  circleWidth:(CGFloat)circleWidth
+                                   startAngle:(CGFloat)startAngle
+                                     endAngle:(CGFloat)endAngle
+                                       margin:(CGFloat)margin
+                                     inMargin:(CGFloat)inMargin
+                                  breakMargin:(CGFloat)breakMargin
+                                   checkBlock:(CGFloat(^)(CGPoint breakPoint))checkBlock
+                              detailInfoBlock:(void(^)(CGPoint edgePoint, CGPoint endPoint))detailInfoBlock;
+
+
 // 圆环
-+ (UIBezierPath *)or_ringPathWithRect:(CGRect)rect startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle ringWidth:(CGFloat)ringWidth closckWise:(BOOL)clockWidth isPie:(BOOL)isPie;
++ (UIBezierPath *)or_ringPathWithRect:(CGRect)rect
+                           startAngle:(CGFloat)startAngle
+                             endAngle:(CGFloat)endAngle
+                            ringWidth:(CGFloat)ringWidth
+                           closckWise:(BOOL)clockWidth
+                                isPie:(BOOL)isPie;
 
 //任意角度的对角
 + (CGFloat)or_opposingAngleWithAngle:(CGFloat)angle;
@@ -63,4 +81,4 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 
 
 
-//NS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D398B1E2274694C007DDE80 /* ORRingConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1C2274694C007DDE80 /* ORRingConfiger.m */; };
+		4D0F3F222279F8DE007EF589 /* ORLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F3F212279F8DE007EF589 /* ORLineChartView.m */; };
+		4D398B1E2274694C007DDE80 /* ORChartUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1C2274694C007DDE80 /* ORChartUtilities.m */; };
 		4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1D2274694C007DDE80 /* ORRingChartView.m */; };
 		4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B2122746978007DDE80 /* ORRingViewController.m */; };
+		4D73AC63227ACDB700DFB973 /* ORLineChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D73AC62227ACDB700DFB973 /* ORLineChartCell.m */; };
 		891723371F73BB1400181F60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723361F73BB1400181F60 /* main.m */; };
 		8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723391F73BB1400181F60 /* AppDelegate.m */; };
 		8917233D1F73BB1400181F60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917233C1F73BB1400181F60 /* ViewController.m */; };
@@ -46,12 +48,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0F3F202279F8DE007EF589 /* ORLineChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartView.h; sourceTree = "<group>"; };
+		4D0F3F212279F8DE007EF589 /* ORLineChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartView.m; sourceTree = "<group>"; };
 		4D398B1A2274694C007DDE80 /* ORRingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartView.h; sourceTree = "<group>"; };
-		4D398B1B2274694C007DDE80 /* ORRingConfiger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingConfiger.h; sourceTree = "<group>"; };
-		4D398B1C2274694C007DDE80 /* ORRingConfiger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingConfiger.m; sourceTree = "<group>"; };
+		4D398B1B2274694C007DDE80 /* ORChartUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartUtilities.h; sourceTree = "<group>"; };
+		4D398B1C2274694C007DDE80 /* ORChartUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartUtilities.m; sourceTree = "<group>"; };
 		4D398B1D2274694C007DDE80 /* ORRingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingChartView.m; sourceTree = "<group>"; };
 		4D398B2022746978007DDE80 /* ORRingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingViewController.h; sourceTree = "<group>"; };
 		4D398B2122746978007DDE80 /* ORRingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORRingViewController.m; sourceTree = "<group>"; };
+		4D73AC61227ACDB700DFB973 /* ORLineChartCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartCell.h; sourceTree = "<group>"; };
+		4D73AC62227ACDB700DFB973 /* ORLineChartCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartCell.m; sourceTree = "<group>"; };
 		891723321F73BB1400181F60 /* ORChartView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORChartView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		891723361F73BB1400181F60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		891723381F73BB1400181F60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,8 +114,8 @@
 		4D398B19227467AC007DDE80 /* ORRingChartView */ = {
 			isa = PBXGroup;
 			children = (
-				4D398B1B2274694C007DDE80 /* ORRingConfiger.h */,
-				4D398B1C2274694C007DDE80 /* ORRingConfiger.m */,
+				4D398B1B2274694C007DDE80 /* ORChartUtilities.h */,
+				4D398B1C2274694C007DDE80 /* ORChartUtilities.m */,
 				4D398B1A2274694C007DDE80 /* ORRingChartView.h */,
 				4D398B1D2274694C007DDE80 /* ORRingChartView.m */,
 			);
@@ -197,6 +203,10 @@
 				89B428E41F95F42E00452677 /* image */,
 				891723691F73BB2D00181F60 /* ORChartView.h */,
 				8917236A1F73BB2D00181F60 /* ORChartView.m */,
+				4D0F3F202279F8DE007EF589 /* ORLineChartView.h */,
+				4D0F3F212279F8DE007EF589 /* ORLineChartView.m */,
+				4D73AC61227ACDB700DFB973 /* ORLineChartCell.h */,
+				4D73AC62227ACDB700DFB973 /* ORLineChartCell.m */,
 			);
 			path = ORChartView;
 			sourceTree = "<group>";
@@ -363,12 +373,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D0F3F222279F8DE007EF589 /* ORLineChartView.m in Sources */,
 				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
 				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
+				4D73AC63227ACDB700DFB973 /* ORLineChartCell.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
 				4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */,
 				89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */,
-				4D398B1E2274694C007DDE80 /* ORRingConfiger.m in Sources */,
+				4D398B1E2274694C007DDE80 /* ORChartUtilities.m in Sources */,
 				891723751F73BB2D00181F60 /* ORChartView.m in Sources */,
 				891723371F73BB1400181F60 /* main.m in Sources */,
 			);
@@ -521,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = K65QSBQXTG;
 				INFOPLIST_FILE = ORChartView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,7 +546,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = K65QSBQXTG;
 				INFOPLIST_FILE = ORChartView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12;
+				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttouch.ORChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";

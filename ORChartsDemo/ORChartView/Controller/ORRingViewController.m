@@ -9,7 +9,9 @@
 #import "ORRingViewController.h"
 #import "ORRingChartView.h"
 
-@interface ORRingViewController ()<ORRingChartViewDatasource>
+@interface ORRingViewController ()<ORRingChartViewDatasource, ORRingChartViewDelegate> {
+    NSInteger _randowValue;
+}
 
 @property (nonatomic, strong) ORRingChartView *ringView;
 
@@ -21,11 +23,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _randowValue = 4;
     self.view.backgroundColor = [UIColor blackColor];
     
     ORRingChartView *ringView = [ORRingChartView new];
     
     ringView.dataSource = self;
+    ringView.delegate = self;
     ringView.frame = CGRectMake(0, 0, 350, 350);
     ringView.center = self.view.center;
     
@@ -38,20 +42,22 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.ringView.style = arc4random() % 3;
+    _randowValue = arc4random() % 9 + 1;
     [self.ringView reloadData];
 }
 
 - (NSInteger)numberOfRingsOfChartView:(ORRingChartView *)chartView {
-    return 1;
+    return _randowValue;
 }
 
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index {
+    
     return arc4random() % 50 + 10;
 }
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index {
     UILabel *label = [UILabel new];
-    label.text = @"12345";
+    label.text = [NSString stringWithFormat:@"aa %zd", index];
     label.font = [UIFont systemFontOfSize:12];
     label.textColor = [UIColor redColor];
     [label sizeToFit];
@@ -60,11 +66,12 @@
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {
     UILabel *label = [UILabel new];
-    label.text = @"12345";
+    label.text = [NSString stringWithFormat:@"aa %zd", index];
     label.font = [UIFont systemFontOfSize:12];
     label.textColor = [UIColor lightGrayColor];
     [label sizeToFit];
     return label;
 }
+
 
 @end
