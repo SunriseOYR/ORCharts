@@ -170,6 +170,8 @@
         }
     }
 
+    CGFloat insetRingWidth = self.style == ORChartStylePie ? 0 : ringWidth;
+    
     [self.ringConfigs enumerateObjectsUsingBlock:^(ORRingConfig * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.gradientLayer.bounds = bounds;
@@ -182,7 +184,8 @@
         obj.ringLineLayer.position = position;
         obj.ringLineLayer.path = path;
         
-        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width startAngle:obj.startAngle endAngle:obj.endAngle margin:obj.margin inMargin:obj.inMargin breakMargin:obj.breakMargin checkBlock:^CGFloat(CGPoint breakPoint) {
+        
+        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:obj.margin inMargin:obj.inMargin breakMargin:obj.breakMargin checkBlock:^CGFloat(CGPoint breakPoint) {
             
             if (idx > 0) {
                 ORRingConfig *config = self.ringConfigs[idx - 1];
@@ -196,14 +199,12 @@
                 }else if (CGRectGetMinX(config.topInfoView.frame) < centerX && breakPoint.x < centerX) {
                     
                     CGFloat inset = obj.bottomInfoView.bounds.size.height + obj.infoMargin - (CGRectGetMinY(config.topInfoView.frame) - breakPoint.y);
-                    
                     if (inset > 0) {
                         return -inset;
                     }
                 }
             }
             return 0;
-            
         } detailInfoBlock:^(CGPoint edgePoint, CGPoint endPoint) {
             
             obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - obj.pointWidth / 2.0, endPoint.y - obj.pointWidth / 2.0, obj.pointWidth, obj.pointWidth);
@@ -278,6 +279,14 @@
     }];
 }
 
+- (void)_or_deleteConfig:(ORRingConfig *)config {
+    
+    [config.infoLineLayer removeFromSuperlayer];
+    [config.ringLineLayer removeFromSuperlayer];
+    [config.infoLinePointLayer removeFromSuperlayer];
+    [config.gradientLayer removeFromSuperlayer];
+    [_ringConfigs removeObject:config];
+}
 
 #pragma mark -- public
 - (void)reloadData {
@@ -306,6 +315,10 @@
         }
         
         config.value = [_dataSource chartView:self valueAtRingIndex:i];
+        if (config.value == 0) {
+            [self _or_deleteConfig:config];
+            continue;
+        }
         config.gradientColors = [_dataSource chartView:self graidentColorsAtRingIndex:i];
         config.ringLineColor = [_dataSource chartView:self lineColorForRingAtRingIndex:i];
         config.ringInfoColor = [_dataSource chartView:self lineColorForInfoLineAtRingIndex:i];
@@ -329,14 +342,9 @@
         
     }
     
-    if (items != _ringConfigs.count) {
-        for (NSInteger i = items; i < _ringConfigs.count; i ++) {
-            ORRingConfig *config = _ringConfigs[i];
-            [config.infoLineLayer removeFromSuperlayer];
-            [config.ringLineLayer removeFromSuperlayer];
-            [config.infoLinePointLayer removeFromSuperlayer];
-            [config.gradientLayer removeFromSuperlayer];
-            [_ringConfigs removeObject:config];
+    if (_ringConfigs.count != _ringConfigs.count) {
+        for (NSInteger i = _ringConfigs.count; i < _ringConfigs.count; i ++) {
+            [self _or_deleteConfig:_ringConfigs[i]];
             i --;
         }
     }

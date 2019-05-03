@@ -41,7 +41,6 @@
     }
 }
 
-
 + (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)color {
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
@@ -54,46 +53,21 @@
     return  shapeLayer;
 }
 
-+ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
-    
-    CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
-
-    CGFloat middAngle = [self or_middleAngleWithStartAngle:startAngle endAngle:endAngle];
-    
-    CGRect inReck = CGRectMake(rect.origin.x - inMargin, rect.origin.y - inMargin, rect.size.width + 2 * inMargin, rect.size.height + 2 * inMargin);
-    
-    CGRect breakReck = CGRectMake(inReck.origin.x - breakMargin, inReck.origin.y - breakMargin, inReck.size.width + 2 * breakMargin, inReck.size.height + 2 * breakMargin);
-    
-    CGPoint inPoint = [self or_pointWithCircleRect:inReck angle:middAngle];
-    CGPoint breakPoint = [self or_pointWithCircleRect:breakReck angle:middAngle];
-
-    CGFloat centerX = CGRectGetMidX(rect);
-    
-    CGPoint edgePoint = CGPointZero;
-    
-    if (inPoint.x < centerX) {
-        edgePoint = CGPointMake(margin, breakPoint.y);
-    }else {
-        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
-    }
-    
-    if (detailInfoBlock) {
-        detailInfoBlock(edgePoint,inPoint);
-    }
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:inPoint];
-    [path addLineToPoint:breakPoint];
-    [path addLineToPoint:edgePoint];
-    
-    return path;
-}
-
-+ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
++ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth ringWidth:(CGFloat)ringWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
     
     CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
     
     CGFloat middAngle = [self or_middleAngleWithStartAngle:startAngle endAngle:endAngle];
+    
+    if (ringWidth > 0) {
+        
+        CGFloat insetAngle = asin(ringWidth / circleWidth);
+
+        CGFloat inset = [self or_differAngleWithSubtractionAngle:endAngle subtractedAngle:startAngle] / (insetAngle * 3);
+        inset = MIN(inset, 1);
+        
+        middAngle = [self or_angle:middAngle byAddAngle:insetAngle * inset];
+    }
     
     CGRect inReck = CGRectMake(rect.origin.x - inMargin, rect.origin.y - inMargin, rect.size.width + 2 * inMargin, rect.size.height + 2 * inMargin);
     
@@ -103,12 +77,7 @@
     CGPoint breakPoint = [self or_pointWithCircleRect:breakReck angle:middAngle];
     
     if (checkBlock) {
-        
-        NSLog(@"%.2lf  -- %.2lf", breakPoint.y,checkBlock(breakPoint));
-        
         breakPoint.y += checkBlock(breakPoint);
-        NSLog(@"qq %.2lf", breakPoint.y );
-
     }
     
     CGFloat centerX = CGRectGetMidX(rect);
@@ -146,13 +115,9 @@
         return path;
     }
     
-    
-    
-    
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint center = CGPointMake(rect.origin.x + rect.size.width / 2.0, rect.origin.y + rect.size.height / 2.0);
     CGFloat radius = MIN(rect.size.width, rect.size.height) / 2.0;
-    
     
     [path addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
     
@@ -194,6 +159,16 @@
         return angle + addAngle - M_PI * 2;
     }
     return angle + addAngle;
+}
+
+//减法
++ (CGFloat)or_differAngleWithSubtractionAngle:(CGFloat)subtractionAngle subtractedAngle:(CGFloat)subtractedAngle {
+    
+    if (subtractedAngle > subtractionAngle) {
+        return subtractionAngle + M_PI * 2 - subtractedAngle;
+    }else {
+        return subtractionAngle - subtractedAngle;
+    }
 }
 
 //任意角度间的中点角度

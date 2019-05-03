@@ -29,11 +29,9 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 + (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)color;
 
 // 折线
-+ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin detailInfoBlock:(void(^)(CGPoint edgePoint, CGPoint endPoint))detailInfoBlock;
-
-// 折线
 + (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect
                                   circleWidth:(CGFloat)circleWidth
+                                    ringWidth:(CGFloat)ringWidth
                                    startAngle:(CGFloat)startAngle
                                      endAngle:(CGFloat)endAngle
                                        margin:(CGFloat)margin
