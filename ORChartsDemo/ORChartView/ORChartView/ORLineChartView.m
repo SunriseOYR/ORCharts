@@ -8,34 +8,27 @@
 
 #import "ORLineChartView.h"
 #import "ORLineChartCell.h"
+#import "ORLineChartConfig.h"
 
 @implementation NSObject (ORLineChartView)
 
 - (NSInteger)numberOfVerticalDataOfChartView:(ORLineChartView *)chartView {return 5;};
 
-- (UIView *)chartView:(ORLineChartView *)chartView viewForHorizontalAtIndex:(NSInteger)index {return nil;};
+- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {return nil;};
 
 
 @end
 
-@interface ORLineChartConfig : NSObject
-
-@property (nonatomic, copy) UIColor *lineColor;
-@property (nonatomic, copy) UIColor *shadowLineColor;
-
-@property (nonatomic, copy) NSArray<UIColor *> *gradientColors;
-
-@end
-
-@implementation ORLineChartConfig
-
-
-@end
 
 @interface ORLineChartView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray <UILabel *>*leftLabels;
+
+@property (nonatomic, strong) NSMutableArray <ORLineChartHorizontal *>*horizontalDatas;
+
+@property (nonatomic, strong) ORLineChartConfig *config;
+@property (nonatomic, strong) CALayer *bottowLineLayer;
 
 @end
 
@@ -61,11 +54,17 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self _or_layoutSubviews];
+}
+
 - (void)_or_initUI {
     
     _collectionView = ({
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
         layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         collectionView.backgroundColor = [UIColor clearColor];
@@ -85,9 +84,34 @@
 - (void)_or_initData {
     
     _leftLabels = [NSMutableArray array];
-    
+    _horizontalDatas = [NSMutableArray array];
+    _leftWidth = 60;
 }
 
+- (void)_or_layoutSubviews {
+    
+    
+    CGFloat topHeight = 40;
+    CGFloat bottowHeight = 40;
+    
+    CGFloat height = self.bounds.size.height;
+    
+    CGFloat labelHeight = (height - topHeight - bottowHeight) / self.leftLabels.count;
+    
+    self.collectionView.frame = CGRectMake(_leftWidth, 0, self.bounds.size.width - _leftWidth, height);
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.frame = CGRectMake(0, height - bottowHeight - (labelHeight * idx), _leftWidth, labelHeight);
+        
+        if (idx > 0) {
+            [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
+            [path addLineToPoint:CGPointMake(self.bounds.size.width - _leftWidth, obj.center.y)];
+        }
+    }];
+    
+    
+}
 
 - (void)reloadData {
     
@@ -95,8 +119,73 @@
         return;
     }
     
-    //    [self.ringconfigs removeAllObjects];
+    NSInteger items = [_dataSource numberOfHorizontalDataOfChartView:self];
     
+    for (int i = 0; i < items; i ++) {
+        
+        ORLineChartHorizontal *horizontal = [ORLineChartHorizontal new];
+        horizontal.value = [_dataSource chartView:self valueForHorizontalAtIndex:i];
+        horizontal.title = [_dataSource chartView:self titleForHorizontalAtIndex:i];
+        [self.horizontalDatas addObject:horizontal];
+    }
+    
+    NSInteger vertical = [_dataSource numberOfVerticalDataOfChartView:self];
+    
+    if (self.leftLabels.count > vertical) {
+        for (NSInteger i = vertical; i < _leftLabels.count; i ++) {
+            UILabel *label = _leftLabels[i];
+            [label removeFromSuperview];
+            [_leftLabels removeObject:label];
+        }
+    }else if (self.leftLabels.count < vertical) {
+        for (NSInteger i = self.leftLabels.count; i < vertical; i ++) {
+            UILabel *label = [UILabel new];
+            label.textAlignment = NSTextAlignmentCenter;
+            [_leftLabels addObject:label];
+            [self addSubview:label];
+        }
+    }
+    
+    //    [self.ringconfigs removeAllObjects];
+    [self.collectionView reloadData];
 }
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.horizontalDatas.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ORLineChartCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class]) forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.horizontal = self.horizontalDatas[indexPath.row];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(50, collectionView.bounds.size.height);//collectionView.bounds.size.height
+}
+
+#pragma mark -- setter
+- (void)setDataSource:(id<ORLineChartViewDataSource>)dataSource {
+    
+    if (_dataSource != dataSource) {
+        _dataSource = dataSource;
+        if (_dataSource) {
+            [self reloadData];
+        }
+    }
+}
+
+- (void)setDelegate:(id<ORLineChartViewDelegate>)delegate {
+    
+    if (_delegate != delegate) {
+        _delegate = delegate;
+        if (_dataSource) {
+//            [self _or_setDelegateData];
+            [self setNeedsLayout];
+        }
+    }
+}
+
 
 @end

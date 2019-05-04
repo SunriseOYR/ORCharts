@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4D0F3F222279F8DE007EF589 /* ORLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F3F212279F8DE007EF589 /* ORLineChartView.m */; };
+		4D16BCB2227D398300DBD881 /* ORLineChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16BCB1227D398300DBD881 /* ORLineChartConfig.m */; };
+		4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */; };
 		4D398B1E2274694C007DDE80 /* ORChartUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1C2274694C007DDE80 /* ORChartUtilities.m */; };
 		4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B1D2274694C007DDE80 /* ORRingChartView.m */; };
 		4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B2122746978007DDE80 /* ORRingViewController.m */; };
@@ -50,6 +52,10 @@
 /* Begin PBXFileReference section */
 		4D0F3F202279F8DE007EF589 /* ORLineChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartView.h; sourceTree = "<group>"; };
 		4D0F3F212279F8DE007EF589 /* ORLineChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartView.m; sourceTree = "<group>"; };
+		4D16BCB0227D398300DBD881 /* ORLineChartConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartConfig.h; sourceTree = "<group>"; };
+		4D16BCB1227D398300DBD881 /* ORLineChartConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartConfig.m; sourceTree = "<group>"; };
+		4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartViewController.h; sourceTree = "<group>"; };
+		4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartViewController.m; sourceTree = "<group>"; };
 		4D398B1A2274694C007DDE80 /* ORRingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartView.h; sourceTree = "<group>"; };
 		4D398B1B2274694C007DDE80 /* ORChartUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartUtilities.h; sourceTree = "<group>"; };
 		4D398B1C2274694C007DDE80 /* ORChartUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartUtilities.m; sourceTree = "<group>"; };
@@ -129,6 +135,8 @@
 				8917233C1F73BB1400181F60 /* ViewController.m */,
 				4D398B2022746978007DDE80 /* ORRingViewController.h */,
 				4D398B2122746978007DDE80 /* ORRingViewController.m */,
+				4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */,
+				4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,6 +211,8 @@
 				89B428E41F95F42E00452677 /* image */,
 				891723691F73BB2D00181F60 /* ORChartView.h */,
 				8917236A1F73BB2D00181F60 /* ORChartView.m */,
+				4D16BCB0227D398300DBD881 /* ORLineChartConfig.h */,
+				4D16BCB1227D398300DBD881 /* ORLineChartConfig.m */,
 				4D0F3F202279F8DE007EF589 /* ORLineChartView.h */,
 				4D0F3F212279F8DE007EF589 /* ORLineChartView.m */,
 				4D73AC61227ACDB700DFB973 /* ORLineChartCell.h */,
@@ -377,7 +387,9 @@
 				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
 				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
 				4D73AC63227ACDB700DFB973 /* ORLineChartCell.m in Sources */,
+				4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
+				4D16BCB2227D398300DBD881 /* ORLineChartConfig.m in Sources */,
 				4D398B1F2274694C007DDE80 /* ORRingChartView.m in Sources */,
 				89B428EB1F95F42E00452677 /* UIButton+EnlargeTouchArea.m in Sources */,
 				4D398B1E2274694C007DDE80 /* ORChartUtilities.m in Sources */,

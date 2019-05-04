@@ -51,9 +51,6 @@
 }
 
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index {
-    if (index == 0) {
-        return 0;
-    }
     return arc4random() % 50 + 10;
 }
 
@@ -75,9 +72,8 @@
     return label;
 }
 
-//- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoLineToRingAtRingIndex:(NSInteger)index {
-//    return -16;
-//}
-
+- (CGFloat)chartView:(ORRingChartView *)chartView pointWidthForInfoLineAtRingIndex:(NSInteger)index {
+    return 4;
+}
 
 @end

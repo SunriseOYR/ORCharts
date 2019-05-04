@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORLineChartHorizontal;
+
 @interface ORLineChartCell : UICollectionViewCell
+
+@property (nonatomic, strong) ORLineChartHorizontal *horizontal;
 
 @end
 

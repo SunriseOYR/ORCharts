@@ -27,8 +27,12 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) ORLineChatStyle style;
 
-// Y轴坐标数据， 根据dataSource 获取
-@property (nonatomic, strong, readonly) NSArray *verticalValues;
+@property (nonatomic, assign) CGFloat leftWidth;
+
+@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
+@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;
+
+@property (nonatomic, assign) CGFloat bottowSpace;
 
 @end
 
@@ -45,12 +49,14 @@ typedef enum : NSUInteger {
 
 - (NSInteger)numberOfVerticalDataOfChartView:(ORLineChartView *)chartView;
 
-- (UIView *)chartView:(ORLineChartView *)chartView viewForHorizontalAtIndex:(NSInteger)index;
+- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
 
 @end
 
 @protocol ORLineChartViewDelegate <NSObject>
 
+- (NSDictionary *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView;
+- (NSDictionary *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView;
 
 @end
 

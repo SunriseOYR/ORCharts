@@ -141,6 +141,12 @@
     return path;
 }
 
++ (UIBezierPath *)or_backGroundLinePathWithRect:(CGRect)rect count:(NSInteger)count space:(CGFloat)space {
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    return path;
+}
+
 //任意角度的对角
 + (CGFloat)or_opposingAngleWithAngle:(CGFloat)angle {
     

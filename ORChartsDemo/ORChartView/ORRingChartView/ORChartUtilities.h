@@ -49,6 +49,9 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
                            closckWise:(BOOL)clockWidth
                                 isPie:(BOOL)isPie;
 
+//背景横线
++ (UIBezierPath *)or_backGroundLinePathWithRect:(CGRect)rect count:(NSInteger)count space:(CGFloat)space;
+
 //任意角度的对角
 + (CGFloat)or_opposingAngleWithAngle:(CGFloat)angle;
 

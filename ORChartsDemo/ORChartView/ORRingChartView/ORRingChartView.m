@@ -11,7 +11,7 @@
 
 @implementation NSObject (ORRingChartView)
 
-- (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {return @[[[UIColor or_randomColor] colorWithAlpha:0.6],[[UIColor or_randomColor] colorWithAlpha:0.4]];}
+- (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {return @[[[UIColor or_randomColor] colorWithAlpha:1],[[UIColor or_randomColor] colorWithAlpha:1]];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForRingAtRingIndex:(NSInteger)index {return [UIColor whiteColor];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForInfoLineAtRingIndex:(NSInteger)index {return nil;}
 
@@ -281,10 +281,15 @@
 
 - (void)_or_deleteConfig:(ORRingConfig *)config {
     
-    [config.infoLineLayer removeFromSuperlayer];
-    [config.ringLineLayer removeFromSuperlayer];
-    [config.infoLinePointLayer removeFromSuperlayer];
-    [config.gradientLayer removeFromSuperlayer];
+    if (config.gradientLayer && config.gradientLayer.superlayer) {
+        [config.infoLineLayer removeFromSuperlayer];
+        [config.ringLineLayer removeFromSuperlayer];
+        [config.infoLinePointLayer removeFromSuperlayer];
+        [config.gradientLayer removeFromSuperlayer];
+    }
+    [config.topInfoView removeFromSuperview];
+    [config.bottomInfoView removeFromSuperview];
+
     [_ringConfigs removeObject:config];
 }
 
@@ -298,7 +303,7 @@
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSInteger items = [_dataSource numberOfRingsOfChartView:self];
-    
+
     CGFloat maxValue = 0;
     
     _centerInfoView = [_dataSource viewForRingCenterOfChartView:self];
@@ -315,10 +320,6 @@
         }
         
         config.value = [_dataSource chartView:self valueAtRingIndex:i];
-        if (config.value == 0) {
-            [self _or_deleteConfig:config];
-            continue;
-        }
         config.gradientColors = [_dataSource chartView:self graidentColorsAtRingIndex:i];
         config.ringLineColor = [_dataSource chartView:self lineColorForRingAtRingIndex:i];
         config.ringInfoColor = [_dataSource chartView:self lineColorForInfoLineAtRingIndex:i];
@@ -342,28 +343,33 @@
         
     }
     
-    if (_ringConfigs.count != _ringConfigs.count) {
-        for (NSInteger i = _ringConfigs.count; i < _ringConfigs.count; i ++) {
+    if (items != _ringConfigs.count) {
+        for (NSInteger i = items; i < _ringConfigs.count; i ++) {
             [self _or_deleteConfig:_ringConfigs[i]];
             i --;
         }
     }
     
-    __block CGFloat startAngle = self.startAngle;
-    
-    [self.ringConfigs enumerateObjectsUsingBlock:^(ORRingConfig * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    CGFloat startAngle = self.startAngle;
+    for (int i = 0; i < _ringConfigs.count; i ++) {
         
-        CGFloat angle = [ORChartUtilities or_angle:startAngle byAddAngle:ORInterpolation(0, M_PI * 2, obj.value / maxValue)];
-        obj.startAngle = startAngle;
-        obj.endAngle = angle;
+        ORRingConfig *config = _ringConfigs[i];
+
+        if (config.value == 0) {
+            [self _or_deleteConfig:config];
+            i --;
+            continue;
+        }
+        
+        CGFloat angle = [ORChartUtilities or_angle:startAngle byAddAngle:ORInterpolation(0, M_PI * 2, config.value / maxValue)];
+        config.startAngle = startAngle;
+        config.endAngle = angle;
         
         startAngle = angle;
-        
-        [self _or_addLayerstWithconfig:obj];
-    }];
+        [self _or_addLayerstWithconfig:config];
+    }
     
     [self addSubview:_centerInfoView];
-    
     [self setNeedsLayout];
 }
 
