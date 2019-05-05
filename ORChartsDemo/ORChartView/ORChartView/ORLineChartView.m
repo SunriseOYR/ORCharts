@@ -29,6 +29,7 @@
 
 @property (nonatomic, strong) ORLineChartConfig *config;
 @property (nonatomic, strong) CALayer *bottowLineLayer;
+@property (nonatomic, strong) CAShapeLayer *bgLineLayer;
 
 @end
 
@@ -78,6 +79,10 @@
     });
     [self addSubview:_collectionView];
     
+    _bgLineLayer = [CAShapeLayer layer];
+    _bgLineLayer.strokeColor = [UIColor blackColor].CGColor;
+    _bgLineLayer.lineWidth = 1;
+    [self.layer addSublayer:_bgLineLayer];
 }
 
 
@@ -110,6 +115,7 @@
         }
     }];
     
+    _bgLineLayer.path = path.CGPath;
     
 }
 
