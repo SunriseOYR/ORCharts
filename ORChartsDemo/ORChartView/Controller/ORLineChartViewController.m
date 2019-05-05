@@ -23,6 +23,8 @@
     
     lineView.dataSource = self;
     
+    lineView.backgroundColor = [UIColor greenColor];
+    
     [self.view addSubview:lineView];
     
     lineView.center = self.view.center;
