@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate;
 
+- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate;
+
 @end
 
 

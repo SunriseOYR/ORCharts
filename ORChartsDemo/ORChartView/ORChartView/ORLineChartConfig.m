@@ -119,4 +119,13 @@
     
 }
 
+- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate {
+    
+    NSMutableArray *number = [NSMutableArray arrayWithCapacity:horizontals.count];
+    [horizontals enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [number addObject:@(obj.value)];
+    }];
+    return [self initWithData:number numberWithSeparate:separate];
+}
+
 @end

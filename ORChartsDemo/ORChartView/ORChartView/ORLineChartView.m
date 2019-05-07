@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray <ORLineChartHorizontal *>*horizontalDatas;
 
 @property (nonatomic, strong) ORLineChartConfig *config;
+@property (nonatomic, strong) ORLineChartValue *value;
 @property (nonatomic, strong) CALayer *bottowLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
 
