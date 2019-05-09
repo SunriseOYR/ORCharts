@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSMutableArray <ORLineChartHorizontal *>*horizontalDatas;
 
 @property (nonatomic, strong) ORLineChartConfig *config;
-@property (nonatomic, strong) ORLineChartValue *value;
+@property (nonatomic, strong) ORLineChartValue *lineChartValue;
 @property (nonatomic, strong) CALayer *bottowLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
 
@@ -138,6 +138,8 @@
     
     NSInteger vertical = [_dataSource numberOfVerticalDataOfChartView:self];
     
+    _lineChartValue = [[ORLineChartValue alloc] initWithHorizontalData:self.horizontalDatas numberWithSeparate:vertical];
+    
     if (self.leftLabels.count > vertical) {
         for (NSInteger i = vertical; i < _leftLabels.count; i ++) {
             UILabel *label = _leftLabels[i];
@@ -152,6 +154,10 @@
             [self addSubview:label];
         }
     }
+    
+    [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.text = [NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]];
+    }];
     
     //    [self.ringconfigs removeAllObjects];
     [self.collectionView reloadData];
