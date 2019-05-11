@@ -23,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _randowValue = 4;
+    _randowValue = 30;
     self.view.backgroundColor = [UIColor blackColor];
     
     ORRingChartView *ringView = [ORRingChartView new];
