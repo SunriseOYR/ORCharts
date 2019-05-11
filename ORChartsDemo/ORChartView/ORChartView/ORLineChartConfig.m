@@ -25,8 +25,11 @@
     
     _bottomInset = 30;
     _topInset = 30;
+    
     _bottomLabelWidth = 50;
-    _leftLabelFont = [UIFont systemFontOfSize:13];
+    _bottomLabelInset = 8;
+    
+    _leftWidth = 60;
 }
 
 @end

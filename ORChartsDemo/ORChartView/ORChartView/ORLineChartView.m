@@ -16,6 +16,12 @@
 
 - (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {return nil;};
 
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView {
+    return @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+}
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView {
+    return @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+}
 
 @end
 
@@ -31,6 +37,8 @@
 @property (nonatomic, strong) ORLineChartValue *lineChartValue;
 @property (nonatomic, strong) CALayer *bottowLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
+
+@property (nonatomic, assign) CGFloat bottowTextHeight;
 
 @end
 
@@ -95,6 +103,8 @@
     _config = [ORLineChartConfig new];
 }
 
+
+
 - (void)_or_layoutSubviews {
     
     
@@ -110,12 +120,15 @@
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
 
     
+    if (self.horizontalDatas.count > 0) {
+        _bottowTextHeight = [self.horizontalDatas.firstObject.title boundingRectWithSize:CGSizeMake(_config.bottomLabelWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.width + _config.bottomLabelInset;
+    }
+    
     CGFloat topHeight = 40;
-    CGFloat bottowHeight = 40;
     
     CGFloat height = self.collectionView.bounds.size.height;
     
-    CGFloat labelHeight = (height - topHeight - bottowHeight) / self.leftLabels.count;
+    CGFloat labelHeight = (height - topHeight - _bottowTextHeight) / self.leftLabels.count;
     
     CGFloat labelInset = 0;
     
@@ -156,7 +169,9 @@
         
         ORLineChartHorizontal *horizontal = [ORLineChartHorizontal new];
         horizontal.value = [_dataSource chartView:self valueForHorizontalAtIndex:i];
-        horizontal.title = [_dataSource chartView:self titleForHorizontalAtIndex:i];
+        
+        horizontal.title = [[NSAttributedString alloc] initWithString:[_dataSource chartView:self titleForHorizontalAtIndex:i] attributes:[_dataSource labelAttrbutesForHorizontalOfChartView:self]];
+        
         [self.horizontalDatas addObject:horizontal];
     }
     
@@ -173,7 +188,6 @@
     }else if (self.leftLabels.count < vertical) {
         for (NSInteger i = self.leftLabels.count; i < vertical; i ++) {
             UILabel *label = [UILabel new];
-            label.font = _config.leftLabelFont;
             label.textAlignment = NSTextAlignmentCenter;
             [_leftLabels addObject:label];
             [self addSubview:label];
@@ -181,7 +195,7 @@
     }
     
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.text = [NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]];
+        obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[_dataSource labelAttrbutesForVerticalOfChartView:self]];
     }];
     
     //    [self.ringconfigs removeAllObjects];

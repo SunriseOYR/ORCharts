@@ -29,8 +29,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) CGFloat leftWidth;
 
-@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
-@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;
+//@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
+//@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;
 
 @property (nonatomic, assign) CGFloat bottowSpace;
 
@@ -49,14 +49,16 @@ typedef enum : NSUInteger {
 
 - (NSInteger)numberOfVerticalDataOfChartView:(ORLineChartView *)chartView;
 
-- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
+- (NSString *)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
+
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView;
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView;
 
 @end
 
 @protocol ORLineChartViewDelegate <NSObject>
 
-- (NSDictionary *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView;
-- (NSDictionary *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView;
+
 
 @end
 

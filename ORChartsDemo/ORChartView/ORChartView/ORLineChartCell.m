@@ -67,6 +67,7 @@
     }else if ([horizontal.title isKindOfClass:[NSAttributedString class]]) {
         self.titleLabel.attributedText = horizontal.title;
     }
+    
 }
 
 

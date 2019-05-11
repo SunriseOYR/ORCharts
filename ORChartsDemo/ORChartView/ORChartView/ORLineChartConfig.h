@@ -22,15 +22,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat topInset;
 
 @property (nonatomic, assign) CGFloat bottomLabelWidth;
+@property (nonatomic, assign) CGFloat bottomLabelInset;
 
-@property (nonatomic, copy) UIFont *leftLabelFont;
+@property (nonatomic, assign) CGFloat leftWidth;
 
 @end
 
 @interface ORLineChartHorizontal : NSObject
 
 @property (nonatomic, assign) CGFloat value;
-@property (nonatomic, copy) id title;
+@property (nonatomic, copy) NSAttributedString *title;
 
 @end
 
