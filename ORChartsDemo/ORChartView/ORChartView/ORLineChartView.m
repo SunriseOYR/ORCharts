@@ -92,23 +92,47 @@
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
     _leftWidth = 60;
+    _config = [ORLineChartConfig new];
 }
 
 - (void)_or_layoutSubviews {
     
     
+    
+    
+
+    
+//    self.collectionView.contentInset = UIEdgeInsetsMake(topHeight, 0, bottowHeight, 0);
+    
+    self.collectionView.frame = CGRectMake(_leftWidth,
+                                           _config.topInset,
+                                           self.bounds.size.width - _leftWidth,
+                                           self.bounds.size.height - _config.topInset + _config.bottomInset);
+
+    
     CGFloat topHeight = 40;
     CGFloat bottowHeight = 40;
     
-    CGFloat height = self.bounds.size.height;
+    CGFloat height = self.collectionView.bounds.size.height;
     
     CGFloat labelHeight = (height - topHeight - bottowHeight) / self.leftLabels.count;
     
-    self.collectionView.frame = CGRectMake(_leftWidth, 0, self.bounds.size.width - _leftWidth, height);
+    CGFloat labelInset = 0;
+    
+    
+    if (self.leftLabels.count > 0) {
+        
+        [self.leftLabels.firstObject sizeToFit];
+        labelInset = labelHeight - self.leftLabels.firstObject.bounds.size.height;
+        labelHeight =  self.leftLabels.firstObject.bounds.size.height;
+    }
+    
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.frame = CGRectMake(0, height - bottowHeight - (labelHeight * idx), _leftWidth, labelHeight);
+        
+        
+        obj.frame = CGRectMake(0, height - topHeight + labelInset - bottowHeight - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
         
         if (idx > 0) {
             [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
@@ -149,6 +173,7 @@
     }else if (self.leftLabels.count < vertical) {
         for (NSInteger i = self.leftLabels.count; i < vertical; i ++) {
             UILabel *label = [UILabel new];
+            label.font = _config.leftLabelFont;
             label.textAlignment = NSTextAlignmentCenter;
             [_leftLabels addObject:label];
             [self addSubview:label];
@@ -200,5 +225,13 @@
     }
 }
 
+- (void)setConfig:(ORLineChartConfig *)config {
+    if (_config != config) {
+        _config = config;
+        if (_dataSource) {
+            [self setNeedsLayout];
+        }
+    }
+}
 
 @end

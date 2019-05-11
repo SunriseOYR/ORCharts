@@ -10,6 +10,25 @@
 
 @implementation ORLineChartConfig
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self _or_initData];
+    }
+    return self;
+}
+
+- (void)_or_initData {
+    _lineColor = [UIColor yellowColor];
+    _shadowLineColor = [UIColor lightGrayColor];
+    
+    _bottomInset = 30;
+    _topInset = 30;
+    _bottomLabelWidth = 50;
+    _leftLabelFont = [UIFont systemFontOfSize:13];
+}
+
 @end
 
 @implementation ORLineChartHorizontal

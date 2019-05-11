@@ -54,9 +54,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat height = [self.titleLabel.attributedText boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height;
+    CGFloat height = [self.titleLabel.attributedText boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height + 8;
     self.titleLabel.frame = CGRectMake(0, self.bounds.size.height - height , self.bounds.size.width, height);
-    self.lineLayer.frame = CGRectMake(self.bounds.size.width / 2.0 - 0.5, 0, 1, self.bounds.size.height - height );
+    self.lineLayer.frame = CGRectMake(self.bounds.size.width / 2.0 - 0.5, 0, 1, self.bounds.size.height - height);
 
 }
 

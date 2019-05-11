@@ -18,7 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<UIColor *> *gradientColors;
 
+@property (nonatomic, assign) CGFloat bottomInset;
+@property (nonatomic, assign) CGFloat topInset;
 
+@property (nonatomic, assign) CGFloat bottomLabelWidth;
+
+@property (nonatomic, copy) UIFont *leftLabelFont;
 
 @end
 
