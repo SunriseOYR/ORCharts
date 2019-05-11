@@ -107,7 +107,7 @@
     self.collectionView.frame = CGRectMake(_leftWidth,
                                            _config.topInset,
                                            self.bounds.size.width - _leftWidth,
-                                           self.bounds.size.height - _config.topInset + _config.bottomInset);
+                                           self.bounds.size.height - _config.topInset - _config.bottomInset);
 
     
     CGFloat topHeight = 40;
@@ -132,7 +132,7 @@
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         
-        obj.frame = CGRectMake(0, height - topHeight + labelInset - bottowHeight - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
+        obj.frame = CGRectMake(0, height - topHeight + labelInset  - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
         
         if (idx > 0) {
             [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
