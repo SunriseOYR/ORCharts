@@ -32,7 +32,6 @@ typedef enum : NSUInteger {
 //@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
 //@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;
 
-@property (nonatomic, assign) CGFloat bottowSpace;
 
 @end
 

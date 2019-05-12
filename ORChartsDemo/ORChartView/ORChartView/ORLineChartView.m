@@ -35,10 +35,10 @@
 
 @property (nonatomic, strong) ORLineChartConfig *config;
 @property (nonatomic, strong) ORLineChartValue *lineChartValue;
-@property (nonatomic, strong) CALayer *bottowLineLayer;
+@property (nonatomic, strong) CAShapeLayer *bottomLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
 
-@property (nonatomic, assign) CGFloat bottowTextHeight;
+@property (nonatomic, assign) CGFloat bottomTextHeight;
 
 @end
 
@@ -84,14 +84,17 @@
         [collectionView registerClass:[ORLineChartCell class] forCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class])];
         collectionView.delegate = self;
         collectionView.dataSource = self;
+        collectionView.backgroundColor = [UIColor whiteColor];
         collectionView;
     });
     [self addSubview:_collectionView];
     
     _bgLineLayer = [CAShapeLayer layer];
-    _bgLineLayer.strokeColor = [UIColor blackColor].CGColor;
-    _bgLineLayer.lineWidth = 1;
     [self.layer addSublayer:_bgLineLayer];
+    
+    _bottomLineLayer = [CAShapeLayer layer];
+    [self.layer addSublayer:_bottomLineLayer];
+    
 }
 
 
@@ -99,19 +102,28 @@
     
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
-    _leftWidth = 60;
+    _leftWidth = 40;
     _config = [ORLineChartConfig new];
 }
 
+- (void)_or_configChart {
+    
+    _bgLineLayer.strokeColor = _config.bgLineColor.CGColor;
+    _bgLineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
+    _bgLineLayer.lineWidth = _config.bglineWidth;
 
+    _bottomLineLayer.strokeColor = _config.bgLineColor.CGColor;
+    _bottomLineLayer.lineWidth = _config.bglineWidth;
+
+    if (self.horizontalDatas.count > 0) {
+        _bottomTextHeight = [self.horizontalDatas.firstObject.title boundingRectWithSize:CGSizeMake(_config.bottomLabelWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height + _config.bottomLabelInset;
+    }
+    [self.collectionView reloadData];
+    [self setNeedsLayout];
+}
 
 - (void)_or_layoutSubviews {
-    
-    
-    
-    
-
-    
+        
 //    self.collectionView.contentInset = UIEdgeInsetsMake(topHeight, 0, bottowHeight, 0);
     
     self.collectionView.frame = CGRectMake(_leftWidth,
@@ -120,15 +132,13 @@
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
 
     
-    if (self.horizontalDatas.count > 0) {
-        _bottowTextHeight = [self.horizontalDatas.firstObject.title boundingRectWithSize:CGSizeMake(_config.bottomLabelWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.width + _config.bottomLabelInset;
-    }
+    
     
     CGFloat topHeight = 40;
     
     CGFloat height = self.collectionView.bounds.size.height;
     
-    CGFloat labelHeight = (height - topHeight - _bottowTextHeight) / self.leftLabels.count;
+    CGFloat labelHeight = (height - topHeight - _bottomTextHeight) / self.leftLabels.count;
     
     CGFloat labelInset = 0;
     
@@ -140,16 +150,20 @@
         labelHeight =  self.leftLabels.firstObject.bounds.size.height;
     }
     
-    
     UIBezierPath *path = [UIBezierPath bezierPath];
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        
-        obj.frame = CGRectMake(0, height - topHeight + labelInset  - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
+        obj.backgroundColor = [UIColor redColor];
+        obj.frame = CGRectMake(0, height - self.bottomTextHeight + labelHeight * 1.5   - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
         
         if (idx > 0) {
             [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
-            [path addLineToPoint:CGPointMake(self.bounds.size.width - _leftWidth, obj.center.y)];
+            [path addLineToPoint:CGPointMake(self.bounds.size.width, obj.center.y)];
+        }else {
+            UIBezierPath *path = [UIBezierPath bezierPath];
+            [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
+            [path addLineToPoint:CGPointMake(self.bounds.size.width, obj.center.y)];
+            _bottomLineLayer.path = path.CGPath;
         }
     }];
     
@@ -199,7 +213,7 @@
     }];
     
     //    [self.ringconfigs removeAllObjects];
-    [self.collectionView reloadData];
+    [self _or_configChart];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -208,8 +222,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ORLineChartCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class]) forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor lightGrayColor];
     cell.horizontal = self.horizontalDatas[indexPath.row];
+    cell.config = self.config;
     return cell;
 }
 
@@ -243,7 +257,7 @@
     if (_config != config) {
         _config = config;
         if (_dataSource) {
-            [self setNeedsLayout];
+            [self _or_configChart];
         }
     }
 }

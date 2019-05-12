@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORLineChartConfig : NSObject
 
-@property (nonatomic, copy) UIColor *lineColor;
+@property (nonatomic, copy) UIColor *chartLineColor;
 @property (nonatomic, copy) UIColor *shadowLineColor;
+@property (nonatomic, copy) UIColor *bgLineColor;
 
 @property (nonatomic, copy) NSArray<UIColor *> *gradientColors;
 
@@ -25,6 +26,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat bottomLabelInset;
 
 @property (nonatomic, assign) CGFloat leftWidth;
+
+@property (nonatomic, assign) CGFloat bglineWidth;
+
+//default YES
+@property (nonatomic, assign) BOOL showVerticalBgline;
+//default YES
+@property (nonatomic, assign) BOOL showHorizontalBgline;
+//default YES
+@property (nonatomic, assign) BOOL dottedBGLine;
+
+
 
 @end
 

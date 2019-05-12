@@ -12,7 +12,7 @@
 @interface ORLineChartCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) CALayer *lineLayer;
+@property (nonatomic, strong) CAShapeLayer *lineLayer;
 
 @end
 
@@ -41,8 +41,7 @@
     self.titleLabel = [UILabel new];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.lineLayer = [CALayer layer];
-    self.lineLayer.backgroundColor = [UIColor redColor].CGColor;
+    self.lineLayer = [CAShapeLayer layer];
     
     [self.contentView.layer addSublayer:self.lineLayer];
     [self.contentView addSubview:self.titleLabel];
@@ -54,21 +53,27 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat height = [self.titleLabel.attributedText boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height + 8;
-    self.titleLabel.frame = CGRectMake(0, self.bounds.size.height - height , self.bounds.size.width, height);
-    self.lineLayer.frame = CGRectMake(self.bounds.size.width / 2.0 - 0.5, 0, 1, self.bounds.size.height - height);
+    CGFloat width = self.bounds.size.width;
+    
+    CGFloat height = [self.titleLabel.attributedText boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height;
+    self.titleLabel.frame = CGRectMake(0, self.bounds.size.height - height , width, height);
 
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(width * 0.5, 0)];
+    [path addLineToPoint:CGPointMake(width * 0.5, self.bounds.size.height - height - _config.bottomLabelInset)];
+    _lineLayer.path = path.CGPath;
 }
 
 - (void)setHorizontal:(ORLineChartHorizontal *)horizontal {
     
-    if ([horizontal.title isKindOfClass:[NSString class]]) {
-        self.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:horizontal.title];
-    }else if ([horizontal.title isKindOfClass:[NSAttributedString class]]) {
-        self.titleLabel.attributedText = horizontal.title;
-    }
-    
+    self.titleLabel.attributedText = horizontal.title;
 }
 
+- (void)setConfig:(ORLineChartConfig *)config {
+    _config = config;
+    _lineLayer.strokeColor = _config.bgLineColor.CGColor;
+    _lineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
+    _lineLayer.lineWidth = _config.bglineWidth;
+}
 
 @end

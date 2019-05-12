@@ -20,16 +20,24 @@
 }
 
 - (void)_or_initData {
-    _lineColor = [UIColor yellowColor];
+    
+    _chartLineColor = [UIColor yellowColor];
     _shadowLineColor = [UIColor lightGrayColor];
+    _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
+    _bglineWidth = 1;
     
     _bottomInset = 30;
     _topInset = 30;
     
     _bottomLabelWidth = 50;
-    _bottomLabelInset = 8;
+    _bottomLabelInset = 12;
     
     _leftWidth = 60;
+    
+    _showVerticalBgline = YES;
+    _showVerticalBgline = YES;
+    _dottedBGLine = YES;
+    
 }
 
 @end
