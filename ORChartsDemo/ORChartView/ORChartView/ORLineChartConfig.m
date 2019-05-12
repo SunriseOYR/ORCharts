@@ -111,12 +111,12 @@
 
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i < separate; i ++) {
-        [array insertObject:@(min + i * (int)average) atIndex:0];
+        [array addObject:@(min + i * (int)average)];
     }
 
 
     _min = min;
-    _max = [array.firstObject floatValue];
+    _max = [array.lastObject floatValue];
     _separatedValues = [array copy];
     
     

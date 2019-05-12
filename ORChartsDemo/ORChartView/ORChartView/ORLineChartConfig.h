@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat value;
 @property (nonatomic, copy) NSAttributedString *title;
 
+
 @end
 
 @interface ORLineChartValue : NSObject

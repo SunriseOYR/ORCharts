@@ -11,6 +11,8 @@
 
 @interface ORLineChartViewController () <ORLineChartViewDataSource>
 
+@property (nonatomic, strong) NSArray *datasource;
+
 @end
 
 @implementation ORLineChartViewController
@@ -18,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _datasource = @[@(12), @(2),@(6),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16)];
+
     
     ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 350, 350)];
     
@@ -28,14 +33,15 @@
     [self.view addSubview:lineView];
     
     lineView.center = self.view.center;
+    
 }
 
 - (NSInteger)numberOfHorizontalDataOfChartView:(ORLineChartView *)chartView {
-    return 10;
+    return _datasource.count;
 }
 
 - (CGFloat)chartView:(ORLineChartView *)chartView valueForHorizontalAtIndex:(NSInteger)index {
-    return 10;
+    return [_datasource[index] doubleValue];
 }
 
 - (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {

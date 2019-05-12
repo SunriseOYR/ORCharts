@@ -9,6 +9,7 @@
 #import "ORLineChartView.h"
 #import "ORLineChartCell.h"
 #import "ORLineChartConfig.h"
+#import "ORChartUtilities.h"
 
 @implementation NSObject (ORLineChartView)
 
@@ -37,6 +38,9 @@
 @property (nonatomic, strong) ORLineChartValue *lineChartValue;
 @property (nonatomic, strong) CAShapeLayer *bottomLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
+
+@property (nonatomic, strong) CAShapeLayer *lineLayer;
+@property (nonatomic, strong) CAShapeLayer *shadowLineLayer;
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
 
@@ -95,6 +99,11 @@
     _bottomLineLayer = [CAShapeLayer layer];
     [self.layer addSublayer:_bottomLineLayer];
     
+    _lineLayer = [CAShapeLayer layer];
+    _lineLayer.lineWidth = 1;
+    _lineLayer.strokeColor = [UIColor redColor].CGColor;
+    [_collectionView.layer addSublayer:_lineLayer];
+    
 }
 
 
@@ -130,11 +139,8 @@
                                            _config.topInset,
                                            self.bounds.size.width - _leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
-
     
-    
-    
-    CGFloat topHeight = 40;
+    CGFloat topHeight = 30;
     
     CGFloat height = self.collectionView.bounds.size.height;
     
@@ -169,7 +175,69 @@
     
     _bgLineLayer.path = path.CGPath;
     
+    CGFloat ratio = (self.lineChartValue.max == self.lineChartValue.min) ? (float)1 :(CGFloat)(self.lineChartValue.min - self.lineChartValue.max);
+
+    NSMutableArray *points = [NSMutableArray array];
+    [self.horizontalDatas enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+
+        CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight + labelHeight * 1.5, (obj.value - self.lineChartValue.max) / ratio);
+        [points addObject:[NSValue valueWithCGPoint:CGPointMake(_config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
+    }];
+    
+    _lineLayer.path = [self _or_pathWithPoints:points].CGPath;
+    
+    
 }
+
+- (UIBezierPath *)_or_pathWithPoints:(NSArray *)points {
+    
+    CGPoint p1 = [points.firstObject CGPointValue];
+    
+    UIBezierPath *beizer = [UIBezierPath bezierPath];
+    [beizer moveToPoint:p1];
+    
+    for (int i = 0;i<points.count;i++ ) {
+        if (i > 0) {
+            CGPoint prePoint = [[points objectAtIndex:i-1] CGPointValue];
+            CGPoint nowPoint = [[points objectAtIndex:i] CGPointValue];
+            
+            [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+            
+            if (i == points.count-1) {
+                //                [beizer moveToPoint:nowPoint];//添加连线
+            }
+        }
+    }
+    return beizer;
+}
+
+
+- (UIBezierPath *)_or_closePathWithPoints:(NSArray *)points maxY:(CGFloat)maxY {
+    
+    CGPoint p1 = [points.firstObject CGPointValue];
+    
+    UIBezierPath *beizer = [UIBezierPath bezierPath];
+    [beizer moveToPoint:CGPointMake(p1.x, maxY)];
+    [beizer moveToPoint:p1];
+    
+    for (int i = 0;i<points.count;i++ ) {
+        if (i > 0) {
+            CGPoint prePoint = [[points objectAtIndex:i-1] CGPointValue];
+            CGPoint nowPoint = [[points objectAtIndex:i] CGPointValue];
+            
+            [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+            
+            if (i == points.count-1) {
+                //                [beizer moveToPoint:nowPoint];//添加连线
+                [beizer addLineToPoint:CGPointMake(nowPoint.x, maxY)];
+                [beizer closePath];
+            }
+        }
+    }
+    return beizer;
+}
+
 
 - (void)reloadData {
     
