@@ -160,7 +160,7 @@
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.backgroundColor = [UIColor redColor];
-        obj.frame = CGRectMake(0, height - self.bottomTextHeight + labelHeight * 1.5   - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
+        obj.frame = CGRectMake(0, self.bounds.size.height - self.bottomTextHeight - self.config.bottomInset - labelHeight * 0.5   - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
         
         if (idx > 0) {
             [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
@@ -181,7 +181,7 @@
     [self.horizontalDatas enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
 
-        CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight + labelHeight * 1.5, (obj.value - self.lineChartValue.max) / ratio);
+        CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight, (obj.value - self.lineChartValue.max) / ratio);
         [points addObject:[NSValue valueWithCGPoint:CGPointMake(_config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
     }];
     
