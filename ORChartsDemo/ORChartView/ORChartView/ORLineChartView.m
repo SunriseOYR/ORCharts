@@ -102,7 +102,15 @@
     _lineLayer = [CAShapeLayer layer];
     _lineLayer.lineWidth = 1;
     _lineLayer.strokeColor = [UIColor redColor].CGColor;
+    _lineLayer.fillColor = [UIColor clearColor].CGColor;
     [_collectionView.layer addSublayer:_lineLayer];
+    
+    _shadowLineLayer = [CAShapeLayer layer];
+    _shadowLineLayer.lineWidth = 1;
+    _shadowLineLayer.strokeColor = [UIColor redColor].CGColor;
+    _shadowLineLayer.fillColor = [UIColor clearColor].CGColor;
+    [_collectionView.layer addSublayer:_shadowLineLayer];
+
     
 }
 
