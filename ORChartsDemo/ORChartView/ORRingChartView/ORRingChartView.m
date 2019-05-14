@@ -296,13 +296,18 @@
 #pragma mark -- public
 - (void)reloadData {
     
-    if (!_dataSource || [_dataSource numberOfRingsOfChartView:self] == 0) {
+    if (!_dataSource) {
         return;
     }
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSInteger items = [_dataSource numberOfRingsOfChartView:self];
+    
+    if (items == 0) {
+        [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+        return;
+    }
 
     CGFloat maxValue = 0;
     
