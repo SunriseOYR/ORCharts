@@ -53,6 +53,51 @@
     return  shapeLayer;
 }
 
+
++ (UIBezierPath *)or_pathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve {
+    return [self or_closePathWithPoints:points isCurve:isCurve maxY:-10086];
+}
+
++ (UIBezierPath *)or_closePathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve maxY:(CGFloat)maxY {
+    
+    if (points.count <= 0) {
+        return nil;
+    }
+    
+    BOOL isClose = maxY != -10086;
+    
+    CGPoint p1 = [points.firstObject CGPointValue];
+    
+    UIBezierPath *beizer = [UIBezierPath bezierPath];
+    
+    if (isClose) {
+        [beizer moveToPoint:CGPointMake(p1.x, maxY)];
+        [beizer addLineToPoint:p1];
+    }else {
+        [beizer moveToPoint:p1];
+    }
+        
+    for (int i = 1;i<points.count;i++ ) {
+        
+        CGPoint prePoint = [[points objectAtIndex:i-1] CGPointValue];
+        CGPoint nowPoint = [[points objectAtIndex:i] CGPointValue];
+            
+        if (isCurve) {
+            [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+        }else {
+            [beizer addLineToPoint:nowPoint];
+        }
+
+        if (i == points.count-1 && isClose) {
+            [beizer addLineToPoint:CGPointMake(nowPoint.x, maxY)];
+            [beizer closePath];
+        }
+    }
+    return beizer;
+}
+
+#pragma mark -- ring
+
 + (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth ringWidth:(CGFloat)ringWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
     
     CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
@@ -138,12 +183,6 @@
     CGPoint squreCenter1 = [self or_centerWithRect:rect angle:startAngle ringWidth:ringWidth];
     [path addArcWithCenter:squreCenter1 radius:ringWidth / 2.0 startAngle:[self or_opposingAngleWithAngle:startAngle] endAngle:startAngle clockwise:!clockWidth];
     
-    return path;
-}
-
-+ (UIBezierPath *)or_backGroundLinePathWithRect:(CGRect)rect count:(NSInteger)count space:(CGFloat)space {
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
     return path;
 }
 

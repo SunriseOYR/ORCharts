@@ -110,8 +110,6 @@
     _shadowLineLayer.strokeColor = [UIColor redColor].CGColor;
     _shadowLineLayer.fillColor = [UIColor clearColor].CGColor;
     [_collectionView.layer addSublayer:_shadowLineLayer];
-
-    
 }
 
 
@@ -193,57 +191,9 @@
         [points addObject:[NSValue valueWithCGPoint:CGPointMake(_config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
     }];
     
-    _lineLayer.path = [self _or_pathWithPoints:points].CGPath;
+    _lineLayer.path = [ORChartUtilities or_pathWithPoints:points isCurve:NO].CGPath;
     
     
-}
-
-- (UIBezierPath *)_or_pathWithPoints:(NSArray *)points {
-    
-    CGPoint p1 = [points.firstObject CGPointValue];
-    
-    UIBezierPath *beizer = [UIBezierPath bezierPath];
-    [beizer moveToPoint:p1];
-    
-    for (int i = 0;i<points.count;i++ ) {
-        if (i > 0) {
-            CGPoint prePoint = [[points objectAtIndex:i-1] CGPointValue];
-            CGPoint nowPoint = [[points objectAtIndex:i] CGPointValue];
-            
-            [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
-            
-            if (i == points.count-1) {
-                //                [beizer moveToPoint:nowPoint];//添加连线
-            }
-        }
-    }
-    return beizer;
-}
-
-
-- (UIBezierPath *)_or_closePathWithPoints:(NSArray *)points maxY:(CGFloat)maxY {
-    
-    CGPoint p1 = [points.firstObject CGPointValue];
-    
-    UIBezierPath *beizer = [UIBezierPath bezierPath];
-    [beizer moveToPoint:CGPointMake(p1.x, maxY)];
-    [beizer moveToPoint:p1];
-    
-    for (int i = 0;i<points.count;i++ ) {
-        if (i > 0) {
-            CGPoint prePoint = [[points objectAtIndex:i-1] CGPointValue];
-            CGPoint nowPoint = [[points objectAtIndex:i] CGPointValue];
-            
-            [beizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
-            
-            if (i == points.count-1) {
-                //                [beizer moveToPoint:nowPoint];//添加连线
-                [beizer addLineToPoint:CGPointMake(nowPoint.x, maxY)];
-                [beizer closePath];
-            }
-        }
-    }
-    return beizer;
 }
 
 
