@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL dottedBGLine;
 
 
+@property (nonatomic, strong) UIView *indicator;
+
 
 @end
 
