@@ -38,6 +38,7 @@
 @property (nonatomic, strong) ORLineChartValue *lineChartValue;
 @property (nonatomic, strong) CAShapeLayer *bottomLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
+@property (nonatomic, strong) CAGradientLayer *gradientLayer;
 
 @property (nonatomic, strong) CAShapeLayer *lineLayer;
 @property (nonatomic, strong) CAShapeLayer *shadowLineLayer;

@@ -57,7 +57,7 @@ typedef enum : NSUInteger {
 
 @protocol ORLineChartViewDelegate <NSObject>
 
-- (void)
+//- (void)
 
 @end
 
