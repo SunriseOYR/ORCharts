@@ -37,6 +37,7 @@
     _showVerticalBgline = YES;
     _showVerticalBgline = YES;
     _dottedBGLine = YES;
+    _gradientColors = @[(__bridge id)([[UIColor redColor] colorWithAlpha:0.5].CGColor), (__bridge id)([[UIColor greenColor] colorWithAlpha:0.5].CGColor)];
     
 }
 

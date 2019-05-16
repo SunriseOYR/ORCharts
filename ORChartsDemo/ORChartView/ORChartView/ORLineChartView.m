@@ -38,7 +38,9 @@
 @property (nonatomic, strong) ORLineChartValue *lineChartValue;
 @property (nonatomic, strong) CAShapeLayer *bottomLineLayer;
 @property (nonatomic, strong) CAShapeLayer *bgLineLayer;
+
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
+@property (nonatomic, strong) CAShapeLayer *closeLayer;
 
 @property (nonatomic, strong) CAShapeLayer *lineLayer;
 @property (nonatomic, strong) CAShapeLayer *shadowLineLayer;
@@ -100,17 +102,25 @@
     _bottomLineLayer = [CAShapeLayer layer];
     [self.layer addSublayer:_bottomLineLayer];
     
-    _lineLayer = [CAShapeLayer layer];
-    _lineLayer.lineWidth = 1;
-    _lineLayer.strokeColor = [UIColor redColor].CGColor;
-    _lineLayer.fillColor = [UIColor clearColor].CGColor;
+    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
     [_collectionView.layer addSublayer:_lineLayer];
     
-    _shadowLineLayer = [CAShapeLayer layer];
-    _shadowLineLayer.lineWidth = 1;
-    _shadowLineLayer.strokeColor = [UIColor redColor].CGColor;
-    _shadowLineLayer.fillColor = [UIColor clearColor].CGColor;
+    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor lightGrayColor]];
     [_collectionView.layer addSublayer:_shadowLineLayer];
+    
+    _gradientLayer = ({
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(0, 1);
+        gradientLayer.masksToBounds = YES;
+        gradientLayer.locations = @[@(0.5f)];
+        gradientLayer;
+    });
+    _gradientLayer.colors = self.config.gradientColors;
+    [_collectionView.layer addSublayer:_gradientLayer];
+    
+    _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
+    _gradientLayer.mask = _closeLayer;
 }
 
 
@@ -146,6 +156,8 @@
                                            _config.topInset,
                                            self.bounds.size.width - _leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
+    
+    _gradientLayer.frame = self.collectionView.bounds;
     
     CGFloat topHeight = 30;
     
@@ -194,7 +206,7 @@
     
     _lineLayer.path = [ORChartUtilities or_pathWithPoints:points isCurve:NO].CGPath;
     
-    
+    _closeLayer.path = [ORChartUtilities or_closePathWithPoints:points isCurve:NO maxY: height - self.bottomTextHeight].CGPath;
 }
 
 
