@@ -129,10 +129,15 @@
     
     CGPoint edgePoint = CGPointZero;
     
+    CGFloat width = (rawRect.size.width - breakReck.size.width) / 2.0 - margin;
+    
     if (inPoint.x < centerX) {
-        edgePoint = CGPointMake(margin, breakPoint.y);
+//        edgePoint = CGPointMake(margin, breakPoint.y);
+        edgePoint = CGPointMake(breakPoint.x - width, breakPoint.y);
     }else {
-        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
+//        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
+//        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
+        edgePoint = CGPointMake(breakPoint.x + width, breakPoint.y);
     }
     
     if (detailInfoBlock) {
