@@ -1,6 +1,8 @@
 # ORChartView
 ### iOS - 超轻量级的曲线图绘制
 
+注：最近在添加扇形图，饼状图，已经重构代码，所以可能会出现功能bug
+
  [博客说明](http://www.jianshu.com/p/a571ae110ba5)
 
 * 效果图   
