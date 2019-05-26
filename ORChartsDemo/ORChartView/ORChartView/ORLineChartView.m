@@ -45,6 +45,9 @@
 @property (nonatomic, strong) CAShapeLayer *lineLayer;
 @property (nonatomic, strong) CAShapeLayer *shadowLineLayer;
 
+@property (nonatomic, strong) CAShapeLayer *circleLayer;
+
+
 @property (nonatomic, assign) CGFloat bottomTextHeight;
 
 @end
@@ -86,7 +89,6 @@
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         collectionView.backgroundColor = [UIColor clearColor];
         collectionView.showsHorizontalScrollIndicator = NO;
-        collectionView.bounces = YES;
         collectionView.scrollsToTop = NO;
         [collectionView registerClass:[ORLineChartCell class] forCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class])];
         collectionView.delegate = self;
@@ -102,10 +104,10 @@
     _bottomLineLayer = [CAShapeLayer layer];
     [self.layer addSublayer:_bottomLineLayer];
     
-    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
+    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:[UIColor redColor]];
     [_collectionView.layer addSublayer:_lineLayer];
     
-    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor lightGrayColor]];
+    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:[UIColor lightGrayColor]];
     [_collectionView.layer addSublayer:_shadowLineLayer];
     
     _gradientLayer = ({
@@ -120,7 +122,17 @@
     [_collectionView.layer addSublayer:_gradientLayer];
     
     _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
+    _closeLayer.fillColor = [UIColor blueColor].CGColor;
+//    [_collectionView.layer addSublayer:_closeLayer];
+
     _gradientLayer.mask = _closeLayer;
+    
+    _circleLayer = [ORChartUtilities or_shapelayerWithLineWidth:3 strokeColor:[UIColor redColor]];
+    _circleLayer.frame = CGRectMake(0, 0, 10, 10);
+    _circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 10, 10)].CGPath;
+    _circleLayer.fillColor = [UIColor whiteColor].CGColor;
+    [_collectionView.layer addSublayer:_circleLayer];
+    
 }
 
 
@@ -157,7 +169,7 @@
                                            self.bounds.size.width - _leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
     
-    _gradientLayer.frame = self.collectionView.bounds;
+    _gradientLayer.frame = CGRectMake(0, 0, _config.bottomLabelWidth * _horizontalDatas.count, self.collectionView.bounds.size.height);
     
     CGFloat topHeight = 30;
     
@@ -204,9 +216,22 @@
         [points addObject:[NSValue valueWithCGPoint:CGPointMake(_config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
     }];
     
-    _lineLayer.path = [ORChartUtilities or_pathWithPoints:points isCurve:NO].CGPath;
+    UIBezierPath *linePath = [ORChartUtilities or_pathWithPoints:points isCurve:YES];
+    _lineLayer.path = [linePath.copy CGPath];
     
-    _closeLayer.path = [ORChartUtilities or_closePathWithPoints:points isCurve:NO maxY: height - self.bottomTextHeight].CGPath;
+    [linePath applyTransform:CGAffineTransformMakeTranslation(0, 8)];
+    _shadowLineLayer.path = [linePath.copy CGPath];
+    
+    _closeLayer.path = [ORChartUtilities or_closePathWithPoints:points isCurve:YES maxY: height - self.bottomTextHeight].CGPath;
+    
+    
+    [_circleLayer removeAnimationForKey:@"or_circleMove"];
+    CAKeyframeAnimation *anim1 = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    anim1.duration = 1.0f;
+    anim1.path = _lineLayer.path;
+    _circleLayer.speed = 0.0f;
+    [_circleLayer addAnimation:anim1 forKey:@"or_circleMove"];
+    
 }
 
 
@@ -267,7 +292,15 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(50, collectionView.bounds.size.height);//collectionView.bounds.size.height
+    return CGSizeMake(_config.bottomLabelWidth, collectionView.bounds.size.height);//collectionView.bounds.size.height
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat ratio = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right - scrollView.bounds.size.width);
+    ratio = fmin(fmax(0.0, ratio), 1.0);
+
+    _circleLayer.timeOffset = ratio;
 }
 
 #pragma mark -- setter

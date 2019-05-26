@@ -30,7 +30,7 @@
     
     ringView.dataSource = self;
     ringView.delegate = self;
-    ringView.frame = CGRectMake(0, 0, 350, 350);
+    ringView.frame = CGRectMake(0, 0, 375, 350);
     ringView.center = self.view.center;
     
     //    ringView.backgroundColor = [UIColor redColor];

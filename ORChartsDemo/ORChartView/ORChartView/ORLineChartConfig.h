@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat bglineWidth;
 
+@property (nonatomic, assign) CGFloat lineWidth;
+
 //default YES
 @property (nonatomic, assign) BOOL showVerticalBgline;
 //default YES

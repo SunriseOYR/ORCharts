@@ -25,6 +25,7 @@
     _shadowLineColor = [UIColor lightGrayColor];
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
     _bglineWidth = 1;
+    _lineWidth = 2;
     
     _bottomInset = 30;
     _topInset = 30;
