@@ -27,7 +27,6 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) ORLineChatStyle style;
 
-@property (nonatomic, assign) CGFloat leftWidth;
 
 //@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
 //@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;

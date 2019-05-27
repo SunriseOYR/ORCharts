@@ -33,7 +33,7 @@
     _bottomLabelWidth = 50;
     _bottomLabelInset = 12;
     
-    _leftWidth = 60;
+    _leftWidth = 40;
     
     _showVerticalBgline = YES;
     _showVerticalBgline = YES;

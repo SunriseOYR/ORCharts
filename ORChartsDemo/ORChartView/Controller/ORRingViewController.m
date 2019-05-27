@@ -64,10 +64,14 @@
 }
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {
-    UILabel *label = [UILabel new];
-    label.text = [NSString stringWithFormat:@"aa %zd", index];
-    label.font = [UIFont systemFontOfSize:12];
-    label.textColor = [UIColor lightGrayColor];
+    UILabel *label = [chartView dequeueBottowInfoViewAtIndex:index];
+    if (!label) {
+        label = [UILabel new];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor lightGrayColor];
+        NSLog(@"1");
+    }
+    label.text = [NSString stringWithFormat:@"bottow %zd", index];
     [label sizeToFit];
     return label;
 }

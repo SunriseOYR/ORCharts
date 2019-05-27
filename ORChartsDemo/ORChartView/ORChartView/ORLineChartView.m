@@ -140,7 +140,6 @@
     
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
-    _leftWidth = 40;
     _config = [ORLineChartConfig new];
 }
 
@@ -164,9 +163,9 @@
         
 //    self.collectionView.contentInset = UIEdgeInsetsMake(topHeight, 0, bottowHeight, 0);
     
-    self.collectionView.frame = CGRectMake(_leftWidth,
+    self.collectionView.frame = CGRectMake(_config.leftWidth,
                                            _config.topInset,
-                                           self.bounds.size.width - _leftWidth,
+                                           self.bounds.size.width - _config.leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
     
     _gradientLayer.frame = CGRectMake(0, 0, _config.bottomLabelWidth * _horizontalDatas.count, self.collectionView.bounds.size.height);
@@ -191,16 +190,16 @@
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.backgroundColor = [UIColor redColor];
-        obj.frame = CGRectMake(0, self.bounds.size.height - self.bottomTextHeight - self.config.bottomInset - labelHeight * 0.5   - (labelHeight + labelInset) * idx, _leftWidth, labelHeight);
+        obj.frame = CGRectMake(0, self.bounds.size.height - self.bottomTextHeight - self.config.bottomInset - labelHeight * 0.5   - (labelHeight + labelInset) * idx, self.config.leftWidth, labelHeight);
         
         if (idx > 0) {
-            [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
+            [path moveToPoint:CGPointMake(self.config.leftWidth, obj.center.y)];
             [path addLineToPoint:CGPointMake(self.bounds.size.width, obj.center.y)];
         }else {
             UIBezierPath *path = [UIBezierPath bezierPath];
-            [path moveToPoint:CGPointMake(_leftWidth, obj.center.y)];
+            [path moveToPoint:CGPointMake(self.config.leftWidth, obj.center.y)];
             [path addLineToPoint:CGPointMake(self.bounds.size.width, obj.center.y)];
-            _bottomLineLayer.path = path.CGPath;
+            self.bottomLineLayer.path = path.CGPath;
         }
     }];
     
@@ -213,7 +212,7 @@
         
 
         CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight, (obj.value - self.lineChartValue.max) / ratio);
-        [points addObject:[NSValue valueWithCGPoint:CGPointMake(_config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
+        [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
     }];
     
     UIBezierPath *linePath = [ORChartUtilities or_pathWithPoints:points isCurve:YES];
@@ -273,7 +272,7 @@
     }
     
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[_dataSource labelAttrbutesForVerticalOfChartView:self]];
+        obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[self.dataSource labelAttrbutesForVerticalOfChartView:self]];
     }];
     
     //    [self.ringconfigs removeAllObjects];

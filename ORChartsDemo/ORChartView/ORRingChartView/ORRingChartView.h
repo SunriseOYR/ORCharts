@@ -43,9 +43,9 @@ typedef enum : NSUInteger {
 
 - (void)reloadData;
 
-- (UIView *)dequeueCenterView;
-- (UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index;
-- (UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index;
+- (__kindof UIView *)dequeueCenterView;
+- (__kindof UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index;
+- (__kindof UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index;
 
 @end
 

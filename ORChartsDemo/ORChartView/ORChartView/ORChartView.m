@@ -376,7 +376,6 @@
         [self.detailLabelArr addObject:detailLabel];
     }
     
-    NSLog(@"a");
     
 }
 

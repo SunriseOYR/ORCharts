@@ -147,8 +147,7 @@
 
     CGFloat centerX = self.bounds.size.width * 0.5;
 
-    
-    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum ) * 2, self.bounds.size.height - (_maxMarginHeightSum) * 2);
+    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum + 5) * 2, self.bounds.size.height - (_maxMarginHeightSum + 5) * 2);
 
     CGRect bounds = CGRectMake(0, 0, width, width);
     CGPoint position = CGPointMake(centerX, self.bounds.size.height * 0.5);
@@ -322,7 +321,6 @@
 
     CGFloat maxValue = 0;
     
-    _centerInfoView = [_dataSource viewForRingCenterOfChartView:self];
     
     for (int i = 0; i < items; i ++) {
         
@@ -347,19 +345,14 @@
             [config.topInfoView removeFromSuperview];
             config.topInfoView = topInfoView;
             [self addSubview:config.topInfoView];
+            //缓存数组 --待定
         }
         
         if (bottomInfoView && ![bottomInfoView isEqual:config.bottomInfoView]) {
             [config.bottomInfoView removeFromSuperview];
-            config.bottomInfoView = topInfoView;
+            config.bottomInfoView = bottomInfoView;
             [self addSubview:config.bottomInfoView];
         }
-
-//        config.topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
-//        config.bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
-//
-//        [self addSubview:config.topInfoView];
-//        [self addSubview:config.bottomInfoView];
         
         config.margin = [_delegate chartView:self marginForInfoLineAtRingIndex:i] ?: 10;
         config.inMargin = [_delegate chartView:self marginForInfoLineToRingAtRingIndex:i] ?: 10;
@@ -402,7 +395,13 @@
         [self _or_addLayerstWithconfig:config];
     }
     
-    [self addSubview:_centerInfoView];
+    UIView *centerView = [_dataSource viewForRingCenterOfChartView:self];
+    if (centerView && ![centerView isEqual:_centerInfoView]) {
+        [_centerInfoView removeFromSuperview];
+        _centerInfoView = centerView;
+        [self addSubview:_centerInfoView];
+    }
+    
     [self setNeedsLayout];
 }
 
