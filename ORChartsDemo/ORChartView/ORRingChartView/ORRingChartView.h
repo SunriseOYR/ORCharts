@@ -43,6 +43,10 @@ typedef enum : NSUInteger {
 
 - (void)reloadData;
 
+- (UIView *)dequeueCenterView;
+- (UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index;
+- (UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index;
+
 @end
 
 

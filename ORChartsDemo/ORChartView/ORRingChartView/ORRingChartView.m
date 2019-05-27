@@ -293,6 +293,16 @@
     [_ringConfigs removeObject:config];
 }
 
+- (void)_or_replaceView:(UIView *)rawView withNewView:(UIView *)newView {
+    if (!newView || [newView isEqual:rawView]) {
+        return;
+    }
+    if (rawView) {
+        [rawView removeFromSuperview];
+    }
+    [self addSubview:newView];
+}
+
 #pragma mark -- public
 - (void)reloadData {
     
@@ -300,12 +310,13 @@
         return;
     }
     
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSInteger items = [_dataSource numberOfRingsOfChartView:self];
     
     if (items == 0) {
         [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
         return;
     }
 
@@ -329,8 +340,26 @@
         config.ringLineColor = [_dataSource chartView:self lineColorForRingAtRingIndex:i];
         config.ringInfoColor = [_dataSource chartView:self lineColorForInfoLineAtRingIndex:i];
         
-        config.topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
-        config.bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+        UIView *topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
+        UIView *bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+        
+        if (topInfoView && ![topInfoView isEqual:config.topInfoView]) {
+            [config.topInfoView removeFromSuperview];
+            config.topInfoView = topInfoView;
+            [self addSubview:config.topInfoView];
+        }
+        
+        if (bottomInfoView && ![bottomInfoView isEqual:config.bottomInfoView]) {
+            [config.bottomInfoView removeFromSuperview];
+            config.bottomInfoView = topInfoView;
+            [self addSubview:config.bottomInfoView];
+        }
+
+//        config.topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
+//        config.bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+//
+//        [self addSubview:config.topInfoView];
+//        [self addSubview:config.bottomInfoView];
         
         config.margin = [_delegate chartView:self marginForInfoLineAtRingIndex:i] ?: 10;
         config.inMargin = [_delegate chartView:self marginForInfoLineToRingAtRingIndex:i] ?: 10;
@@ -338,8 +367,7 @@
         config.infoMargin = [_delegate chartView:self marginForInfoViewToLineAtRingIndex:i] ?: 2;
         config.pointWidth = [_delegate chartView:self pointWidthForInfoLineAtRingIndex:i] ?: 2;
         
-        [self addSubview:config.topInfoView];
-        [self addSubview:config.bottomInfoView];
+        
         
         _maxMarginWidthSum = MAX(MAX(config.topInfoView.bounds.size.width, config.bottomInfoView.bounds.size.width) + config.margin + config.inMargin, _maxMarginWidthSum);
         _maxMarginHeightSum = MAX(config.topInfoView.bounds.size.height + config.bottomInfoView.bounds.size.height + config.margin + config.inMargin + config.infoMargin * 2 + config.breakMargin, _maxMarginHeightSum);
@@ -376,6 +404,24 @@
     
     [self addSubview:_centerInfoView];
     [self setNeedsLayout];
+}
+
+- (UIView *)dequeueCenterView {
+    return _centerInfoView;
+}
+
+- (UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index {
+    if (index < self.ringConfigs.count) {
+        return self.ringConfigs[index].topInfoView;
+    }
+    return nil;
+}
+
+- (UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index {
+    if (index < self.ringConfigs.count) {
+        return self.ringConfigs[index].bottomInfoView;
+    }
+    return nil;
 }
 
 #pragma mark -- setter
