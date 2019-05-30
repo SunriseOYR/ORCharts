@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 //default YES
 @property (nonatomic, assign) BOOL dottedBGLine;
 
+@property (nonatomic, assign) BOOL isBreakLine;
 
 @property (nonatomic, strong) UIView *indicator;
 

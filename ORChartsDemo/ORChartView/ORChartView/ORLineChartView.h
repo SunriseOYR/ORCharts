@@ -43,9 +43,13 @@ typedef enum : NSUInteger {
 
 - (CGFloat)chartView:(ORLineChartView *)chartView valueForHorizontalAtIndex:(NSInteger)index;
 
+
+
 @optional
 
-- (NSInteger)numberOfVerticalDataOfChartView:(ORLineChartView *)chartView;
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index;
+
+- (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView;
 
 - (NSString *)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
 

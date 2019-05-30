@@ -13,7 +13,7 @@
 
 @implementation NSObject (ORLineChartView)
 
-- (NSInteger)numberOfVerticalDataOfChartView:(ORLineChartView *)chartView {return 5;};
+- (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView {return 5;};
 
 - (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {return nil;};
 
@@ -26,6 +26,90 @@
 
 @end
 
+@interface _ORIndicatorView : UIView
+
+@end
+
+@implementation _ORIndicatorView {
+    UILabel *_label;
+    CAShapeLayer *_backLayer;
+    CALayer *_shadowLayer;
+}
+
+#pragma mark - Initailize Methods
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self _xw_initailizeUI];
+    }
+    return self;
+}
+
+
+- (void)_xw_initailizeUI{
+    _label = ({
+        UILabel *label = [UILabel new];
+//        label.ignoreCommonProperties = YES;
+//        label.backgroundColor = [UIColor clearColor];
+        label;
+    });
+    [self addSubview:_label];
+
+    
+    _backLayer = ({
+        CAShapeLayer *layer = [CAShapeLayer new];
+        layer.fillColor = [UIColor redColor].CGColor;
+        layer;
+    });
+    
+    [self.layer insertSublayer:_backLayer atIndex:0];
+    
+    _shadowLayer = ({
+        CALayer *layer = [CALayer new];
+        layer;
+    });
+    [self.layer insertSublayer:_shadowLayer atIndex:0];
+    [self or_setTitle:@""];
+}
+
+//- (void)nt_setTextLayout:(YYTextLayout *)layout{
+//    _label.textLayout = layout;
+//    CGFloat width = layout.textBoundingRect.size.width;
+//    self.bounds = CGRectMake(0, 0, width, NTWidthRatio(26));
+//    _backLayer.path = ({
+//        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, height - NTWidthRatio(3.78)) cornerRadius:NTWidthRatio(4)];
+//        UIBezierPath *anglePath = [UIBezierPath bezierPath];
+//        [anglePath moveToPoint:CGPointMake(width / 2.0f, height)];
+//        [anglePath addLineToPoint:CGPointMake(width / 2.0 - NTWidthRatio(3.5), height - NTWidthRatio(3.78))];
+//        [anglePath addLineToPoint:CGPointMake(width / 2.0 + NTWidthRatio(3.5), height - NTWidthRatio(3.78))];
+//        [anglePath addLineToPoint:CGPointMake(width / 2.0f, height)];
+//        [path appendPath:anglePath];
+//        path.CGPath;
+//    });
+//
+//}
+
+- (void)or_setTitle:(NSAttributedString *)title {
+    _label.attributedText = title;
+    CGFloat width = 60;
+    CGFloat height = 26;
+    self.bounds = CGRectMake(0, 0, width, height);
+    
+    _backLayer.path = ({
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, height - 3.78) cornerRadius:3];
+        UIBezierPath *anglePath = [UIBezierPath bezierPath];
+        [anglePath moveToPoint:CGPointMake(width / 2.0f, height)];
+        [anglePath addLineToPoint:CGPointMake(width / 2.0 - 3.5, height - 3.78)];
+        [anglePath addLineToPoint:CGPointMake(width / 2.0 + 3.5, height - 3.78)];
+        [anglePath addLineToPoint:CGPointMake(width / 2.0f, height)];
+        [path appendPath:anglePath];
+        path.CGPath;
+    });
+}
+
+@end
 
 @interface ORLineChartView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
@@ -46,6 +130,10 @@
 @property (nonatomic, strong) CAShapeLayer *shadowLineLayer;
 
 @property (nonatomic, strong) CAShapeLayer *circleLayer;
+
+@property (nonatomic, strong) CALayer *animationLayer;
+@property (nonatomic, strong) _ORIndicatorView *indicator;
+@property (nonatomic, strong) CALayer *indicatorLineLayer;
 
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
@@ -127,12 +215,38 @@
 
     _gradientLayer.mask = _closeLayer;
     
-    _circleLayer = [ORChartUtilities or_shapelayerWithLineWidth:3 strokeColor:[UIColor redColor]];
-    _circleLayer.frame = CGRectMake(0, 0, 10, 10);
-    _circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 10, 10)].CGPath;
-    _circleLayer.fillColor = [UIColor whiteColor].CGColor;
+    
+    _indicatorLineLayer = ({
+        CALayer *layer = [CALayer layer];
+        layer.backgroundColor = [UIColor blackColor].CGColor;
+        layer;
+    });
+    
+    [_collectionView.layer addSublayer:_indicatorLineLayer];
+
+    
+    _circleLayer = ({
+        CAShapeLayer *layer = [ORChartUtilities or_shapelayerWithLineWidth:3 strokeColor:[UIColor redColor]];
+        layer.frame = CGRectMake(0, 0, 10, 10);
+        layer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 10, 10)].CGPath;
+        layer.fillColor = [UIColor whiteColor].CGColor;
+        layer.speed = 0.0f;
+        layer;
+    });
     [_collectionView.layer addSublayer:_circleLayer];
     
+    
+    _animationLayer = ({
+        CALayer *layer = [CALayer new];
+        layer.backgroundColor = [UIColor clearColor].CGColor;
+        layer.speed = 0.0f;
+        layer;
+    });
+    [_collectionView.layer addSublayer:_animationLayer];
+    
+    _indicator = [_ORIndicatorView new];;
+    [_collectionView addSubview:_indicator];
+
 }
 
 
@@ -208,31 +322,71 @@
     CGFloat ratio = (self.lineChartValue.max == self.lineChartValue.min) ? (float)1 :(CGFloat)(self.lineChartValue.min - self.lineChartValue.max);
 
     NSMutableArray *points = [NSMutableArray array];
+    
     [self.horizontalDatas enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
 
         CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight, (obj.value - self.lineChartValue.max) / ratio);
+        
+        if (idx == 0) {
+            [points addObject:[NSValue valueWithCGPoint:CGPointMake(0, y)]];
+        }
+        
         [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
+        
+        if (idx == self.horizontalDatas.count - 1) {
+            [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * self.horizontalDatas.count , y)]];
+        }
     }];
     
-    UIBezierPath *linePath = [ORChartUtilities or_pathWithPoints:points isCurve:YES];
+    BOOL isCurve = !self.config.isBreakLine;
+    
+    UIBezierPath *linePath = [ORChartUtilities or_pathWithPoints:points isCurve:isCurve];
     _lineLayer.path = [linePath.copy CGPath];
     
     [linePath applyTransform:CGAffineTransformMakeTranslation(0, 8)];
     _shadowLineLayer.path = [linePath.copy CGPath];
     
-    _closeLayer.path = [ORChartUtilities or_closePathWithPoints:points isCurve:YES maxY: height - self.bottomTextHeight].CGPath;
+    _closeLayer.path = [ORChartUtilities or_closePathWithPoints:points isCurve:isCurve maxY: height - self.bottomTextHeight].CGPath;
     
+    
+    [points removeLastObject];
+    [points removeObjectAtIndex:0];
+    UIBezierPath *ainmationPath = [ORChartUtilities or_pathWithPoints:points isCurve:isCurve];
     
     [_circleLayer removeAnimationForKey:@"or_circleMove"];
-    CAKeyframeAnimation *anim1 = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    anim1.duration = 1.0f;
-    anim1.path = _lineLayer.path;
-    _circleLayer.speed = 0.0f;
-    [_circleLayer addAnimation:anim1 forKey:@"or_circleMove"];
+    [_circleLayer addAnimation:[self _or_positionAnimationWithPath:[ainmationPath.copy CGPath]] forKey:@"or_circleMove"];
+    
+    CGFloat indecaterHeight = _indicator.bounds.size.height;
+    
+    [ainmationPath applyTransform:CGAffineTransformMakeTranslation(0, - indecaterHeight)];
+    [_animationLayer removeAnimationForKey:@"or_circleMove"];
+    [_animationLayer addAnimation:[self _or_positionAnimationWithPath:ainmationPath.CGPath] forKey:@"or_circleMove"];
+
+    CGPoint fistValue = [points.firstObject CGPointValue];
+    _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
+
+    
+    [self _or_updateIndcaterLineFrame];
+
     
 }
 
+- (CAAnimation *)_or_positionAnimationWithPath:(CGPathRef)path {
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    animation.duration = 1.0f;
+    animation.path = path;
+    return animation;
+}
+
+- (void)_or_updateIndcaterLineFrame {
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    CGFloat midY = CGRectGetMidY(self.leftLabels.firstObject.frame);
+    _indicatorLineLayer.frame = CGRectMake(_indicator.center.x - 0.4, CGRectGetMaxY(_indicator.frame), 0.8, midY - CGRectGetMaxY(_indicator.frame) - self.bottomTextHeight);
+    [CATransaction commit];
+}
 
 - (void)reloadData {
     
@@ -252,7 +406,7 @@
         [self.horizontalDatas addObject:horizontal];
     }
     
-    NSInteger vertical = [_dataSource numberOfVerticalDataOfChartView:self];
+    NSInteger vertical = [_dataSource numberOfVerticalLinesOfChartView:self];
     
     _lineChartValue = [[ORLineChartValue alloc] initWithHorizontalData:self.horizontalDatas numberWithSeparate:vertical];
     
@@ -300,6 +454,10 @@
     ratio = fmin(fmax(0.0, ratio), 1.0);
 
     _circleLayer.timeOffset = ratio;
+    _animationLayer.timeOffset = ratio;
+    _indicator.center = _animationLayer.presentationLayer.position;
+    [self _or_updateIndcaterLineFrame];
+    
 }
 
 #pragma mark -- setter
