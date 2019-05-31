@@ -169,6 +169,8 @@
 
 - (void)_or_initUI {
     
+    self.backgroundColor = [UIColor whiteColor];
+    
     _collectionView = ({
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
         layout.minimumInteritemSpacing = 0;
@@ -181,7 +183,6 @@
         [collectionView registerClass:[ORLineChartCell class] forCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class])];
         collectionView.delegate = self;
         collectionView.dataSource = self;
-        collectionView.backgroundColor = [UIColor whiteColor];
         collectionView;
     });
     [self addSubview:_collectionView];
@@ -192,11 +193,7 @@
     _bottomLineLayer = [CAShapeLayer layer];
     [self.layer addSublayer:_bottomLineLayer];
     
-    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:[UIColor redColor]];
-    [_collectionView.layer addSublayer:_lineLayer];
     
-    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:[UIColor lightGrayColor]];
-    [_collectionView.layer addSublayer:_shadowLineLayer];
     
     _gradientLayer = ({
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -209,12 +206,20 @@
     _gradientLayer.colors = self.config.gradientColors;
     [_collectionView.layer addSublayer:_gradientLayer];
     
+    
+    
     _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
     _closeLayer.fillColor = [UIColor blueColor].CGColor;
 //    [_collectionView.layer addSublayer:_closeLayer];
 
     _gradientLayer.mask = _closeLayer;
     
+    
+    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:_config.chartLineColor];
+    [_collectionView.layer addSublayer:_lineLayer];
+    
+    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:_config.shadowLineColor];
+    [_collectionView.layer addSublayer:_shadowLineLayer];
     
     _indicatorLineLayer = ({
         CALayer *layer = [CALayer layer];
@@ -227,9 +232,9 @@
     
     _circleLayer = ({
         CAShapeLayer *layer = [ORChartUtilities or_shapelayerWithLineWidth:3 strokeColor:[UIColor redColor]];
-        layer.frame = CGRectMake(0, 0, 10, 10);
-        layer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 10, 10)].CGPath;
-        layer.fillColor = [UIColor whiteColor].CGColor;
+        layer.frame = (CGRect){{0,0},{_config.circleWidth,_config.circleWidth}};
+        layer.path = [UIBezierPath bezierPathWithOvalInRect:layer.frame].CGPath;
+        layer.fillColor = self.backgroundColor.CGColor;
         layer.speed = 0.0f;
         layer;
     });
@@ -249,7 +254,6 @@
 
 }
 
-
 - (void)_or_initData {
     
     _leftLabels = [NSMutableArray array];
@@ -262,10 +266,10 @@
     _bgLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bgLineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
     _bgLineLayer.lineWidth = _config.bglineWidth;
-
+    
     _bottomLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bottomLineLayer.lineWidth = _config.bglineWidth;
-
+    
     if (self.horizontalDatas.count > 0) {
         _bottomTextHeight = [self.horizontalDatas.firstObject.title boundingRectWithSize:CGSizeMake(_config.bottomLabelWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height + _config.bottomLabelInset;
     }
@@ -273,9 +277,12 @@
     [self setNeedsLayout];
 }
 
+
 - (void)_or_layoutSubviews {
         
 //    self.collectionView.contentInset = UIEdgeInsetsMake(topHeight, 0, bottowHeight, 0);
+    
+    _circleLayer.fillColor = self.backgroundColor.CGColor;
     
     self.collectionView.frame = CGRectMake(_config.leftWidth,
                                            _config.topInset,
@@ -284,11 +291,14 @@
     
     _gradientLayer.frame = CGRectMake(0, 0, _config.bottomLabelWidth * _horizontalDatas.count, self.collectionView.bounds.size.height);
     
-    CGFloat topHeight = 30;
+    CGFloat indecaterHeight = _indicator.bounds.size.height;
+
+    
+    CGFloat topHeight = indecaterHeight * 2;
     
     CGFloat height = self.collectionView.bounds.size.height;
     
-    CGFloat labelHeight = (height - topHeight - _bottomTextHeight) / self.leftLabels.count;
+    CGFloat labelHeight = (height - topHeight - _bottomTextHeight) / (self.leftLabels.count - 1);
     
     CGFloat labelInset = 0;
     
@@ -303,7 +313,6 @@
     UIBezierPath *path = [UIBezierPath bezierPath];
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        obj.backgroundColor = [UIColor redColor];
         obj.frame = CGRectMake(0, self.bounds.size.height - self.bottomTextHeight - self.config.bottomInset - labelHeight * 0.5   - (labelHeight + labelInset) * idx, self.config.leftWidth, labelHeight);
         
         if (idx > 0) {
@@ -357,7 +366,7 @@
     [_circleLayer removeAnimationForKey:@"or_circleMove"];
     [_circleLayer addAnimation:[self _or_positionAnimationWithPath:[ainmationPath.copy CGPath]] forKey:@"or_circleMove"];
     
-    CGFloat indecaterHeight = _indicator.bounds.size.height;
+//    CGFloat indecaterHeight = _indicator.bounds.size.height;
     
     [ainmationPath applyTransform:CGAffineTransformMakeTranslation(0, - indecaterHeight)];
     [_animationLayer removeAnimationForKey:@"or_circleMove"];
@@ -365,10 +374,8 @@
 
     CGPoint fistValue = [points.firstObject CGPointValue];
     _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
-
     
     [self _or_updateIndcaterLineFrame];
-
     
 }
 
@@ -384,7 +391,7 @@
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     CGFloat midY = CGRectGetMidY(self.leftLabels.firstObject.frame);
-    _indicatorLineLayer.frame = CGRectMake(_indicator.center.x - 0.4, CGRectGetMaxY(_indicator.frame), 0.8, midY - CGRectGetMaxY(_indicator.frame) - self.bottomTextHeight);
+    _indicatorLineLayer.frame = CGRectMake(_indicator.center.x - _config.indicatorLineWidth / 2.0, CGRectGetMaxY(_indicator.frame), _config.indicatorLineWidth, midY - CGRectGetMaxY(_indicator.frame));
     [CATransaction commit];
 }
 

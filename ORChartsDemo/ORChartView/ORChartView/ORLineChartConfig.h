@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIView *indicator;
 
+@property (nonatomic, assign) CGFloat circleWidth;
+@property (nonatomic, assign) CGFloat indicatorLineWidth;
 
 @end
 
