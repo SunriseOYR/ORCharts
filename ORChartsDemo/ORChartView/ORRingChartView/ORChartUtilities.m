@@ -48,7 +48,9 @@
     shapeLayer.lineWidth = lineWidth;
     shapeLayer.lineCap = kCALineCapRound;
     shapeLayer.lineJoin = kCALineJoinRound;
-    shapeLayer.strokeColor = color.CGColor;
+    if (color) {
+        shapeLayer.strokeColor = color.CGColor;
+    }
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
     return  shapeLayer;
 }

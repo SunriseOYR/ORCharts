@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
-    ORLineChatStyleSingleCurve = 0, //曲线
-    ORLineChatStyleSingleBroken,    //折线
-    ORLineChatStyleMatrixCurve,     //网格曲线
-    ORLineChatStyleMatrixBroken     //网格折线
-} ORLineChatStyle;
 
 @protocol ORLineChartViewDataSource,ORLineChartViewDelegate;
 
@@ -25,11 +19,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDelegate> delegate;
 
-@property (nonatomic, assign) ORLineChatStyle style;
-
-
-//@property (nonatomic, copy) NSDictionary *verticalAttrbutes;
-//@property (nonatomic, copy) NSDictionary *horizontalAttrbutes;
 
 
 @end
@@ -42,8 +31,6 @@ typedef enum : NSUInteger {
 - (NSInteger)numberOfHorizontalDataOfChartView:(ORLineChartView *)chartView;
 
 - (CGFloat)chartView:(ORLineChartView *)chartView valueForHorizontalAtIndex:(NSInteger)index;
-
-
 
 @optional
 

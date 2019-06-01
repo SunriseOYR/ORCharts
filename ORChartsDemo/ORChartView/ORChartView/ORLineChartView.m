@@ -24,10 +24,11 @@
     return @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
 }
 
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index {return nil;}
+
 @end
 
 @interface _ORIndicatorView : UIView
-
 @end
 
 @implementation _ORIndicatorView {
@@ -51,8 +52,6 @@
 - (void)_xw_initailizeUI{
     _label = ({
         UILabel *label = [UILabel new];
-//        label.ignoreCommonProperties = YES;
-//        label.backgroundColor = [UIColor clearColor];
         label;
     });
     [self addSubview:_label];
@@ -71,31 +70,15 @@
         layer;
     });
     [self.layer insertSublayer:_shadowLayer atIndex:0];
-    [self or_setTitle:@""];
 }
-
-//- (void)nt_setTextLayout:(YYTextLayout *)layout{
-//    _label.textLayout = layout;
-//    CGFloat width = layout.textBoundingRect.size.width;
-//    self.bounds = CGRectMake(0, 0, width, NTWidthRatio(26));
-//    _backLayer.path = ({
-//        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, height - NTWidthRatio(3.78)) cornerRadius:NTWidthRatio(4)];
-//        UIBezierPath *anglePath = [UIBezierPath bezierPath];
-//        [anglePath moveToPoint:CGPointMake(width / 2.0f, height)];
-//        [anglePath addLineToPoint:CGPointMake(width / 2.0 - NTWidthRatio(3.5), height - NTWidthRatio(3.78))];
-//        [anglePath addLineToPoint:CGPointMake(width / 2.0 + NTWidthRatio(3.5), height - NTWidthRatio(3.78))];
-//        [anglePath addLineToPoint:CGPointMake(width / 2.0f, height)];
-//        [path appendPath:anglePath];
-//        path.CGPath;
-//    });
-//
-//}
 
 - (void)or_setTitle:(NSAttributedString *)title {
     _label.attributedText = title;
-    CGFloat width = 60;
-    CGFloat height = 26;
+    [_label sizeToFit];
+    CGFloat width = _label.bounds.size.width + 10;
+    CGFloat height = _label.bounds.size.height + 10;
     self.bounds = CGRectMake(0, 0, width, height);
+    _label.center = CGPointMake(width / 2.0, (height - 3.78) / 2.0);
     
     _backLayer.path = ({
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, height - 3.78) cornerRadius:3];
@@ -109,9 +92,15 @@
     });
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    _backLayer.fillColor = backgroundColor.CGColor;
+}
+
 @end
 
-@interface ORLineChartView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface ORLineChartView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource> {
+    NSInteger _lastIndex;
+}
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray <UILabel *>*leftLabels;
@@ -137,6 +126,7 @@
 
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
+
 
 @end
 
@@ -203,22 +193,21 @@
         gradientLayer.locations = @[@(0.5f)];
         gradientLayer;
     });
-    _gradientLayer.colors = self.config.gradientColors;
     [_collectionView.layer addSublayer:_gradientLayer];
     
     
     
-    _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:[UIColor redColor]];
+    _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
     _closeLayer.fillColor = [UIColor blueColor].CGColor;
 //    [_collectionView.layer addSublayer:_closeLayer];
 
     _gradientLayer.mask = _closeLayer;
     
     
-    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:_config.chartLineColor];
+    _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
     [_collectionView.layer addSublayer:_lineLayer];
     
-    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:_config.lineWidth strokeColor:_config.shadowLineColor];
+    _shadowLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
     [_collectionView.layer addSublayer:_shadowLineLayer];
     
     _indicatorLineLayer = ({
@@ -231,9 +220,7 @@
 
     
     _circleLayer = ({
-        CAShapeLayer *layer = [ORChartUtilities or_shapelayerWithLineWidth:3 strokeColor:[UIColor redColor]];
-        layer.frame = (CGRect){{0,0},{_config.circleWidth,_config.circleWidth}};
-        layer.path = [UIBezierPath bezierPathWithOvalInRect:layer.frame].CGPath;
+        CAShapeLayer *layer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
         layer.fillColor = self.backgroundColor.CGColor;
         layer.speed = 0.0f;
         layer;
@@ -263,20 +250,35 @@
 
 - (void)_or_configChart {
     
+    _lineLayer.strokeColor = _config.chartLineColor.CGColor;
+    _shadowLineLayer.strokeColor = _config.shadowLineColor.CGColor;
+    _lineLayer.lineWidth = _config.lineWidth;
+    _shadowLineLayer.lineWidth = _config.lineWidth * 0.8;
+    
+    
+    _circleLayer.frame = (CGRect){{0,0},{_config.circleWidth,_config.circleWidth}};
+    _circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:_circleLayer.frame].CGPath;
+    _circleLayer.lineWidth = _config.lineWidth;
+    _circleLayer.strokeColor = _config.chartLineColor.CGColor;
+    
+    _gradientLayer.colors = _config.gradientColors;
+    
     _bgLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bgLineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
     _bgLineLayer.lineWidth = _config.bglineWidth;
-    
+
     _bottomLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bottomLineLayer.lineWidth = _config.bglineWidth;
     
     if (self.horizontalDatas.count > 0) {
         _bottomTextHeight = [self.horizontalDatas.firstObject.title boundingRectWithSize:CGSizeMake(_config.bottomLabelWidth, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading context:nil].size.height + _config.bottomLabelInset;
     }
+    
+    _indicator.backgroundColor = _config.indicatorTintColor;
+    
     [self.collectionView reloadData];
     [self setNeedsLayout];
 }
-
 
 - (void)_or_layoutSubviews {
         
@@ -436,7 +438,12 @@
         obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[self.dataSource labelAttrbutesForVerticalOfChartView:self]];
     }];
     
-    //    [self.ringconfigs removeAllObjects];
+    NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:0];
+    if (!title) {
+        title = self.leftLabels.firstObject.attributedText;
+    }
+    [_indicator or_setTitle:title];
+    
     [self _or_configChart];
 }
 
@@ -464,6 +471,18 @@
     _animationLayer.timeOffset = ratio;
     _indicator.center = _animationLayer.presentationLayer.position;
     [self _or_updateIndcaterLineFrame];
+    
+    NSInteger index = floor(_indicator.center.x / _config.bottomLabelWidth);
+    
+    if (index == _lastIndex) {
+        return;
+    }
+    NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:index];
+    if (!title) {
+        title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%g", self.horizontalDatas[index].value]];
+    }
+    _lastIndex = index;
+    [_indicator or_setTitle:title];
     
 }
 

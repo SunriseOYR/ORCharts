@@ -25,9 +25,9 @@
     _shadowLineColor = [[UIColor lightGrayColor] colorWithAlpha:0.5];
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
     _bglineWidth = 1;
-    _lineWidth = 2;
+    _lineWidth = 3;
     
-    _bottomInset = 0;
+    _bottomInset = 10;
     _topInset = 0;
     
     _bottomLabelWidth = 50;
@@ -42,6 +42,13 @@
     
     _circleWidth = 10;
     _indicatorLineWidth = 0.8;
+}
+
+- (UIColor *)indicatorTintColor {
+    if (!_indicatorTintColor) {
+        _indicatorTintColor = _chartLineColor;
+    }
+    return _indicatorTintColor;
 }
 
 @end

@@ -39,12 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 //default YES
 @property (nonatomic, assign) BOOL dottedBGLine;
 
+//default NO
 @property (nonatomic, assign) BOOL isBreakLine;
 
 @property (nonatomic, strong) UIView *indicator;
 
 @property (nonatomic, assign) CGFloat circleWidth;
 @property (nonatomic, assign) CGFloat indicatorLineWidth;
+@property (nonatomic, copy) UIColor * indicatorTintColor;
 
 @end
 
