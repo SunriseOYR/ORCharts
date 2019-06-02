@@ -26,7 +26,7 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 + (CAGradientLayer *)or_grandientLayerWithColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight;
 + (void)or_configGrandientLayer:(CAGradientLayer *)gradientLayer withColors:(NSArray <UIColor *>*)colors leftToRight:(BOOL)leftToRight;
 
-+ (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)color;
++ (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor * _Nullable)color;
 
 // 折线
 + (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect
@@ -49,8 +49,9 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
                            closckWise:(BOOL)clockWidth
                                 isPie:(BOOL)isPie;
 
-//背景横线
-+ (UIBezierPath *)or_backGroundLinePathWithRect:(CGRect)rect count:(NSInteger)count space:(CGFloat)space;
+
++ (UIBezierPath *)or_pathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve;
++ (UIBezierPath *)or_closePathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve  maxY:(CGFloat)maxY;
 
 //任意角度的对角
 + (CGFloat)or_opposingAngleWithAngle:(CGFloat)angle;

@@ -23,14 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _randowValue = 30;
+    _randowValue = 8;
     self.view.backgroundColor = [UIColor blackColor];
     
     ORRingChartView *ringView = [ORRingChartView new];
     
     ringView.dataSource = self;
     ringView.delegate = self;
-    ringView.frame = CGRectMake(0, 0, 350, 350);
+    ringView.frame = CGRectMake(0, 0, 375, 350);
     ringView.center = self.view.center;
     
     //    ringView.backgroundColor = [UIColor redColor];
@@ -64,10 +64,14 @@
 }
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {
-    UILabel *label = [UILabel new];
-    label.text = [NSString stringWithFormat:@"aa %zd", index];
-    label.font = [UIFont systemFontOfSize:12];
-    label.textColor = [UIColor lightGrayColor];
+    UILabel *label = [chartView dequeueBottowInfoViewAtIndex:index];
+    if (!label) {
+        label = [UILabel new];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor lightGrayColor];
+        NSLog(@"1");
+    }
+    label.text = [NSString stringWithFormat:@"bottow %zd", index];
     [label sizeToFit];
     return label;
 }

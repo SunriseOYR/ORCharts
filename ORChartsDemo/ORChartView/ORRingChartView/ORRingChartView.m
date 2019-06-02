@@ -126,17 +126,8 @@
 
 - (void)_or_initData {
     
-    _ringLineWidth = 2;
-    _infoLineWidth = 1;
-    
-    _ringWidth = 60;
-    
-    _startAngle = M_PI * 3 / 2;
     _ringConfigs = [NSMutableArray array];
-    
-    _animateDuration = 1;
-    
-    _clockwise = YES;
+    _config = [ORRingChartConfig new];
 }
 
 - (void)_or_layoutLayers {
@@ -147,13 +138,12 @@
 
     CGFloat centerX = self.bounds.size.width * 0.5;
 
-    
-    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum ) * 2, self.bounds.size.height - (_maxMarginHeightSum) * 2);
+    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum + _config.minInfoInset) * 2, self.bounds.size.height - (_maxMarginHeightSum + _config.minInfoInset) * 2);
 
     CGRect bounds = CGRectMake(0, 0, width, width);
     CGPoint position = CGPointMake(centerX, self.bounds.size.height * 0.5);
     
-    CGFloat ringWidth = _ringWidth;
+    CGFloat ringWidth = _config.ringWidth;
     
     if (self.centerInfoView) {
         self.centerInfoView.center = position;
@@ -177,7 +167,7 @@
         obj.gradientLayer.bounds = bounds;
         obj.gradientLayer.position = position;
         CAShapeLayer *shapeLayer = obj.gradientLayer.mask;
-        CGPathRef path = [ORChartUtilities or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.clockwise isPie:self.style == ORChartStylePie].CGPath;
+        CGPathRef path = [ORChartUtilities or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.config.clockwise isPie:self.style == ORChartStylePie].CGPath;
         shapeLayer.path = path;
         
         obj.ringLineLayer.bounds = bounds;
@@ -223,9 +213,9 @@
         }].CGPath;
         obj.infoLineLayer.path = linePath;
         
-        [shapeLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.animateDuration] forKey:nil];
-        [obj.ringLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.animateDuration] forKey:nil];
-        [obj.infoLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.animateDuration] forKey:nil];
+        [shapeLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+        [obj.ringLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+        [obj.infoLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
     }];
 }
 
@@ -234,10 +224,10 @@
     if (config.gradientLayer) {
         [ORChartUtilities or_configGrandientLayer:config.gradientLayer withColors:config.gradientColors leftToRight:config.leftToRight];
         
-        config.ringLineLayer.lineWidth = self.ringLineWidth;
+        config.ringLineLayer.lineWidth = self.config.ringLineWidth;
         config.ringLineLayer.strokeColor = config.ringLineColor.CGColor;
         
-        config.infoLineLayer.lineWidth = self.infoLineWidth;
+        config.infoLineLayer.lineWidth = self.config.infoLineWidth;
         config.infoLineLayer.strokeColor = config.ringInfoColor.CGColor;
         
         config.infoLinePointLayer.backgroundColor = config.ringInfoColor.CGColor;
@@ -248,10 +238,10 @@
     gradientLayer.mask = [CAShapeLayer layer];
     [self.layer addSublayer:gradientLayer];
     
-    CAShapeLayer *ringLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:self.ringLineWidth strokeColor:config.ringLineColor];
+    CAShapeLayer *ringLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:self.config.ringLineWidth strokeColor:config.ringLineColor];
     [self.layer addSublayer:ringLineLayer];
     
-    CAShapeLayer *infoLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:self.infoLineWidth strokeColor:config.ringInfoColor];
+    CAShapeLayer *infoLineLayer = [ORChartUtilities or_shapelayerWithLineWidth:self.config.infoLineWidth strokeColor:config.ringInfoColor];
     [self.layer addSublayer:infoLineLayer];
   
     CALayer *infoLinePointLayer = [CALayer layer];
@@ -293,6 +283,16 @@
     [_ringConfigs removeObject:config];
 }
 
+- (void)_or_replaceView:(UIView *)rawView withNewView:(UIView *)newView {
+    if (!newView || [newView isEqual:rawView]) {
+        return;
+    }
+    if (rawView) {
+        [rawView removeFromSuperview];
+    }
+    [self addSubview:newView];
+}
+
 #pragma mark -- public
 - (void)reloadData {
     
@@ -300,18 +300,18 @@
         return;
     }
     
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSInteger items = [_dataSource numberOfRingsOfChartView:self];
     
     if (items == 0) {
         [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
         return;
     }
 
     CGFloat maxValue = 0;
     
-    _centerInfoView = [_dataSource viewForRingCenterOfChartView:self];
     
     for (int i = 0; i < items; i ++) {
         
@@ -329,8 +329,21 @@
         config.ringLineColor = [_dataSource chartView:self lineColorForRingAtRingIndex:i];
         config.ringInfoColor = [_dataSource chartView:self lineColorForInfoLineAtRingIndex:i];
         
-        config.topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
-        config.bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+        UIView *topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
+        UIView *bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
+        
+        if (topInfoView && ![topInfoView isEqual:config.topInfoView]) {
+            [config.topInfoView removeFromSuperview];
+            config.topInfoView = topInfoView;
+            [self addSubview:config.topInfoView];
+            //缓存数组 --待定
+        }
+        
+        if (bottomInfoView && ![bottomInfoView isEqual:config.bottomInfoView]) {
+            [config.bottomInfoView removeFromSuperview];
+            config.bottomInfoView = bottomInfoView;
+            [self addSubview:config.bottomInfoView];
+        }
         
         config.margin = [_delegate chartView:self marginForInfoLineAtRingIndex:i] ?: 10;
         config.inMargin = [_delegate chartView:self marginForInfoLineToRingAtRingIndex:i] ?: 10;
@@ -338,8 +351,7 @@
         config.infoMargin = [_delegate chartView:self marginForInfoViewToLineAtRingIndex:i] ?: 2;
         config.pointWidth = [_delegate chartView:self pointWidthForInfoLineAtRingIndex:i] ?: 2;
         
-        [self addSubview:config.topInfoView];
-        [self addSubview:config.bottomInfoView];
+        
         
         _maxMarginWidthSum = MAX(MAX(config.topInfoView.bounds.size.width, config.bottomInfoView.bounds.size.width) + config.margin + config.inMargin, _maxMarginWidthSum);
         _maxMarginHeightSum = MAX(config.topInfoView.bounds.size.height + config.bottomInfoView.bounds.size.height + config.margin + config.inMargin + config.infoMargin * 2 + config.breakMargin, _maxMarginHeightSum);
@@ -355,7 +367,7 @@
         }
     }
     
-    CGFloat startAngle = self.startAngle;
+    CGFloat startAngle = self.config.startAngle;
     for (int i = 0; i < _ringConfigs.count; i ++) {
         
         ORRingConfig *config = _ringConfigs[i];
@@ -374,8 +386,32 @@
         [self _or_addLayerstWithconfig:config];
     }
     
-    [self addSubview:_centerInfoView];
+    UIView *centerView = [_dataSource viewForRingCenterOfChartView:self];
+    if (centerView && ![centerView isEqual:_centerInfoView]) {
+        [_centerInfoView removeFromSuperview];
+        _centerInfoView = centerView;
+        [self addSubview:_centerInfoView];
+    }
+    
     [self setNeedsLayout];
+}
+
+- (UIView *)dequeueCenterView {
+    return _centerInfoView;
+}
+
+- (UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index {
+    if (index < self.ringConfigs.count) {
+        return self.ringConfigs[index].topInfoView;
+    }
+    return nil;
+}
+
+- (UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index {
+    if (index < self.ringConfigs.count) {
+        return self.ringConfigs[index].bottomInfoView;
+    }
+    return nil;
 }
 
 #pragma mark -- setter

@@ -21,23 +21,34 @@
 
 - (void)_or_initData {
     
-    _chartLineColor = [UIColor yellowColor];
-    _shadowLineColor = [UIColor lightGrayColor];
+    _chartLineColor = [UIColor orangeColor];
+    _shadowLineColor = [[UIColor lightGrayColor] colorWithAlpha:0.5];
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
     _bglineWidth = 1;
+    _lineWidth = 3;
     
-    _bottomInset = 30;
-    _topInset = 30;
+    _bottomInset = 10;
+    _topInset = 0;
     
     _bottomLabelWidth = 50;
     _bottomLabelInset = 12;
     
-    _leftWidth = 60;
+    _leftWidth = 40;
     
     _showVerticalBgline = YES;
     _showVerticalBgline = YES;
     _dottedBGLine = YES;
+    _gradientColors = @[(__bridge id)([[UIColor redColor] colorWithAlpha:0.3].CGColor), (__bridge id)([[UIColor greenColor] colorWithAlpha:0.3].CGColor)];
     
+    _circleWidth = 10;
+    _indicatorLineWidth = 0.8;
+}
+
+- (UIColor *)indicatorTintColor {
+    if (!_indicatorTintColor) {
+        _indicatorTintColor = _chartLineColor;
+    }
+    return _indicatorTintColor;
 }
 
 @end

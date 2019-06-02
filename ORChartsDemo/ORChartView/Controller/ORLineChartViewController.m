@@ -21,14 +21,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _datasource = @[@(12), @(2),@(6),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16)];
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    _datasource = @[@(12), @(2),@(49),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16)];
 
     
     ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 350, 350)];
     
     lineView.dataSource = self;
     
-    lineView.backgroundColor = [UIColor greenColor];
     
     [self.view addSubview:lineView];
     
