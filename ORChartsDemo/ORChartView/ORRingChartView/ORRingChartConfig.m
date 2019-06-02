@@ -17,7 +17,7 @@
         
         _ringLineWidth = 2;
         _infoLineWidth = 1;
-        _minInfoInset = 10
+        _minInfoInset = 10;
         _ringWidth = 60;
         _startAngle = M_PI * 3 / 2;
         _animateDuration = 1;
