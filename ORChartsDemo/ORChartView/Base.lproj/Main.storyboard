@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8aU-Nw-ibk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8aU-Nw-ibk">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="361" y="665"/>
         </scene>
-        <!--Ring View Controller-->
+        <!--Title-->
         <scene sceneID="8Xo-XK-ZWY">
             <objects>
                 <viewController id="5WX-g1-RMe" customClass="ORRingViewController" sceneMemberID="viewController">
@@ -107,10 +107,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="wuZ-6b-v1l">
+                        <barButtonItem key="rightBarButtonItem" title="More" id="amK-X0-Msy">
+                            <connections>
+                                <segue destination="Us3-fF-2vy" kind="show" id="Q0n-K0-fWn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5R-40-YFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1236" y="435"/>
+        </scene>
+        <!--Data Source-->
+        <scene sceneID="oy0-lA-DFc">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FW6-gL-dCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Us3-fF-2vy" customClass="ORRingMoreViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="haH-BD-naQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iso-Hc-YsD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2HL-ft-Z87">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlC-oV-mOM" customClass="ORRingChartView">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jlC-oV-mOM" secondAttribute="height" id="jBS-SB-Frz"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="Us3-fF-2vy" id="etB-zc-3Wc"/>
+                                    <outlet property="delegate" destination="Us3-fF-2vy" id="Dvd-Rv-UmM"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jlC-oV-mOM" firstAttribute="centerY" secondItem="2HL-ft-Z87" secondAttribute="centerY" id="L4z-nu-0ro"/>
+                            <constraint firstItem="jlC-oV-mOM" firstAttribute="leading" secondItem="2HL-ft-Z87" secondAttribute="leading" id="Q3g-d8-jQU"/>
+                            <constraint firstAttribute="trailing" secondItem="jlC-oV-mOM" secondAttribute="trailing" id="Sve-al-nLI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ringChart" destination="jlC-oV-mOM" id="yBE-Mb-m9n"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2134" y="435"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
