@@ -153,21 +153,21 @@
     ringWidth = MAX(ringWidth, 10);
     ringWidth = MIN(ringWidth, width / 2.0);
     
-    if (self.style == ORChartStyleFan || self.style == ORChartStylePie) {
+    if (self.style == ORRingChartStyleFan || self.style == ORRingChartStylePie) {
         ringWidth = width / 2.0;
         if (_centerInfoView) {
             [_centerInfoView removeFromSuperview];
         }
     }
 
-    CGFloat insetRingWidth = self.style == ORChartStylePie ? 0 : ringWidth;
+    CGFloat insetRingWidth = self.style == ORRingChartStylePie ? 0 : ringWidth;
     
     [self.ringConfigs enumerateObjectsUsingBlock:^(ORRingConfig * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.gradientLayer.bounds = bounds;
         obj.gradientLayer.position = position;
         CAShapeLayer *shapeLayer = obj.gradientLayer.mask;
-        CGPathRef path = [ORChartUtilities or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.config.clockwise isPie:self.style == ORChartStylePie].CGPath;
+        CGPathRef path = [ORChartUtilities or_ringPathWithRect:bounds startAngle:obj.startAngle endAngle:obj.endAngle ringWidth:ringWidth closckWise:self.config.clockwise isPie:self.style == ORRingChartStylePie].CGPath;
         shapeLayer.path = path;
         
         obj.ringLineLayer.bounds = bounds;
@@ -436,7 +436,7 @@
     }
 }
 
-- (void)setStyle:(ORChartStyle)style {
+- (void)setStyle:(ORRingChartStyle)style {
     _style = style;
     [self setNeedsLayout];
 }

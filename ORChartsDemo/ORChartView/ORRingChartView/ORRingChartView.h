@@ -12,10 +12,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    ORChartStyleRing,
-    ORChartStylePie,
-    ORChartStyleFan,
-} ORChartStyle;
+    ORRingChartStyleRing,
+    ORRingChartStylePie,
+    ORRingChartStyleFan,
+} ORRingChartStyle;
 
 
 @interface ORRingChartView : UIView
@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDatasource> dataSource;
 @property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDelegate> delegate;
 
-@property (nonatomic, assign) ORChartStyle style;
+@property (nonatomic, assign) ORRingChartStyle style;
 
 @property (nonatomic, strong) ORRingChartConfig *config;
 
