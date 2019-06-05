@@ -70,21 +70,21 @@
     return _ringInfoColor;
 }
 
-- (UIView *)topInfoView {
-    
-    if (!_topInfoView) {
-        _topInfoView = [self labelWithText:[NSString stringWithFormat:@"value : %lf", self.value]];
-    }
-    return _topInfoView;
-}
-
-- (UILabel *)labelWithText:(NSString *)text {
-    UILabel *label = [UILabel new];
-    label.frame = CGRectMake(0, 0, 60, 25);
-    label.font = [UIFont systemFontOfSize:12];
-    label.text = text;
-    return label;
-}
+//- (UIView *)topInfoView {
+//    
+//    if (!_topInfoView) {
+//        _topInfoView = [self labelWithText:[NSString stringWithFormat:@"value : %lf", self.value]];
+//    }
+//    return _topInfoView;
+//}
+//
+//- (UILabel *)labelWithText:(NSString *)text {
+//    UILabel *label = [UILabel new];
+//    label.frame = CGRectMake(0, 0, 60, 25);
+//    label.font = [UIFont systemFontOfSize:12];
+//    label.text = text;
+//    return label;
+//}
 
 @end
 
@@ -407,7 +407,7 @@
     return nil;
 }
 
-- (UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index {
+- (UIView *)dequeueBottomInfoViewAtIndex:(NSInteger)index {
     if (index < self.ringConfigs.count) {
         return self.ringConfigs[index].bottomInfoView;
     }

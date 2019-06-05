@@ -133,7 +133,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlC-oV-mOM" customClass="ORRingChartView">
                                 <rect key="frame" x="0.0" y="66" width="375" height="375"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.073612300228310473" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jlC-oV-mOM" secondAttribute="height" id="jBS-SB-Frz"/>
                                 </constraints>
@@ -184,8 +184,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0v-d5-5jY">
                                         <rect key="frame" x="172" y="274" width="31" height="30"/>
                                         <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="action_config:" destination="Us3-fF-2vy" eventType="touchUpInside" id="0rc-QR-52s"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.5" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnH-J4-hzL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnH-J4-hzL">
                                         <rect key="frame" x="336" y="232.5" width="31" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="31" id="2Vp-DX-g1y"/>
@@ -194,7 +197,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="h6F-lA-ZJl">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="h6F-lA-ZJl">
                                         <rect key="frame" x="176" y="226.5" width="154" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="gcM-sf-KI9"/>
@@ -223,6 +226,9 @@
                                     </slider>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bxa-s6-q1L">
                                         <rect key="frame" x="318" y="156" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="action_clockwise:" destination="Us3-fF-2vy" eventType="valueChanged" id="SVx-M2-iXA"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfE-n1-hCd">
                                         <rect key="frame" x="336" y="127.5" width="31" height="18"/>
@@ -347,10 +353,17 @@
                             <constraint firstAttribute="bottom" secondItem="jG2-dQ-Zb4" secondAttribute="bottom" id="WaV-HR-mOo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="More" id="VqT-tM-pAM">
+                        <barButtonItem key="rightBarButtonItem" title="Config" id="dis-bB-NhX">
+                            <connections>
+                                <action selector="action_showConfig:" destination="Us3-fF-2vy" id="3n2-aY-6l2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="animateDurationLabel" destination="BnH-J4-hzL" id="kTh-j7-kWB"/>
                         <outlet property="bottowLayout" destination="WaV-HR-mOo" id="8UT-Ww-wMN"/>
-                        <outlet property="infoLineWidth" destination="4cj-ho-khO" id="Shi-x3-cpA"/>
+                        <outlet property="infoLineWidthLabel" destination="4cj-ho-khO" id="gyx-pE-wcJ"/>
                         <outlet property="minInfoInsetLabel" destination="CDX-hg-c68" id="xZr-2m-p4b"/>
                         <outlet property="ringChart" destination="jlC-oV-mOM" id="yBE-Mb-m9n"/>
                         <outlet property="ringLineWidthLabel" destination="nfE-n1-hCd" id="GSJ-0b-nxh"/>

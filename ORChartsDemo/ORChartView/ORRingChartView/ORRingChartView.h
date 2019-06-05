@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
 
 - (__kindof UIView *)dequeueCenterView;
 - (__kindof UIView *)dequeueTopInfoViewAtIndex:(NSInteger)index;
-- (__kindof UIView *)dequeueBottowInfoViewAtIndex:(NSInteger)index;
+- (__kindof UIView *)dequeueBottomInfoViewAtIndex:(NSInteger)index;
 
 @end
 

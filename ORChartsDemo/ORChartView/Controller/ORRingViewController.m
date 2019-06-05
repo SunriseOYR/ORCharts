@@ -64,7 +64,7 @@
 }
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {
-    UILabel *label = [chartView dequeueBottowInfoViewAtIndex:index];
+    UILabel *label = [chartView dequeueBottomInfoViewAtIndex:index];
     if (!label) {
         label = [UILabel new];
         label.font = [UIFont systemFontOfSize:12];
