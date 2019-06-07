@@ -9,7 +9,7 @@
 #import "ORRingViewController.h"
 #import "ORRingChartView.h"
 
-@interface ORRingViewController ()<ORRingChartViewDatasource, ORRingChartViewDelegate> {
+@interface ORRingViewController ()<ORRingChartViewDatasource> {
     NSInteger _randowValue;
 }
 
@@ -29,8 +29,7 @@
     ORRingChartView *ringView = [ORRingChartView new];
     
     ringView.dataSource = self;
-    ringView.delegate = self;
-    ringView.frame = CGRectMake(0, 0, 375, 350);
+    ringView.frame = CGRectMake(0, 0, 375, 375);
     ringView.center = self.view.center;
     
     //    ringView.backgroundColor = [UIColor redColor];
@@ -69,9 +68,8 @@
         label = [UILabel new];
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor lightGrayColor];
-        NSLog(@"1");
     }
-    label.text = [NSString stringWithFormat:@"bottow %zd", index];
+    label.text = [NSString stringWithFormat:@"bot %zd", index];
     [label sizeToFit];
     return label;
 }

@@ -141,14 +141,22 @@
 			children = (
 				8917233B1F73BB1400181F60 /* ViewController.h */,
 				8917233C1F73BB1400181F60 /* ViewController.m */,
-				4D398B2022746978007DDE80 /* ORRingViewController.h */,
-				4D398B2122746978007DDE80 /* ORRingViewController.m */,
-				4D3BCA3222A5597F00F340BC /* ORRingMoreViewController.h */,
-				4D3BCA3322A5597F00F340BC /* ORRingMoreViewController.m */,
+				4DA4CFA422AA40A00058BF28 /* RingChartView */,
 				4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */,
 				4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		4DA4CFA422AA40A00058BF28 /* RingChartView */ = {
+			isa = PBXGroup;
+			children = (
+				4D398B2022746978007DDE80 /* ORRingViewController.h */,
+				4D398B2122746978007DDE80 /* ORRingViewController.m */,
+				4D3BCA3222A5597F00F340BC /* ORRingMoreViewController.h */,
+				4D3BCA3322A5597F00F340BC /* ORRingMoreViewController.m */,
+			);
+			path = RingChartView;
 			sourceTree = "<group>";
 		};
 		891723291F73BB1400181F60 = {

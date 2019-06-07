@@ -21,11 +21,10 @@ typedef enum : NSUInteger {
 @interface ORRingChartView : UIView
 
 @property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDatasource> dataSource;
-@property (nonatomic, weak) IBOutlet __nullable id<ORRingChartViewDelegate> delegate;
 
 @property (nonatomic, assign) ORRingChartStyle style;
 
-@property (nonatomic, strong) ORRingChartConfig *config;
+@property (nonatomic, strong, readonly) ORRingChartConfig *config;
 
 - (void)reloadData;
 

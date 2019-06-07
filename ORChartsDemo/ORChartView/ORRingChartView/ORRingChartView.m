@@ -14,16 +14,9 @@
 - (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {return @[[[UIColor or_randomColor] colorWithAlpha:1],[[UIColor or_randomColor] colorWithAlpha:1]];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForRingAtRingIndex:(NSInteger)index {return [UIColor whiteColor];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForInfoLineAtRingIndex:(NSInteger)index {return nil;}
-
 - (UIView *)viewForRingCenterOfChartView:(ORRingChartView *)chartView {return nil;}
 - (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index {return nil;}
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {return nil;}
-
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoLineAtRingIndex:(NSInteger)index {return 0;}
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoLineToRingAtRingIndex:(NSInteger)index {return 0;}
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoViewToLineAtRingIndex:(NSInteger)index {return 0;}
-- (CGFloat)chartView:(ORRingChartView *)chartView breakMarginForInfoLineAtRingIndex:(NSInteger)index {return 0;}
-- (CGFloat)chartView:(ORRingChartView *)chartView pointWidthForInfoLineAtRingIndex:(NSInteger)index {return 0;};
 
 @end
 
@@ -46,12 +39,6 @@
 @property (nonatomic, assign) CGFloat endAngle;
 @property (nonatomic, assign, readonly) BOOL leftToRight;
 
-@property (nonatomic, assign) CGFloat margin;
-@property (nonatomic, assign) CGFloat inMargin;
-@property (nonatomic, assign) CGFloat infoMargin;
-@property (nonatomic, assign) CGFloat breakMargin;
-@property (nonatomic, assign) CGFloat pointWidth;
-
 @end
 
 @implementation ORRingConfig
@@ -69,22 +56,6 @@
     }
     return _ringInfoColor;
 }
-
-//- (UIView *)topInfoView {
-//    
-//    if (!_topInfoView) {
-//        _topInfoView = [self labelWithText:[NSString stringWithFormat:@"value : %lf", self.value]];
-//    }
-//    return _topInfoView;
-//}
-//
-//- (UILabel *)labelWithText:(NSString *)text {
-//    UILabel *label = [UILabel new];
-//    label.frame = CGRectMake(0, 0, 60, 25);
-//    label.font = [UIFont systemFontOfSize:12];
-//    label.text = text;
-//    return label;
-//}
 
 @end
 
@@ -138,7 +109,7 @@
 
     CGFloat centerX = self.bounds.size.width * 0.5;
 
-    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum + _config.minInfoInset) * 2, self.bounds.size.height - (_maxMarginHeightSum + _config.minInfoInset) * 2);
+    CGFloat width = MIN(self.bounds.size.width - (_maxMarginWidthSum + _config.minInfoInset + _config.infoLineBreakMargin + _config.infoLineInMargin + _config.infoLineMargin) * 2, self.bounds.size.height - (_maxMarginHeightSum + _config.minInfoInset + _config.infoLineWidth + _config.infoLineInMargin + _config.infoViewMargin * 2 + _config.infoLineBreakMargin) * 2);
 
     CGRect bounds = CGRectMake(0, 0, width, width);
     CGPoint position = CGPointMake(centerX, self.bounds.size.height * 0.5);
@@ -147,7 +118,7 @@
     
     if (self.centerInfoView) {
         self.centerInfoView.center = position;
-        ringWidth = (width - MAX(self.centerInfoView.bounds.size.width, self.centerInfoView.bounds.size.height)) / 2;
+        ringWidth = (width - MAX(self.centerInfoView.bounds.size.width, self.centerInfoView.bounds.size.height) - _config.ringLineWidth) / 2 ;
     }
     
     ringWidth = MAX(ringWidth, 10);
@@ -175,20 +146,20 @@
         obj.ringLineLayer.path = path;
         
         
-        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:obj.margin inMargin:obj.inMargin breakMargin:obj.breakMargin checkBlock:^CGFloat(CGPoint breakPoint) {
+        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:self.config.infoLineMargin inMargin:self.config.infoLineInMargin breakMargin:self.config.infoLineBreakMargin checkBlock:^CGFloat(CGPoint breakPoint) {
             
             if (idx > 0) {
                 ORRingConfig *config = self.ringConfigs[idx - 1];
                 
                 if (CGRectGetMinX(config.topInfoView.frame) > centerX && breakPoint.x > centerX) {
                     
-                    CGFloat inset = obj.topInfoView.bounds.size.height + obj.infoMargin - (breakPoint.y - CGRectGetMaxY(config.bottomInfoView.frame));
+                    CGFloat inset = obj.topInfoView.bounds.size.height + self.config.infoViewMargin - (breakPoint.y - CGRectGetMaxY(config.bottomInfoView.frame));
                     if (inset > 0) {
                         return inset;
                     }
                 }else if (CGRectGetMinX(config.topInfoView.frame) < centerX && breakPoint.x < centerX) {
                     
-                    CGFloat inset = obj.bottomInfoView.bounds.size.height + obj.infoMargin - (CGRectGetMinY(config.topInfoView.frame) - breakPoint.y);
+                    CGFloat inset = obj.bottomInfoView.bounds.size.height + self.config.infoViewMargin - (CGRectGetMinY(config.topInfoView.frame) - breakPoint.y);
                     if (inset > 0) {
                         return -inset;
                     }
@@ -197,17 +168,17 @@
             return 0;
         } detailInfoBlock:^(CGPoint edgePoint, CGPoint endPoint) {
             
-            obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - obj.pointWidth / 2.0, endPoint.y - obj.pointWidth / 2.0, obj.pointWidth, obj.pointWidth);
-            obj.infoLinePointLayer.cornerRadius = obj.pointWidth / 2.0;
+            obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - self.config.pointWidth / 2.0, endPoint.y - self.config.pointWidth / 2.0, self.config.pointWidth, self.config.pointWidth);
+            obj.infoLinePointLayer.cornerRadius = self.config.pointWidth / 2.0;
 
             CGRect frame = obj.topInfoView.frame;
             CGFloat fx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - frame.size.width : edgePoint.x;
-            frame.origin = CGPointMake(fx, edgePoint.y - obj.infoMargin - frame.size.height);
+            frame.origin = CGPointMake(fx, edgePoint.y - self.config.infoViewMargin - frame.size.height);
             obj.topInfoView.frame = frame;
 
             CGRect bottomFrame = obj.bottomInfoView.frame;
             CGFloat bfx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - bottomFrame.size.width : edgePoint.x;
-            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + obj.infoMargin);
+            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + self.config.infoViewMargin);
             obj.bottomInfoView.frame = bottomFrame;
             
         }].CGPath;
@@ -252,21 +223,6 @@
     config.ringLineLayer = ringLineLayer;
     config.infoLineLayer = infoLineLayer;
     config.infoLinePointLayer = infoLinePointLayer;
-}
-
-- (void)_or_setDelegateData {
-    
-    [self.ringConfigs enumerateObjectsUsingBlock:^(ORRingConfig * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        obj.margin = [self.delegate chartView:self marginForInfoLineAtRingIndex:idx] ?: 10;
-        obj.inMargin = [self.delegate chartView:self marginForInfoLineToRingAtRingIndex:idx] ?: 10;
-        obj.breakMargin = [self.delegate chartView:self breakMarginForInfoLineAtRingIndex:idx] ?: 15;
-        obj.infoMargin = [self.delegate chartView:self marginForInfoViewToLineAtRingIndex:idx] ?: 4;
-        obj.pointWidth = [self.delegate chartView:self pointWidthForInfoLineAtRingIndex:idx] ?: 4;
-        
-        self.maxMarginWidthSum = MAX(MAX(obj.topInfoView.bounds.size.width, obj.bottomInfoView.bounds.size.width) + obj.margin + obj.inMargin, self.maxMarginWidthSum);
-        self.maxMarginHeightSum = MAX(obj.topInfoView.bounds.size.height + obj.bottomInfoView.bounds.size.height + obj.margin + obj.inMargin + obj.infoMargin * 2 + obj.breakMargin, self.maxMarginHeightSum);
-    }];
 }
 
 - (void)_or_deleteConfig:(ORRingConfig *)config {
@@ -345,16 +301,9 @@
             [self addSubview:config.bottomInfoView];
         }
         
-        config.margin = [_delegate chartView:self marginForInfoLineAtRingIndex:i] ?: 10;
-        config.inMargin = [_delegate chartView:self marginForInfoLineToRingAtRingIndex:i] ?: 10;
-        config.breakMargin = [_delegate chartView:self breakMarginForInfoLineAtRingIndex:i] ?: 18;
-        config.infoMargin = [_delegate chartView:self marginForInfoViewToLineAtRingIndex:i] ?: 2;
-        config.pointWidth = [_delegate chartView:self pointWidthForInfoLineAtRingIndex:i] ?: 2;
-        
-        
-        
-        _maxMarginWidthSum = MAX(MAX(config.topInfoView.bounds.size.width, config.bottomInfoView.bounds.size.width) + config.margin + config.inMargin, _maxMarginWidthSum);
-        _maxMarginHeightSum = MAX(config.topInfoView.bounds.size.height + config.bottomInfoView.bounds.size.height + config.margin + config.inMargin + config.infoMargin * 2 + config.breakMargin, _maxMarginHeightSum);
+
+        _maxMarginWidthSum = MAX(MAX(config.topInfoView.bounds.size.width, config.bottomInfoView.bounds.size.width), _maxMarginWidthSum);
+        _maxMarginHeightSum = MAX(config.topInfoView.bounds.size.height + config.bottomInfoView.bounds.size.height, _maxMarginHeightSum);
         
         maxValue += config.value;
         
@@ -387,7 +336,7 @@
     }
     
     UIView *centerView = [_dataSource viewForRingCenterOfChartView:self];
-    if (centerView && ![centerView isEqual:_centerInfoView]) {
+    if (centerView && (![centerView isEqual:_centerInfoView] || !centerView.superview)) {
         [_centerInfoView removeFromSuperview];
         _centerInfoView = centerView;
         [self addSubview:_centerInfoView];
@@ -421,17 +370,6 @@
         _dataSource = dataSource;
         if (_dataSource) {
             [self reloadData];
-        }
-    }
-}
-
-- (void)setDelegate:(id<ORRingChartViewDelegate>)delegate {
-    
-    if (_delegate != delegate) {
-        _delegate = delegate;
-        if (_dataSource) {
-            [self _or_setDelegateData];
-            [self setNeedsLayout];
         }
     }
 }

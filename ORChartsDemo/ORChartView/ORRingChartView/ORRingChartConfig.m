@@ -15,13 +15,25 @@
     self = [super init];
     if (self) {
         
-        _ringLineWidth = 2;
-        _infoLineWidth = 1;
-        _minInfoInset = 10;
-        _ringWidth = 60;
-        _startAngle = M_PI * 3 / 2;
-        _animateDuration = 1;
         _clockwise = YES;
+
+        _startAngle = M_PI * 3 / 2;
+        _ringLineWidth = 2;
+        _infoLineWidth = 2;
+
+        _minInfoInset = 0;
+        _infoLineMargin = 10;
+        _infoLineInMargin = 10;
+        _infoLineBreakMargin = 15;
+        _infoViewMargin = 4;
+        _pointWidth = 5;
+        
+        _animateDuration = 1;
+        
+        _ringWidth = 60;
+        
+        
+       
     }
     return self;
 }

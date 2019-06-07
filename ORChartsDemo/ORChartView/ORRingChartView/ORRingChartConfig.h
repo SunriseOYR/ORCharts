@@ -16,10 +16,25 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORRingChartConfig : NSObject
 
 
+@property (nonatomic, assign) BOOL clockwise;
+
+@property (nonatomic, assign) CGFloat startAngle;
+@property (nonatomic, assign) CGFloat ringLineWidth;
 @property (nonatomic, assign) CGFloat infoLineWidth;
 @property (nonatomic, assign) CGFloat minInfoInset;
 
-@property (nonatomic, assign) CGFloat ringLineWidth;
+@property (nonatomic, assign) CGFloat infoLineMargin;
+@property (nonatomic, assign) CGFloat infoLineInMargin;
+@property (nonatomic, assign) CGFloat infoLineBreakMargin;
+@property (nonatomic, assign) CGFloat infoViewMargin;
+
+@property (nonatomic, assign) CGFloat pointWidth;
+
+
+@property (nonatomic, assign) NSTimeInterval animateDuration;
+
+
+
 
 /*
  * if _dataSource responds To Selector 'viewForRingCenterOfChartView:' OR style != ORChartStyleRing. This value will be invalid
@@ -27,11 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) CGFloat ringWidth;
 
-@property (nonatomic, assign) BOOL clockwise;
 
-@property (nonatomic, assign) CGFloat startAngle;
-
-@property (nonatomic, assign) NSTimeInterval animateDuration;
 
 
 @end
@@ -63,22 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol ORRingChartViewDelegate <NSObject>
 
-@optional
-
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoLineAtRingIndex:(NSInteger)index;
-
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoLineToRingAtRingIndex:(NSInteger)index;
-
-- (CGFloat)chartView:(ORRingChartView *)chartView breakMarginForInfoLineAtRingIndex:(NSInteger)index;
-
-- (CGFloat)chartView:(ORRingChartView *)chartView marginForInfoViewToLineAtRingIndex:(NSInteger)index;
-
-- (CGFloat)chartView:(ORRingChartView *)chartView pointWidthForInfoLineAtRingIndex:(NSInteger)index;
-
-
-@end
 
 
 NS_ASSUME_NONNULL_END
