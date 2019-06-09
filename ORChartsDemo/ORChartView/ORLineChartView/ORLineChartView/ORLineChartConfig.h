@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat indicatorLineWidth;
 @property (nonatomic, copy) UIColor * indicatorTintColor;
 
+@property (nonatomic, assign) NSTimeInterval animateDuration;
+
 @end
 
 @interface ORLineChartHorizontal : NSObject

@@ -376,9 +376,24 @@
 
     CGPoint fistValue = [points.firstObject CGPointValue];
     _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
-    
     [self _or_updateIndcaterLineFrame];
-    
+
+    [_lineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:2] forKey:nil];
+    [_shadowLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:2] forKey:nil];
+
+//    _gradientLayer.anchorPoint = CGPointMake(0, 0.5);
+//    CABasicAnimation *anmi1 = [CABasicAnimation animation];
+//    anmi1.keyPath = @"bounds.size.width";
+//    anmi1.duration = 2.0f;
+//    anmi1.fromValue = @(0);
+//    anmi1.toValue = @( _config.bottomLabelWidth * _horizontalDatas.count);
+//
+//    anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    anmi1.fillMode = kCAFillModeForwards;
+//    anmi1.autoreverses = NO;
+//    anmi1.removedOnCompletion = NO;
+//    [_gradientLayer addAnimation:anmi1 forKey:nil];
+
 }
 
 - (CAAnimation *)_or_positionAnimationWithPath:(CGPathRef)path {

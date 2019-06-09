@@ -159,6 +159,30 @@
 			path = RingChartView;
 			sourceTree = "<group>";
 		};
+		4DA4CFA522AA48940058BF28 /* OldCode */ = {
+			isa = PBXGroup;
+			children = (
+				89B428DF1F95F42E00452677 /* categary */,
+				89B428E41F95F42E00452677 /* image */,
+				891723691F73BB2D00181F60 /* ORChartView.h */,
+				8917236A1F73BB2D00181F60 /* ORChartView.m */,
+			);
+			path = OldCode;
+			sourceTree = "<group>";
+		};
+		4DA4CFA622AA48AC0058BF28 /* ORLineChartView */ = {
+			isa = PBXGroup;
+			children = (
+				4D16BCB0227D398300DBD881 /* ORLineChartConfig.h */,
+				4D16BCB1227D398300DBD881 /* ORLineChartConfig.m */,
+				4D0F3F202279F8DE007EF589 /* ORLineChartView.h */,
+				4D0F3F212279F8DE007EF589 /* ORLineChartView.m */,
+				4D73AC61227ACDB700DFB973 /* ORLineChartCell.h */,
+				4D73AC62227ACDB700DFB973 /* ORLineChartCell.m */,
+			);
+			path = ORLineChartView;
+			sourceTree = "<group>";
+		};
 		891723291F73BB1400181F60 = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				4D398B19227467AC007DDE80 /* ORRingChartView */,
-				891723681F73BB2D00181F60 /* ORChartView */,
+				891723681F73BB2D00181F60 /* ORLineChartView */,
 				4D398B2322746B05007DDE80 /* Controller */,
 				891723381F73BB1400181F60 /* AppDelegate.h */,
 				891723391F73BB1400181F60 /* AppDelegate.m */,
@@ -222,21 +246,13 @@
 			path = ORChartViewUITests;
 			sourceTree = "<group>";
 		};
-		891723681F73BB2D00181F60 /* ORChartView */ = {
+		891723681F73BB2D00181F60 /* ORLineChartView */ = {
 			isa = PBXGroup;
 			children = (
-				89B428DF1F95F42E00452677 /* categary */,
-				89B428E41F95F42E00452677 /* image */,
-				891723691F73BB2D00181F60 /* ORChartView.h */,
-				8917236A1F73BB2D00181F60 /* ORChartView.m */,
-				4D16BCB0227D398300DBD881 /* ORLineChartConfig.h */,
-				4D16BCB1227D398300DBD881 /* ORLineChartConfig.m */,
-				4D0F3F202279F8DE007EF589 /* ORLineChartView.h */,
-				4D0F3F212279F8DE007EF589 /* ORLineChartView.m */,
-				4D73AC61227ACDB700DFB973 /* ORLineChartCell.h */,
-				4D73AC62227ACDB700DFB973 /* ORLineChartCell.m */,
+				4DA4CFA522AA48940058BF28 /* OldCode */,
+				4DA4CFA622AA48AC0058BF28 /* ORLineChartView */,
 			);
-			path = ORChartView;
+			path = ORLineChartView;
 			sourceTree = "<group>";
 		};
 		89B428DF1F95F42E00452677 /* categary */ = {

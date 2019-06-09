@@ -32,6 +32,7 @@
         
         _ringWidth = 60;
         
+        _animateDuration = 1;
         
        
     }

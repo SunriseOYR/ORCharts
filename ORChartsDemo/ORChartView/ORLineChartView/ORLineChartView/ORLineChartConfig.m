@@ -110,54 +110,33 @@
 
     _middle = (max - min) / 2.0;
 
-    if (_min != min && _min < max) {
-        min = _min;
-    }
-
-    CGFloat average = (max - min) / (separate - 2.0);
-
-    if (average - (int)average > 0.5) {
-        average += 1;
-    }
-
+//    if (_min != min && _min < max) {
+//        min = _min;
+//    }
+    
     NSMutableArray *array = [NSMutableArray array];
+    NSInteger average = 0;
+    
+    if (min > 0 && max > 10) {
+        
+        min = floorf(min / 10.0) * 10;
+        max = ceilf(max / 10.0) * 10;
+        average = ceilf((max - min) / (separate - 1.0));
+    }else {
+        
+        average = (max - min) / (separate - 2.0);
+        if (average - (int)average > 0.5) {
+            average += 1;
+        }
+    }
+    
     for (int i = 0; i < separate; i ++) {
         [array addObject:@(min + i * (int)average)];
     }
-
-
+    
     _min = min;
     _max = [array.lastObject floatValue];
     _separatedValues = [array copy];
-    
-    
-//    __block CGFloat max = data.firstObject.floatValue;
-//    __block CGFloat min = data.firstObject.floatValue;
-//
-//    [data enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.doubleValue > max) {
-//            max = obj.doubleValue;
-//        }
-//        if (obj.doubleValue < min) {
-//            min = obj.floatValue;
-//        }
-//    }];
-//
-//    min = floorf(min / 10.0) * 10;
-//    max = ceilf(max / 10.0) * 10;
-//
-//    NSInteger average = ceilf((max - min) / (_separate - 1.0));
-//
-//    NSMutableArray *array = [NSMutableArray array];
-//    for (int i = 0; i < _separate; i ++) {
-//        [array insertObject:@(min + i * (int)average) atIndex:0];
-//    }
-//
-//
-//    _max = [array.firstObject floatValue];
-//    _min = [array.lastObject floatValue];
-//    _separatedValues = [array copy];
-    
 }
 
 - (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate {
