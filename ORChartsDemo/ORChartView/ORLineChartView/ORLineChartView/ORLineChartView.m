@@ -124,6 +124,7 @@
 @property (nonatomic, strong) _ORIndicatorView *indicator;
 @property (nonatomic, strong) CALayer *indicatorLineLayer;
 
+@property (nonatomic, strong) CALayer *contenLayer;
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
 
@@ -193,15 +194,19 @@
         gradientLayer.locations = @[@(0.5f)];
         gradientLayer;
     });
-    [_collectionView.layer addSublayer:_gradientLayer];
-    
-    
+//    [_collectionView.layer addSublayer:_gradientLayer];
     
     _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
     _closeLayer.fillColor = [UIColor blueColor].CGColor;
-//    [_collectionView.layer addSublayer:_closeLayer];
 
-    _gradientLayer.mask = _closeLayer;
+//    _gradientLayer.mask = _closeLayer;
+    
+    CALayer *baseLayer = [CALayer layer];
+    [baseLayer addSublayer:_gradientLayer];
+    [baseLayer setMask:_closeLayer];
+    _contenLayer = baseLayer;
+    [_collectionView.layer addSublayer:baseLayer];
+
     
     
     _lineLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
@@ -291,7 +296,7 @@
                                            self.bounds.size.width - _config.leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
     
-    _gradientLayer.frame = CGRectMake(0, 0, _config.bottomLabelWidth * _horizontalDatas.count, self.collectionView.bounds.size.height);
+    _gradientLayer.frame = CGRectMake(0, 0, 0, self.collectionView.bounds.size.height);
     
     CGFloat indecaterHeight = _indicator.bounds.size.height;
 
@@ -382,17 +387,16 @@
     [_shadowLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:2] forKey:nil];
 
 //    _gradientLayer.anchorPoint = CGPointMake(0, 0.5);
-//    CABasicAnimation *anmi1 = [CABasicAnimation animation];
-//    anmi1.keyPath = @"bounds.size.width";
-//    anmi1.duration = 2.0f;
-//    anmi1.fromValue = @(0);
-//    anmi1.toValue = @( _config.bottomLabelWidth * _horizontalDatas.count);
-//
-//    anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    anmi1.fillMode = kCAFillModeForwards;
-//    anmi1.autoreverses = NO;
-//    anmi1.removedOnCompletion = NO;
-//    [_gradientLayer addAnimation:anmi1 forKey:nil];
+    CABasicAnimation *anmi1 = [CABasicAnimation animation];
+    anmi1.keyPath = @"bounds.size.width";
+    anmi1.duration = 2.0f;
+    anmi1.toValue = @( _config.bottomLabelWidth * _horizontalDatas.count * 2);
+
+    anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    anmi1.fillMode = kCAFillModeForwards;
+    anmi1.autoreverses = NO;
+    anmi1.removedOnCompletion = NO;
+    [_gradientLayer addAnimation:anmi1 forKey:nil];
 
 }
 

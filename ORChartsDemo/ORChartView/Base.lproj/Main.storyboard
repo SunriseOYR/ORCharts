@@ -154,7 +154,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-FG-F10">
-                                                <rect key="frame" x="344" y="7" width="31" height="30"/>
+                                                <rect key="frame" x="336" y="7" width="31" height="30"/>
                                                 <state key="normal" title="确定"/>
                                                 <connections>
                                                     <action selector="action_config:" destination="Us3-fF-2vy" eventType="touchUpInside" id="GmX-qn-mpq"/>
@@ -185,7 +185,7 @@
                                             <constraint firstItem="cXD-ii-Z73" firstAttribute="leading" secondItem="MAd-ut-CaV" secondAttribute="leadingMargin" id="S4s-nL-So2"/>
                                             <constraint firstItem="uvh-w7-aLc" firstAttribute="centerX" secondItem="MAd-ut-CaV" secondAttribute="centerX" id="SXn-MK-qGr"/>
                                             <constraint firstItem="uvh-w7-aLc" firstAttribute="centerY" secondItem="MAd-ut-CaV" secondAttribute="centerY" id="a4N-fO-Efa"/>
-                                            <constraint firstAttribute="trailing" secondItem="T6i-FG-F10" secondAttribute="trailing" id="mvW-s2-Egh"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="T6i-FG-F10" secondAttribute="trailing" id="mvW-s2-Egh"/>
                                             <constraint firstItem="T6i-FG-F10" firstAttribute="centerY" secondItem="uvh-w7-aLc" secondAttribute="centerY" id="n00-lW-3nO"/>
                                             <constraint firstItem="dOG-RR-hix" firstAttribute="leading" secondItem="MAd-ut-CaV" secondAttribute="leading" id="vm1-SF-npe"/>
                                             <constraint firstItem="cXD-ii-Z73" firstAttribute="centerY" secondItem="MAd-ut-CaV" secondAttribute="centerY" id="wNJ-pb-Ggh"/>
