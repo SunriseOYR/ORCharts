@@ -3,7 +3,7 @@
 //  ORChartView
 //
 //  Created by OrangesAL on 2019/6/1.
-//  Copyright © 2019 欧阳荣. All rights reserved.
+//  Copyright © 2019 OrangesAL. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORRingChartConfig : NSObject
 
-
+//The direction in chart.
 @property (nonatomic, assign) BOOL clockwise;
 
-
+//neatInfoLine. if YES infoLines alignment chartview, if NO infoLines has same width. default NO
 @property (nonatomic, assign) BOOL neatInfoLine;
 
 //The starting angle of the chart. default M_PI * 3 / 2
@@ -57,9 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) CGFloat ringWidth;
 
-
-
-
 @end
 
 @class ORRingChartView;
@@ -68,24 +65,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 
+//return the number of values.
 - (NSInteger)numberOfRingsOfChartView:(ORRingChartView *)chartView;
 
+//return the value at index
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index;
 
 @optional
 
+//return the graident colors at index
 - (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index;
 
+//return the ring line color at index
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForRingAtRingIndex:(NSInteger)index;
 
+//return the info line color at index
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForInfoLineAtRingIndex:(NSInteger)index;
 
+//return the centerView. The view will be displayed on the top layer, you need to set the bounds
 - (UIView *)viewForRingCenterOfChartView:(ORRingChartView *)chartView;
 
+//return the top info view. you need to set the bounds
 - (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index;
 
+//return the bottom info view. you need to set the bounds
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index;
-
 
 @end
 

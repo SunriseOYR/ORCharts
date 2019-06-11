@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  ORChartView
 //
-//  Created by 欧阳荣 on 2017/9/21.
-//  Copyright © 2017年 欧阳荣. All rights reserved.
+//  Created by OrangesAL on 2017/9/21.
+//  Copyright © 2017年 OrangesAL. All rights reserved.
 //
 
 #import "AppDelegate.h"

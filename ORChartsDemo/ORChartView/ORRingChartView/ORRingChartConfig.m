@@ -3,7 +3,7 @@
 //  ORChartView
 //
 //  Created by OrangesAL on 2019/6/1.
-//  Copyright © 2019 欧阳荣. All rights reserved.
+//  Copyright © 2019 OrangesAL. All rights reserved.
 //
 
 #import "ORRingChartConfig.h"

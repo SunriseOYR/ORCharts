@@ -3,7 +3,7 @@
 //  ORChartView
 //
 //  Created by OrangesAL on 2019/5/2.
-//  Copyright © 2019年 欧阳荣. All rights reserved.
+//  Copyright © 2019年 OrangesAL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

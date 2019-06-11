@@ -2,8 +2,8 @@
 //  ORRingChartView.m
 //  ORAnimateTest
 //
-//  Created by 欧阳荣 on 2019/4/24.
-//  Copyright © 2019 欧阳荣. All rights reserved.
+//  Created by OrangesAL on 2019/4/24.
+//  Copyright © 2019 OrangesAL. All rights reserved.
 //
 
 #import "ORRingChartView.h"
