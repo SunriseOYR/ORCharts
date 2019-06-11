@@ -146,7 +146,7 @@
         obj.ringLineLayer.path = path;
         
         
-        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:self.config.infoLineMargin inMargin:self.config.infoLineInMargin breakMargin:self.config.infoLineBreakMargin checkBlock:^CGFloat(CGPoint breakPoint) {
+        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:self.config.infoLineMargin inMargin:self.config.infoLineInMargin breakMargin:self.config.infoLineBreakMargin neatLine:self.config.neatInfoLine checkBlock:^CGFloat(CGPoint breakPoint) {
             
             if (idx > 0) {
                 ORRingConfig *config = self.ringConfigs[idx - 1];

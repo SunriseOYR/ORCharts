@@ -100,7 +100,7 @@
 
 #pragma mark -- ring
 
-+ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth ringWidth:(CGFloat)ringWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
++ (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect circleWidth:(CGFloat)circleWidth ringWidth:(CGFloat)ringWidth startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle margin:(CGFloat)margin inMargin:(CGFloat)inMargin breakMargin:(CGFloat)breakMargin neatLine:(BOOL)neatLine checkBlock:(CGFloat (^)(CGPoint))checkBlock detailInfoBlock:(void (^)(CGPoint, CGPoint))detailInfoBlock {
     
     CGRect rect = CGRectMake((rawRect.size.width - circleWidth) / 2.0, (rawRect.size.height - circleWidth) / 2.0, circleWidth, circleWidth);
     
@@ -134,12 +134,9 @@
     CGFloat width = (rawRect.size.width - breakReck.size.width) / 2.0 - margin;
     
     if (inPoint.x < centerX) {
-//        edgePoint = CGPointMake(margin, breakPoint.y);
-        edgePoint = CGPointMake(breakPoint.x - width, breakPoint.y);
+        edgePoint = neatLine ? CGPointMake(margin, breakPoint.y) : CGPointMake(breakPoint.x - width, breakPoint.y);
     }else {
-//        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
-//        edgePoint = CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y);
-        edgePoint = CGPointMake(breakPoint.x + width, breakPoint.y);
+        edgePoint = neatLine ? CGPointMake(CGRectGetMaxX(rawRect) - margin, breakPoint.y) : CGPointMake(breakPoint.x + width, breakPoint.y);
     }
     
     if (detailInfoBlock) {

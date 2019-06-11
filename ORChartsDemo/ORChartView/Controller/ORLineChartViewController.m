@@ -26,7 +26,7 @@
     _datasource = @[@(12), @(2),@(49),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16)];
 
     
-    ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 350, 350)];
+    ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 350)];
     
     lineView.dataSource = self;
     

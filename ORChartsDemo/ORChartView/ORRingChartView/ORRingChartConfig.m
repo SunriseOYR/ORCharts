@@ -16,6 +16,7 @@
     if (self) {
         
         _clockwise = YES;
+        _neatInfoLine = NO;
 
         _startAngle = M_PI * 3 / 2;
         _ringLineWidth = 2;

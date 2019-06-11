@@ -28,7 +28,7 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 
 + (CAShapeLayer *)or_shapelayerWithLineWidth:(CGFloat)lineWidth strokeColor:(UIColor * _Nullable)color;
 
-// 折线
+// UIBezierPath
 + (UIBezierPath *)or_breakLinePathWithRawRect:(CGRect)rawRect
                                   circleWidth:(CGFloat)circleWidth
                                     ringWidth:(CGFloat)ringWidth
@@ -37,11 +37,11 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
                                        margin:(CGFloat)margin
                                      inMargin:(CGFloat)inMargin
                                   breakMargin:(CGFloat)breakMargin
+                                     neatLine:(BOOL)neatLine
                                    checkBlock:(CGFloat(^)(CGPoint breakPoint))checkBlock
                               detailInfoBlock:(void(^)(CGPoint edgePoint, CGPoint endPoint))detailInfoBlock;
 
 
-// 圆环
 + (UIBezierPath *)or_ringPathWithRect:(CGRect)rect
                            startAngle:(CGFloat)startAngle
                              endAngle:(CGFloat)endAngle
@@ -53,19 +53,19 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 + (UIBezierPath *)or_pathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve;
 + (UIBezierPath *)or_closePathWithPoints:(NSArray *)points isCurve:(BOOL)isCurve  maxY:(CGFloat)maxY;
 
-//任意角度的对角
+//Diagonal of an angle
 + (CGFloat)or_opposingAngleWithAngle:(CGFloat)angle;
 
-//任意角度 加上 固定角度
+//plus angle
 + (CGFloat)or_angle:(CGFloat)angle byAddAngle:(CGFloat)addAngle;
 
-//任意角度间的中点角度
+//middle angle
 + (CGFloat)or_middleAngleWithStartAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
 
-// 圆环 任意角度(与半径相切)的 中点
+//The midpoint of the ring at any angle (tangential to the radius)
 + (CGPoint)or_centerWithRect:(CGRect)rect angle:(CGFloat)angle ringWidth:(CGFloat)ringWidth;
 
-// 圆上 任意角度的 点
+//a point on the circle at any angle
 + (CGPoint)or_pointWithCircleRect:(CGRect)rect angle:(CGFloat)angle;
 
 @end

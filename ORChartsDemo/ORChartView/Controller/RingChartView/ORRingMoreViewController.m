@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottowLayout;
 
 @property (nonatomic, assign) BOOL clockwise;
+@property (nonatomic, assign) BOOL neatInfoLine;
+
 @property (nonatomic, assign) ORRingChartStyle style;
 
 @end
@@ -96,7 +98,12 @@
 
 
 - (IBAction)action_clockwise:(UISwitch *)sender {
-    _clockwise = sender.isOn;
+    
+    if (sender.tag == 200) {
+        _clockwise = sender.isOn;
+        return;
+    }
+    _neatInfoLine = sender.isOn;
 }
 
 - (IBAction)action_chartStyle:(UISegmentedControl *)sender {
@@ -113,6 +120,8 @@
     
     _ringChart.style = _style;
     _ringChart.config.clockwise = _clockwise;
+    _ringChart.config.neatInfoLine = _neatInfoLine;
+
     _ringChart.config.startAngle = [_startAngleLabel.text floatValue] * M_PI / 180.0;
     _ringChart.config.ringLineWidth = [_ringLineWidthLabel.text floatValue];
     _ringChart.config.infoLineWidth = [_infoLineWidthLabel.text floatValue];
@@ -125,9 +134,7 @@
     _ringChart.config.pointWidth = [_pointWidthLabel.text floatValue];
     
     _ringChart.config.animateDuration = [_animateDurationLabel.text floatValue];
-    
-    
-    
+        
     [_ringChart reloadData];
     
 }
