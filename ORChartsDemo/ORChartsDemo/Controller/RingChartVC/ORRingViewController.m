@@ -9,7 +9,7 @@
 #import "ORRingViewController.h"
 #import "ORRingChartView.h"
 
-@interface ORRingViewController ()<ORRingChartViewDatasource, UITableViewDataSource> {
+@interface ORRingViewController ()<ORRingChartViewDatasource> {
     NSInteger _randowValue;
 }
 
@@ -28,6 +28,8 @@
     
     ORRingChartView *ringView = [ORRingChartView new];
     
+    ringView.config.neatInfoLine = YES;
+    
     ringView.dataSource = self;
     ringView.frame = CGRectMake(0, 0, 375, 375);
     ringView.center = self.view.center;
@@ -41,7 +43,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.ringView.style = arc4random() % 3;
-    _randowValue = arc4random() % 9 + 1;
+    _randowValue = arc4random() % 10 + 1;
     [self.ringView reloadData];
 }
 
@@ -55,7 +57,7 @@
 
 - (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index {
     UILabel *label = [UILabel new];
-    label.text = [NSString stringWithFormat:@"aa %zd", index];
+    label.text = [NSString stringWithFormat:@"TopIndex %zd", index];
     label.font = [UIFont systemFontOfSize:12];
     label.textColor = [UIColor redColor];
     [label sizeToFit];
@@ -69,7 +71,7 @@
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor lightGrayColor];
     }
-    label.text = [NSString stringWithFormat:@"bot %zd", index];
+    label.text = [NSString stringWithFormat:@"BotIndex %zd", index];
     [label sizeToFit];
     return label;
 }
