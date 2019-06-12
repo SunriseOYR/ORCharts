@@ -184,9 +184,11 @@
         }].CGPath;
         obj.infoLineLayer.path = linePath;
         
-        [shapeLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
-        [obj.ringLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
-        [obj.infoLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+        if (self.config.animateDuration > 0) {
+            [shapeLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+            [obj.ringLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+            [obj.infoLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
+        }
     }];
 }
 
