@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet ORRingChartView *ringChart;
 @property (nonatomic, strong) NSArray *datasource;
+@property (nonatomic, strong) NSArray *graidentColors;
 
 @property (weak, nonatomic) IBOutlet UILabel *startAngleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ringLineWidthLabel;
@@ -40,6 +41,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _datasource = @[@(12.4),@(23.1),@(37),@(12),@(18.6),@(8.7),@(12.2),@(16.5)];
+    _graidentColors = @[@[[UIColor redColor]],
+                        @[[UIColor orangeColor]],
+                        @[[UIColor yellowColor]],
+                        @[[UIColor greenColor]],
+                        @[[UIColor cyanColor]],
+                        @[[UIColor blueColor]],
+                        @[[UIColor purpleColor]],
+                        @[[UIColor brownColor]]];
+
 
     [_ringChart reloadData];
     
@@ -147,6 +157,10 @@
 
 - (CGFloat)chartView:(ORRingChartView *)chartView valueAtRingIndex:(NSInteger)index {
     return [_datasource[index] floatValue];
+}
+
+- (NSArray<UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {
+    return _graidentColors[index];
 }
 
 - (UIView *)viewForRingCenterOfChartView:(ORRingChartView *)chartView {
