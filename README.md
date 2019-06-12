@@ -2,7 +2,7 @@
 
 #### 注：曲折线图功能还在完善中，所以可能会出现功能bug，工作比较忙，可能时间稍长
 
-# 环形图、饼状图、扇形图
+# [环形图、饼状图、扇形图](https://www.jianshu.com/p/317a79890984)
 * 效果预览  
 
 ![ring.gif](https://github.com/SunriseOYR/ORCharts/blob/master/gif/ring.gif)
@@ -15,7 +15,7 @@ ORRingChartView 集环形图、饼状图、扇形图（似乎与传统扇形有�
 
 
 
-### iOS - 曲折线图
+# iOS - 曲折线图
 
  [博客说明](http://www.jianshu.com/p/a571ae110ba5)
 
