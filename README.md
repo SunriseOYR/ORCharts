@@ -1,9 +1,21 @@
-# ORChartView
+# ORCharts
 
-#### 注：最近正在添加扇形图，饼状图功能，同时对老代码重构，所以可能会出现功能bug，工作比较忙，可能时间稍长
+#### 注：曲折线图功能还在完善中，所以可能会出现功能bug，工作比较忙，可能时间稍长
+
+# [环形图、饼状图、扇形图](https://www.jianshu.com/p/317a79890984)
+* 效果预览  
+
+![ring.gif](https://github.com/SunriseOYR/ORCharts/blob/master/gif/ring.gif)
+
+# ORRingChartView
+ORRingChartView 集环形图、饼状图、扇形图（似乎与传统扇形有所偏差，只是一个名字啦）于一身，通过style对应设置即可。数据方面，一个中心视图展示总体信息，每一个数据支持设置填充色、线条色，以及最多两个视图展示详细信息。基本上满足大部分此类图表的功能需求。  
+使用上，类似于tableview 通过dataSource代理配置数据。config 配置图标属性，具体配置和使用见本文以及Demo
+* swfit 版本预计下月更新 （预计...）
+* [博客说明](https://www.jianshu.com/p/317a79890984)
 
 
-### iOS - 超轻量级的曲线图绘制
+
+# iOS - 曲折线图
 
  [博客说明](http://www.jianshu.com/p/a571ae110ba5)
 
