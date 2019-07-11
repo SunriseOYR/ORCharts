@@ -62,6 +62,7 @@
     [path moveToPoint:CGPointMake(width * 0.5, 0)];
     [path addLineToPoint:CGPointMake(width * 0.5, self.bounds.size.height - height - _config.bottomLabelInset)];
     _lineLayer.path = path.CGPath;
+
 }
 
 - (void)setHorizontal:(ORLineChartHorizontal *)horizontal {
@@ -74,6 +75,8 @@
     _lineLayer.strokeColor = _config.bgLineColor.CGColor;
     _lineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
     _lineLayer.lineWidth = _config.bglineWidth;
+    _lineLayer.hidden = !_config.showVerticalBgline;
+    [self setNeedsLayout];
 }
 
 @end

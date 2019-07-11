@@ -25,9 +25,8 @@
     _shadowLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
     
-    _gradientColors = @[(__bridge id)([[UIColor redColor] colorWithAlpha:0.3].CGColor), (__bridge id)([[UIColor greenColor] colorWithAlpha:0.3].CGColor)];
     
-    _showVerticalBgline = YES;
+    _showHorizontalBgline = YES;
     _showVerticalBgline = YES;
     _dottedBGLine = YES;
     _isBreakLine = NO;
@@ -44,13 +43,12 @@
     
     _leftWidth = 40;
     
-
-
-    
     _indicatorCircleWidth = 10;
     _indicatorLineWidth = 0.8;
     _animateDuration = 0;
     
+    self.gradientColors = @[[[UIColor redColor] colorWithAlphaComponent:0.3], [[UIColor blueColor] colorWithAlphaComponent:0.3]];
+
 }
 
 - (UIColor *)indicatorTintColor {
@@ -65,6 +63,15 @@
         _indicatorLineColor = _chartLineColor;
     }
     return _indicatorLineColor;
+}
+
+- (void)setGradientColors:(NSArray<UIColor *> *)gradientColors {
+    _gradientColors = gradientColors;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:gradientColors.count];
+    [gradientColors enumerateObjectsUsingBlock:^(UIColor * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [array addObject:(__bridge id)(obj.CGColor)];
+    }];
+   _gradientCGColors = array.copy;
 }
 
 @end
@@ -139,7 +146,6 @@
         max = ceilf(max / 10.0) * 10;
         average = ceilf((max - min) / (separate - 1.0));
     }else {
-        
         average = (max - min) / (separate - 2.0);
         if (average - (int)average > 0.5) {
             average += 1;

@@ -47,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _datasource = @[@(12.4),@(23.1),@(37),@(12),@(18.6),@(8.7),@(12.2),@(16.5), @(98.6), @(36.3),@(18.6),@(8.7),@(12.2)];
+    _datasource = @[@(12.4),@(23.1),@(37),@(12),@(18.6),@(8.7),@(12.2),@(16.5), @(58.6), @(36.3),@(18.6),@(8.7),@(12.2)];
 
     
     
@@ -66,9 +66,10 @@
 
     
     
+    _lineChart.config.gradientColors = @[[[UIColor redColor] colorWithAlphaComponent:0.3], [[UIColor blueColor] colorWithAlphaComponent:0.3]];
+    
     [_lineChart reloadData];
 
-    
     
     _bottowLayout.constant = -400;
     [self.view layoutIfNeeded];

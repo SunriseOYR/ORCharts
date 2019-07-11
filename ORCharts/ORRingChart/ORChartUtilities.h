@@ -72,7 +72,6 @@ static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
 
 @interface UIColor (ORRingConfiger)
 
-- (UIColor *)colorWithAlpha:(CGFloat)alpha;
 + (UIColor *)or_randomColor;
 + (UIColor *)colorWithHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
 

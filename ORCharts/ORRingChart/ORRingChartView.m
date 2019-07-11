@@ -11,7 +11,7 @@
 
 @implementation NSObject (ORRingChartView)
 
-- (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {return @[[[UIColor or_randomColor] colorWithAlpha:1],[[UIColor or_randomColor] colorWithAlpha:1]];}
+- (NSArray <UIColor *> *)chartView:(ORRingChartView *)chartView graidentColorsAtRingIndex:(NSInteger)index {return @[[UIColor or_randomColor],[UIColor or_randomColor]];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForRingAtRingIndex:(NSInteger)index {return [UIColor whiteColor];}
 - (UIColor *)chartView:(ORRingChartView *)chartView lineColorForInfoLineAtRingIndex:(NSInteger)index {return nil;}
 - (UIView *)viewForRingCenterOfChartView:(ORRingChartView *)chartView {return nil;}

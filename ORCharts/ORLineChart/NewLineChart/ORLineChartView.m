@@ -263,12 +263,14 @@
     _circleLayer.lineWidth = _config.chartLineWidth;
     _circleLayer.strokeColor = _config.chartLineColor.CGColor;
     
-    _gradientLayer.colors = _config.gradientColors;
+    _gradientLayer.colors = _config.gradientCGColors;
     
     _bgLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bgLineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
     _bgLineLayer.lineWidth = _config.bglineWidth;
-
+    
+    _bgLineLayer.hidden = !_config.showHorizontalBgline;
+    
     _bottomLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bottomLineLayer.lineWidth = _config.bglineWidth;
     
@@ -511,8 +513,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat ratio = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right - scrollView.bounds.size.width);
-    ratio = fmin(fmax(0.0, ratio), 1.0);
-
+    ratio = fmin(fmax(0.001, ratio), 1.0);
+    
     _circleLayer.timeOffset = ratio;
     _animationLayer.timeOffset = ratio;
     _indicator.center = _animationLayer.presentationLayer.position;

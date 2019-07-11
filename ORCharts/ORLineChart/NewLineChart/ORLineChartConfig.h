@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UIColor *bgLineColor;
 
 @property (nonatomic, copy) NSArray<UIColor *> *gradientColors;
+@property (nonatomic, copy, readonly) NSArray *gradientCGColors;
 
 @property (nonatomic, assign) CGFloat bottomInset;
 @property (nonatomic, assign) CGFloat topInset;

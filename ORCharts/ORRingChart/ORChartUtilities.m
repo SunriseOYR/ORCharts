@@ -269,12 +269,6 @@
 
 @implementation UIColor (ORRingConfiger)
 
-- (UIColor *)colorWithAlpha:(CGFloat)alpha {
-    CGFloat red = 0.0, green = 0.0, blue = 0, al = 0.0;
-    [self getRed:&red green:&green blue:&blue alpha:&al];
-    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-}
-
 
 + (UIColor *)or_randomColor {
     int r = arc4random() % 255;
