@@ -8,7 +8,6 @@
 
 #import "ORLineChartView.h"
 #import "ORLineChartCell.h"
-#import "ORLineChartConfig.h"
 #import "ORChartUtilities.h"
 
 @implementation NSObject (ORLineChartView)
@@ -128,7 +127,6 @@
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
 
-
 @end
 
 @implementation ORLineChartView
@@ -217,7 +215,6 @@
     
     _indicatorLineLayer = ({
         CALayer *layer = [CALayer layer];
-        layer.backgroundColor = [UIColor blackColor].CGColor;
         layer;
     });
     
@@ -257,13 +254,13 @@
     
     _lineLayer.strokeColor = _config.chartLineColor.CGColor;
     _shadowLineLayer.strokeColor = _config.shadowLineColor.CGColor;
-    _lineLayer.lineWidth = _config.lineWidth;
-    _shadowLineLayer.lineWidth = _config.lineWidth * 0.8;
+    _lineLayer.lineWidth = _config.chartLineWidth;
+    _shadowLineLayer.lineWidth = _config.chartLineWidth * 0.8;
     
     
-    _circleLayer.frame = (CGRect){{0,0},{_config.circleWidth,_config.circleWidth}};
+    _circleLayer.frame = (CGRect){{0,0},{_config.indicatorCircleWidth,_config.indicatorCircleWidth}};
     _circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:_circleLayer.frame].CGPath;
-    _circleLayer.lineWidth = _config.lineWidth;
+    _circleLayer.lineWidth = _config.chartLineWidth;
     _circleLayer.strokeColor = _config.chartLineColor.CGColor;
     
     _gradientLayer.colors = _config.gradientColors;
@@ -280,14 +277,17 @@
     }
     
     _indicator.backgroundColor = _config.indicatorTintColor;
-    
+    _indicatorLineLayer.backgroundColor = _config.indicatorLineColor.CGColor;
+
     [self.collectionView reloadData];
     [self setNeedsLayout];
 }
 
 - (void)_or_layoutSubviews {
-        
-//    self.collectionView.contentInset = UIEdgeInsetsMake(topHeight, 0, bottowHeight, 0);
+    
+    if (self.horizontalDatas.count == 0) {
+        return;
+    }
     
     _circleLayer.fillColor = self.backgroundColor.CGColor;
     
@@ -339,19 +339,21 @@
 
     NSMutableArray *points = [NSMutableArray array];
     
+    CGFloat maxX = _config.bottomLabelWidth * _horizontalDatas.count + _collectionView.contentInset.right;
+    
     [self.horizontalDatas enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
 
         CGFloat y = ORInterpolation(topHeight, height - self.bottomTextHeight, (obj.value - self.lineChartValue.max) / ratio);
         
         if (idx == 0) {
-            [points addObject:[NSValue valueWithCGPoint:CGPointMake(0, y)]];
+            [points addObject:[NSValue valueWithCGPoint:CGPointMake(-self.collectionView.contentInset.left, y)]];
         }
         
         [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
         
         if (idx == self.horizontalDatas.count - 1) {
-            [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * self.horizontalDatas.count , y)]];
+            [points addObject:[NSValue valueWithCGPoint:CGPointMake(maxX, y)]];
         }
     }];
     
@@ -383,21 +385,26 @@
     _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
     [self _or_updateIndcaterLineFrame];
 
-    [_lineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:2] forKey:nil];
-    [_shadowLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:2] forKey:nil];
-
-//    _gradientLayer.anchorPoint = CGPointMake(0, 0.5);
-    CABasicAnimation *anmi1 = [CABasicAnimation animation];
-    anmi1.keyPath = @"bounds.size.width";
-    anmi1.duration = 2.0f;
-    anmi1.toValue = @( _config.bottomLabelWidth * _horizontalDatas.count * 2);
-
-    anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    anmi1.fillMode = kCAFillModeForwards;
-    anmi1.autoreverses = NO;
-    anmi1.removedOnCompletion = NO;
-    [_gradientLayer addAnimation:anmi1 forKey:nil];
-
+    
+    if (_config.animateDuration > 0) {
+        [_lineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:_config.animateDuration] forKey:nil];
+        [_shadowLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:_config.animateDuration] forKey:nil];
+        
+        //    _gradientLayer.anchorPoint = CGPointMake(0, 0.5);
+        CABasicAnimation *anmi1 = [CABasicAnimation animation];
+        anmi1.keyPath = @"bounds.size.width";
+        anmi1.duration = _config.animateDuration;
+        anmi1.toValue = @(maxX * 2);
+        
+        anmi1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        anmi1.fillMode = kCAFillModeForwards;
+        anmi1.autoreverses = NO;
+        anmi1.removedOnCompletion = NO;
+        [_gradientLayer addAnimation:anmi1 forKey:@"bw"];
+    }else {
+        _gradientLayer.bounds = CGRectMake(0, 0, maxX * 2, self.collectionView.bounds.size.height);
+    }
+    
 }
 
 - (CAAnimation *)_or_positionAnimationWithPath:(CGPathRef)path {
@@ -418,11 +425,19 @@
 
 - (void)reloadData {
     
-    if (!_dataSource || [_dataSource numberOfHorizontalDataOfChartView:self] == 0) {
+    if (!_dataSource) {
         return;
     }
     
     NSInteger items = [_dataSource numberOfHorizontalDataOfChartView:self];
+    
+    [self.horizontalDatas removeAllObjects];
+    
+    if (items == 0) {
+        [_collectionView reloadData];
+        return;
+    }
+    
     
     for (int i = 0; i < items; i ++) {
         
@@ -457,12 +472,23 @@
         obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[self.dataSource labelAttrbutesForVerticalOfChartView:self]];
     }];
     
+    
+    NSAttributedString *lastTitle = [_dataSource chartView:self attributedStringForIndicaterAtIndex:items - 1];
+    if (!lastTitle) {
+        lastTitle = self.leftLabels.firstObject.attributedText;
+    }
+    [_indicator or_setTitle:lastTitle];
+    CGFloat rightInset = MAX((_indicator.bounds.size.width - _config.bottomLabelWidth) / 2.0 + _config.contentMargin, 0);
+    
     NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:0];
     if (!title) {
         title = self.leftLabels.firstObject.attributedText;
     }
     [_indicator or_setTitle:title];
-    
+    CGFloat leftInset = MAX((_indicator.bounds.size.width - _config.bottomLabelWidth) / 2.0 + _config.contentMargin, 0);
+
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, leftInset, 0, rightInset);
+
     [self _or_configChart];
 }
 
@@ -480,6 +506,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(_config.bottomLabelWidth, collectionView.bounds.size.height);//collectionView.bounds.size.height
 }
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     

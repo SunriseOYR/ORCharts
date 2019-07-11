@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ORLineChartConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDelegate> delegate;
 
+@property (nonatomic, readonly) ORLineChartConfig *config;
 
+- (void)reloadData;
 
 @end
 

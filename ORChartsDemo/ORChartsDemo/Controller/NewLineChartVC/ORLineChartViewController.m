@@ -23,7 +23,7 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    _datasource = @[@(12), @(2),@(49),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16)];
+    _datasource = @[@(12), @(2),@(49),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16.348)];
 
     
     ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 350)];
@@ -47,6 +47,11 @@
 
 - (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {
     return @"06-11";
+}
+
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index {
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"current v:%g", [_datasource[index] doubleValue]]];
+    return string;
 }
 
 @end

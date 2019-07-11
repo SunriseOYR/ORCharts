@@ -32,6 +32,7 @@
 		C9536CF422B0A77700C23D62 /* ORChartUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE222B0A77700C23D62 /* ORChartUtilities.m */; };
 		C9536CF522B0A77700C23D62 /* ORRingChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE522B0A77700C23D62 /* ORRingChartConfig.m */; };
 		C9536CF622B0A77700C23D62 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE822B0A77700C23D62 /* ORRingChartView.m */; };
+		C9C3CF8D22D70268004600AD /* ORLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CF8C22D70268004600AD /* ORLineViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		C9536CE622B0A77700C23D62 /* ORRingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartView.h; sourceTree = "<group>"; };
 		C9536CE722B0A77700C23D62 /* ORRingChartConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartConfig.h; sourceTree = "<group>"; };
 		C9536CE822B0A77700C23D62 /* ORRingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingChartView.m; sourceTree = "<group>"; };
+		C9C3CF8B22D70268004600AD /* ORLineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineViewController.h; sourceTree = "<group>"; };
+		C9C3CF8C22D70268004600AD /* ORLineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,8 @@
 			children = (
 				4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */,
 				4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */,
+				C9C3CF8B22D70268004600AD /* ORLineViewController.h */,
+				C9C3CF8C22D70268004600AD /* ORLineViewController.m */,
 			);
 			path = NewLineChartVC;
 			sourceTree = "<group>";
@@ -246,12 +251,12 @@
 		C9536CCE22B0A77700C23D62 /* NewLineChart */ = {
 			isa = PBXGroup;
 			children = (
-				C9536CCF22B0A77700C23D62 /* ORLineChartView.m */,
-				C9536CD022B0A77700C23D62 /* ORLineChartConfig.m */,
-				C9536CD122B0A77700C23D62 /* ORLineChartCell.m */,
 				C9536CD222B0A77700C23D62 /* ORLineChartView.h */,
-				C9536CD322B0A77700C23D62 /* ORLineChartCell.h */,
+				C9536CCF22B0A77700C23D62 /* ORLineChartView.m */,
 				C9536CD422B0A77700C23D62 /* ORLineChartConfig.h */,
+				C9536CD022B0A77700C23D62 /* ORLineChartConfig.m */,
+				C9536CD322B0A77700C23D62 /* ORLineChartCell.h */,
+				C9536CD122B0A77700C23D62 /* ORLineChartCell.m */,
 			);
 			path = NewLineChart;
 			sourceTree = "<group>";
@@ -292,8 +297,8 @@
 		C9536CE422B0A77700C23D62 /* ORRingChart */ = {
 			isa = PBXGroup;
 			children = (
-				C9536CE222B0A77700C23D62 /* ORChartUtilities.m */,
 				C9536CE322B0A77700C23D62 /* ORChartUtilities.h */,
+				C9536CE222B0A77700C23D62 /* ORChartUtilities.m */,
 				C9536CE722B0A77700C23D62 /* ORRingChartConfig.h */,
 				C9536CE522B0A77700C23D62 /* ORRingChartConfig.m */,
 				C9536CE622B0A77700C23D62 /* ORRingChartView.h */,
@@ -448,6 +453,7 @@
 				C9536CF522B0A77700C23D62 /* ORRingChartConfig.m in Sources */,
 				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
 				4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */,
+				C9C3CF8D22D70268004600AD /* ORLineViewController.m in Sources */,
 				C9536CF322B0A77700C23D62 /* ORChartView.m in Sources */,
 				C9536CEB22B0A77700C23D62 /* ORLineChartCell.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,

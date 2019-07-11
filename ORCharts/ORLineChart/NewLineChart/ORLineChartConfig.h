@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORLineChartConfig : NSObject
 
+@property (nonatomic, assign) CGFloat chartLineWidth;
+@property (nonatomic, assign) CGFloat bglineWidth;
+
 @property (nonatomic, copy) UIColor *chartLineColor;
 @property (nonatomic, copy) UIColor *shadowLineColor;
 @property (nonatomic, copy) UIColor *bgLineColor;
@@ -25,12 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat bottomLabelWidth;
 @property (nonatomic, assign) CGFloat bottomLabelInset;
-
+@property (nonatomic, assign) CGFloat contentMargin;
 @property (nonatomic, assign) CGFloat leftWidth;
 
-@property (nonatomic, assign) CGFloat bglineWidth;
 
-@property (nonatomic, assign) CGFloat lineWidth;
 
 //default YES
 @property (nonatomic, assign) BOOL showVerticalBgline;
@@ -42,13 +43,15 @@ NS_ASSUME_NONNULL_BEGIN
 //default NO
 @property (nonatomic, assign) BOOL isBreakLine;
 
-@property (nonatomic, strong) UIView *indicator;
 
-@property (nonatomic, assign) CGFloat circleWidth;
+@property (nonatomic, assign) CGFloat indicatorCircleWidth;
 @property (nonatomic, assign) CGFloat indicatorLineWidth;
 @property (nonatomic, copy) UIColor * indicatorTintColor;
+@property (nonatomic, copy) UIColor * indicatorLineColor;
 
 @property (nonatomic, assign) NSTimeInterval animateDuration;
+
+@property (nonatomic, strong) UIView *indicator;
 
 @end
 

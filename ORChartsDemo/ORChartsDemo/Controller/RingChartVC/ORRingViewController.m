@@ -34,7 +34,6 @@
     ringView.frame = CGRectMake(0, 0, 375, 375);
     ringView.center = self.view.center;
     
-    //    ringView.backgroundColor = [UIColor redColor];
     
     [self.view addSubview:ringView];
     
