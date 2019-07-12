@@ -1,9 +1,9 @@
 //
-//  ORLineChartView.h
-//  ORChartView
+//  ORNLChartView.h
+//  ORChartsDemo
 //
-//  Created by OrangesAL on 2019/5/1.
-//  Copyright © 2019年 OrangesAL. All rights reserved.
+//  Created by 欧阳荣 on 2019/7/12.
+//  Copyright © 2019 欧阳荣. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,8 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-@interface ORLineChartView : UIView
+@interface ORNLChartView : UIView
 
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDataSource> dataSource;
 

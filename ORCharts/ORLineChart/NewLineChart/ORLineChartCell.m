@@ -65,9 +65,9 @@
 
 }
 
-- (void)setHorizontal:(ORLineChartHorizontal *)horizontal {
-    
-    self.titleLabel.attributedText = horizontal.title;
+
+- (void)setTitle:(NSAttributedString *)title {
+    self.titleLabel.attributedText = title;
 }
 
 - (void)setConfig:(ORLineChartConfig *)config {

@@ -27,28 +27,135 @@
 
 @end
 
-@interface _ORIndicatorView : UIView
+#pragma mark - ORLineChartHorizontal
+@interface ORLineChartHorizontal : NSObject
+
+@property (nonatomic, assign) CGFloat value;
+@property (nonatomic, copy) NSAttributedString *title;
+
 @end
 
-@implementation _ORIndicatorView {
+@interface ORLineChartValue : NSObject
+
+@property (nonatomic, assign, readonly) CGFloat max;
+@property (nonatomic, assign, readonly) CGFloat min;
+@property (nonatomic, assign, readonly) CGFloat middle;
+@property (nonatomic, copy, readonly) NSArray <NSNumber *>* separatedValues;//等分值 由低到高
+@property (nonatomic, copy) NSArray <NSNumber *>* ramValues;
+
+- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min;
+- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate;
+- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate;
+
+@end
+
+@implementation ORLineChartHorizontal
+@end
+
+#pragma mark - ORLineChartValue
+@implementation ORLineChartValue {
+    NSInteger _separate;
+}
+
+- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min
+{
+    self = [super init];
+    if (self) {
+        _separate = separate;
+        _min = min;
+        self.ramValues = values;
+    }
+    return self;
+}
+
+- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate {
+    return  [self initWithData:values numberWithSeparate:separate customMin:CGFLOAT_MAX];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _separate = 5;
+    }
+    return self;
+}
+
+- (void)setRamValues:(NSArray<NSNumber *> *)ramValues {
+    _ramValues = ramValues;
+    [self valueSortedWithRamData:ramValues numberWithSeparate:_separate];
+}
+
+- (void)valueSortedWithRamData:(NSArray <NSNumber *> *)data numberWithSeparate:(NSInteger)separate {
+    
+    __block CGFloat max = [data.firstObject floatValue];
+    __block CGFloat min = [data.firstObject floatValue];
+    
+    [data enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.doubleValue > max) {
+            max = obj.doubleValue;
+        }
+        if (obj.doubleValue < min) {
+            min = obj.floatValue;
+        }
+    }];
+    
+    _middle = (max - min) / 2.0;
+    
+    NSMutableArray *array = [NSMutableArray array];
+    NSInteger average = 0;
+    
+    if (min > 0 && max > 10) {
+        
+        min = floorf(min / 10.0) * 10;
+        max = ceilf(max / 10.0) * 10;
+        average = ceilf((max - min) / (separate - 1.0));
+    }else {
+        average = (max - min) / (separate - 2.0);
+        if (average - (int)average > 0.5) {
+            average += 1;
+        }
+    }
+    
+    for (int i = 0; i < separate; i ++) {
+        [array addObject:@(min + i * (int)average)];
+    }
+    
+    _min = min;
+    _max = [array.lastObject floatValue];
+    _separatedValues = [array copy];
+}
+
+- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate {
+    
+    NSMutableArray *number = [NSMutableArray arrayWithCapacity:horizontals.count];
+    [horizontals enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [number addObject:@(obj.value)];
+    }];
+    return [self initWithData:number numberWithSeparate:separate];
+}
+
+@end
+
+#pragma mark - ORIndicatorView
+@interface ORIndicatorView : UIView
+@end
+
+@implementation ORIndicatorView {
     UILabel *_label;
     CAShapeLayer *_backLayer;
     CALayer *_shadowLayer;
 }
 
-#pragma mark - Initailize Methods
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self _xw_initailizeUI];
+        [self _or_initailizeUI];
     }
     return self;
 }
 
-
-- (void)_xw_initailizeUI{
+- (void)_or_initailizeUI{
     _label = ({
         UILabel *label = [UILabel new];
         label;
@@ -97,6 +204,7 @@
 
 @end
 
+#pragma mark - ORLineChartView
 @interface ORLineChartView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource> {
     NSInteger _lastIndex;
 }
@@ -120,7 +228,7 @@
 @property (nonatomic, strong) CAShapeLayer *circleLayer;
 
 @property (nonatomic, strong) CALayer *animationLayer;
-@property (nonatomic, strong) _ORIndicatorView *indicator;
+@property (nonatomic, strong) ORIndicatorView *indicator;
 @property (nonatomic, strong) CALayer *indicatorLineLayer;
 
 @property (nonatomic, strong) CALayer *contenLayer;
@@ -238,7 +346,7 @@
     });
     [_collectionView.layer addSublayer:_animationLayer];
     
-    _indicator = [_ORIndicatorView new];;
+    _indicator = [ORIndicatorView new];;
     [_collectionView addSubview:_indicator];
 
 }
@@ -297,6 +405,8 @@
                                            _config.topInset,
                                            self.bounds.size.width - _config.leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
+    
+    
     
     _gradientLayer.frame = CGRectMake(0, 0, 0, self.collectionView.bounds.size.height);
     
@@ -378,7 +488,7 @@
     [_circleLayer addAnimation:[self _or_positionAnimationWithPath:[ainmationPath.copy CGPath]] forKey:@"or_circleMove"];
     
 //    CGFloat indecaterHeight = _indicator.bounds.size.height;
-    
+    _animationLayer.timeOffset = 0.0;
     [ainmationPath applyTransform:CGAffineTransformMakeTranslation(0, - indecaterHeight)];
     [_animationLayer removeAnimationForKey:@"or_circleMove"];
     [_animationLayer addAnimation:[self _or_positionAnimationWithPath:ainmationPath.CGPath] forKey:@"or_circleMove"];
@@ -413,6 +523,8 @@
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     animation.duration = 1.0f;
     animation.path = path;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeBoth;
     return animation;
 }
 
@@ -491,6 +603,11 @@
 
     self.collectionView.contentInset = UIEdgeInsetsMake(0, leftInset, 0, rightInset);
 
+    if (self.collectionView.contentOffset.x != -leftInset) {
+        [self.collectionView setContentOffset:CGPointMake(-leftInset, 0) animated:YES];
+    }
+
+    
     [self _or_configChart];
 }
 
@@ -500,7 +617,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ORLineChartCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ORLineChartCell class]) forIndexPath:indexPath];
-    cell.horizontal = self.horizontalDatas[indexPath.row];
+    cell.title = self.horizontalDatas[indexPath.row].title;
     cell.config = self.config;
     return cell;
 }
@@ -513,7 +630,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat ratio = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right - scrollView.bounds.size.width);
-    ratio = fmin(fmax(0.001, ratio), 1.0);
+    ratio = fmin(fmax(0.0, ratio), 1.0);
     
     _circleLayer.timeOffset = ratio;
     _animationLayer.timeOffset = ratio;
@@ -534,24 +651,11 @@
     
 }
 
-#pragma mark -- setter
-- (void)setDataSource:(id<ORLineChartViewDataSource>)dataSource {
-    
+- (void)setDataSource:(id<ORLineChartViewDataSource>)dataSource {    
     if (_dataSource != dataSource) {
         _dataSource = dataSource;
         if (_dataSource) {
             [self reloadData];
-        }
-    }
-}
-
-- (void)setDelegate:(id<ORLineChartViewDelegate>)delegate {
-    
-    if (_delegate != delegate) {
-        _delegate = delegate;
-        if (_dataSource) {
-//            [self _or_setDelegateData];
-            [self setNeedsLayout];
         }
     }
 }

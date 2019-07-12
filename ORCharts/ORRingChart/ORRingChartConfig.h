@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-
 @interface ORRingChartConfig : NSObject
 
 //The direction in chart.

@@ -3,7 +3,7 @@
 //  JZM
 //
 //  Created by Lavare on 12/4/14.
-//  Copyright (c) 2014 http://www.yidejia.com/. All rights reserved.
+//  Copyright (c) 2014. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

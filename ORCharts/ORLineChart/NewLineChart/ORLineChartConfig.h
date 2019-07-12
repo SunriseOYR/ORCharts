@@ -56,29 +56,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ORLineChartHorizontal : NSObject
+@class ORLineChartView;
 
-@property (nonatomic, assign) CGFloat value;
-@property (nonatomic, copy) NSAttributedString *title;
+@protocol ORLineChartViewDataSource <NSObject>
 
+@required
+
+- (NSInteger)numberOfHorizontalDataOfChartView:(ORLineChartView *)chartView;
+
+- (CGFloat)chartView:(ORLineChartView *)chartView valueForHorizontalAtIndex:(NSInteger)index;
+
+@optional
+
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index;
+
+- (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView;
+
+- (NSString *)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
+
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView;
+- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView;
 
 @end
 
-@interface ORLineChartValue : NSObject
-
-@property (nonatomic, assign, readonly) CGFloat max;
-@property (nonatomic, assign, readonly) CGFloat min;
-@property (nonatomic, assign, readonly) CGFloat middle;
-@property (nonatomic, copy, readonly) NSArray <NSNumber *>* separatedValues;//等分值 由低到高
-@property (nonatomic, copy) NSArray <NSNumber *>* ramValues;
-
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min;
-
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate;
-
-- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate;
-
-@end
 
 
 NS_ASSUME_NONNULL_END
