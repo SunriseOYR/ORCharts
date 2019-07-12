@@ -18,28 +18,8 @@
                         <sections>
                             <tableViewSection id="fHV-jC-MN4">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="0XA-VR-SAs" rowHeight="78" style="IBUITableViewCellStyleDefault" id="zRk-QM-TLF">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="78"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zRk-QM-TLF" id="uHN-aC-4Ie">
-                                            <rect key="frame" x="0.0" y="0.0" width="382.5" height="78"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="old line chart (unfinish)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0XA-VR-SAs">
-                                                    <rect key="frame" x="20" y="0.0" width="354.5" height="78"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="x8G-gP-lox"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="INB-V3-yfN" rowHeight="78" style="IBUITableViewCellStyleDefault" id="HrA-B4-UNX">
-                                        <rect key="frame" x="0.0" y="106" width="414" height="78"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HrA-B4-UNX" id="A5j-XO-R8p">
                                             <rect key="frame" x="0.0" y="0.0" width="382.5" height="78"/>
@@ -59,7 +39,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="6UR-Oc-4Ou" rowHeight="78" style="IBUITableViewCellStyleDefault" id="f5K-Df-5Sp">
-                                        <rect key="frame" x="0.0" y="184" width="414" height="78"/>
+                                        <rect key="frame" x="0.0" y="106" width="414" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f5K-Df-5Sp" id="sdB-xC-If7">
                                             <rect key="frame" x="0.0" y="0.0" width="382.5" height="78"/>
@@ -86,13 +66,13 @@
                             <outlet property="delegate" destination="sef-RU-bDe" id="f02-RC-gp4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="x4W-sw-Haa"/>
+                    <navigationItem key="navigationItem" title="ORCharts" id="x4W-sw-Haa"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3K-Cq-Vqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="361" y="665"/>
         </scene>
-        <!--Tap-->
+        <!--RingChart-->
         <scene sceneID="8Xo-XK-ZWY">
             <objects>
                 <viewController id="5WX-g1-RMe" customClass="ORRingViewController" sceneMemberID="viewController">
@@ -105,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tap" id="wuZ-6b-v1l">
+                    <navigationItem key="navigationItem" title="RingChart" id="wuZ-6b-v1l">
                         <barButtonItem key="rightBarButtonItem" title="More" id="amK-X0-Msy">
                             <connections>
                                 <segue destination="Us3-fF-2vy" kind="show" id="Q0n-K0-fWn"/>
@@ -786,24 +766,6 @@
             </objects>
             <point key="canvasLocation" x="2133.5999999999999" y="434.93253373313348"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1236" y="-250"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="hHI-Jy-Edc">
             <objects>
@@ -822,7 +784,7 @@
             </objects>
             <point key="canvasLocation" x="-473" y="664"/>
         </scene>
-        <!--NewLine-->
+        <!--LineChart-->
         <scene sceneID="S68-79-zgn">
             <objects>
                 <viewController id="19h-05-Ujb" customClass="ORLineChartViewController" sceneMemberID="viewController">
@@ -835,7 +797,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="NewLine" id="swp-wP-d0d" userLabel="NewLine">
+                    <navigationItem key="navigationItem" title="LineChart" id="swp-wP-d0d" userLabel="NewLine">
                         <barButtonItem key="rightBarButtonItem" title="More" id="xnf-g0-5ta">
                             <connections>
                                 <segue destination="JM7-0v-D3X" kind="show" id="cZs-Ec-DJf"/>
@@ -850,7 +812,7 @@
         <!--Data Source-->
         <scene sceneID="cpl-2b-nHn">
             <objects>
-                <viewController id="JM7-0v-D3X" customClass="ORLineViewController" sceneMemberID="viewController">
+                <viewController id="JM7-0v-D3X" customClass="ORLineMoreViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWc-g8-W7c"/>
                         <viewControllerLayoutGuide type="bottom" id="lWF-Yw-ILP"/>
@@ -1310,7 +1272,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFC-t0-JDc">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFC-t0-JDc">
                                                                 <rect key="frame" x="371" y="13" width="35" height="18"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="35" id="Bj1-IY-hA0"/>
@@ -1319,7 +1281,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <slider opaque="NO" tag="108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="PjP-8i-C4Q">
+                                                            <slider opaque="NO" tag="108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="13" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="PjP-8i-C4Q">
                                                                 <rect key="frame" x="207" y="7" width="154" height="31"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="150" id="8ie-Fu-2Nx"/>

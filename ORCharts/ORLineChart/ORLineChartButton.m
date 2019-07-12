@@ -1,15 +1,15 @@
 //
-//  UIButton+EnlargeTouchArea.m
-//  JZM
+//  ORChartControl.m
+//  ORChartsDemo
 //
-//  Created by Lavare on 12/4/14.
-//  Copyright (c) . All rights reserved.
+//  Created by 欧阳荣 on 2019/7/12.
+//  Copyright © 2019 欧阳荣. All rights reserved.
 //
 
-#import "UIButton+EnlargeTouchArea.h"
+#import "ORLineChartButton.h"
 #import <objc/runtime.h>
 
-@implementation UIButton (EnlargeTouchArea)
+@implementation ORLineChartButton (EnlargeTouchArea)
 
 static char topNameKey;
 static char rightNameKey;
@@ -55,5 +55,34 @@ static char leftNameKey;
     return CGRectContainsPoint(rect, point) ? self : nil;
 }
 
+
+@end
+
+
+@implementation ORLineChartButton {
+    UIColor *_orTintColor;
+    UIColor *_orBackGroundColor;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setEnlargeEdgeWithTop:20 right:20 bottom:20 left:20];
+    }
+    return self;
+}
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    self.backgroundColor = selected ? _orTintColor : _orBackGroundColor;
+}
+
+- (void)or_setTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor {
+    _orTintColor = tintColor;
+    _orBackGroundColor = backgroundColor;
+    self.backgroundColor = self.selected ? _orTintColor : _orBackGroundColor;
+    self.layer.borderColor = tintColor.CGColor;
+}
 
 @end

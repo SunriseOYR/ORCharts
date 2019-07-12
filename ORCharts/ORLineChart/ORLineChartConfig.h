@@ -12,7 +12,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    ORLineChartStyleIndicator,
+    ORLineChartStyleControl,
+} ORLineChartStyle;
+
 @interface ORLineChartConfig : NSObject
+
+@property (nonatomic, assign) ORLineChartStyle style;
 
 @property (nonatomic, assign) CGFloat chartLineWidth;
 @property (nonatomic, assign) CGFloat bglineWidth;
@@ -52,7 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSTimeInterval animateDuration;
 
-@property (nonatomic, strong) UIView *indicator;
+//@property (nonatomic, strong) UIView *indicator;
+
 
 @end
 

@@ -9,6 +9,8 @@
 #import "ORLineChartView.h"
 #import "ORLineChartCell.h"
 #import "ORChartUtilities.h"
+#import "ORLineChartValue.h"
+#import "ORLineChartButton.h"
 
 @implementation NSObject (ORLineChartView)
 
@@ -27,120 +29,10 @@
 
 @end
 
-#pragma mark - ORLineChartHorizontal
-@interface ORLineChartHorizontal : NSObject
-
-@property (nonatomic, assign) CGFloat value;
-@property (nonatomic, copy) NSAttributedString *title;
-
+@interface _ORIndicatorView : UIView
 @end
 
-@interface ORLineChartValue : NSObject
-
-@property (nonatomic, assign, readonly) CGFloat max;
-@property (nonatomic, assign, readonly) CGFloat min;
-@property (nonatomic, assign, readonly) CGFloat middle;
-@property (nonatomic, copy, readonly) NSArray <NSNumber *>* separatedValues;//等分值 由低到高
-@property (nonatomic, copy) NSArray <NSNumber *>* ramValues;
-
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min;
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate;
-- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate;
-
-@end
-
-@implementation ORLineChartHorizontal
-@end
-
-#pragma mark - ORLineChartValue
-@implementation ORLineChartValue {
-    NSInteger _separate;
-}
-
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min
-{
-    self = [super init];
-    if (self) {
-        _separate = separate;
-        _min = min;
-        self.ramValues = values;
-    }
-    return self;
-}
-
-- (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate {
-    return  [self initWithData:values numberWithSeparate:separate customMin:CGFLOAT_MAX];
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _separate = 5;
-    }
-    return self;
-}
-
-- (void)setRamValues:(NSArray<NSNumber *> *)ramValues {
-    _ramValues = ramValues;
-    [self valueSortedWithRamData:ramValues numberWithSeparate:_separate];
-}
-
-- (void)valueSortedWithRamData:(NSArray <NSNumber *> *)data numberWithSeparate:(NSInteger)separate {
-    
-    __block CGFloat max = [data.firstObject floatValue];
-    __block CGFloat min = [data.firstObject floatValue];
-    
-    [data enumerateObjectsUsingBlock:^(NSNumber *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.doubleValue > max) {
-            max = obj.doubleValue;
-        }
-        if (obj.doubleValue < min) {
-            min = obj.floatValue;
-        }
-    }];
-    
-    _middle = (max - min) / 2.0;
-    
-    NSMutableArray *array = [NSMutableArray array];
-    NSInteger average = 0;
-    
-    if (min > 0 && max > 10) {
-        
-        min = floorf(min / 10.0) * 10;
-        max = ceilf(max / 10.0) * 10;
-        average = ceilf((max - min) / (separate - 1.0));
-    }else {
-        average = (max - min) / (separate - 2.0);
-        if (average - (int)average > 0.5) {
-            average += 1;
-        }
-    }
-    
-    for (int i = 0; i < separate; i ++) {
-        [array addObject:@(min + i * (int)average)];
-    }
-    
-    _min = min;
-    _max = [array.lastObject floatValue];
-    _separatedValues = [array copy];
-}
-
-- (instancetype)initWithHorizontalData:(NSArray<ORLineChartHorizontal *> *)horizontals numberWithSeparate:(NSInteger)separate {
-    
-    NSMutableArray *number = [NSMutableArray arrayWithCapacity:horizontals.count];
-    [horizontals enumerateObjectsUsingBlock:^(ORLineChartHorizontal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [number addObject:@(obj.value)];
-    }];
-    return [self initWithData:number numberWithSeparate:separate];
-}
-
-@end
-
-#pragma mark - ORIndicatorView
-@interface ORIndicatorView : UIView
-@end
-
-@implementation ORIndicatorView {
+@implementation _ORIndicatorView {
     UILabel *_label;
     CAShapeLayer *_backLayer;
     CALayer *_shadowLayer;
@@ -228,12 +120,16 @@
 @property (nonatomic, strong) CAShapeLayer *circleLayer;
 
 @property (nonatomic, strong) CALayer *animationLayer;
-@property (nonatomic, strong) ORIndicatorView *indicator;
+@property (nonatomic, strong) _ORIndicatorView *indicator;
 @property (nonatomic, strong) CALayer *indicatorLineLayer;
 
 @property (nonatomic, strong) CALayer *contenLayer;
 
 @property (nonatomic, assign) CGFloat bottomTextHeight;
+
+
+@property (nonatomic,strong)NSMutableArray <ORLineChartButton *>*points;//数据源btn
+
 
 @end
 
@@ -346,13 +242,13 @@
     });
     [_collectionView.layer addSublayer:_animationLayer];
     
-    _indicator = [ORIndicatorView new];;
+    _indicator = [_ORIndicatorView new];;
     [_collectionView addSubview:_indicator];
 
 }
 
 - (void)_or_initData {
-    
+    _points = [NSMutableArray array];
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
     _config = [ORLineChartConfig new];
@@ -365,8 +261,8 @@
     _lineLayer.lineWidth = _config.chartLineWidth;
     _shadowLineLayer.lineWidth = _config.chartLineWidth * 0.8;
     
-    
-    _circleLayer.frame = (CGRect){{0,0},{_config.indicatorCircleWidth,_config.indicatorCircleWidth}};
+    CGFloat cirw = _config.indicatorCircleWidth - _config.chartLineWidth;
+    _circleLayer.frame = (CGRect){{0,0},{cirw,cirw}};
     _circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:_circleLayer.frame].CGPath;
     _circleLayer.lineWidth = _config.chartLineWidth;
     _circleLayer.strokeColor = _config.chartLineColor.CGColor;
@@ -389,6 +285,13 @@
     _indicator.backgroundColor = _config.indicatorTintColor;
     _indicatorLineLayer.backgroundColor = _config.indicatorLineColor.CGColor;
 
+    [_points enumerateObjectsUsingBlock:^(ORLineChartButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj or_setTintColor:self.config.indicatorTintColor backgroundColor:self.backgroundColor];
+        obj.layer.cornerRadius = self.config.indicatorCircleWidth / 2.0;
+        obj.layer.borderWidth = self.config.chartLineWidth;
+    }];
+    
+    
     [self.collectionView reloadData];
     [self setNeedsLayout];
 }
@@ -462,7 +365,14 @@
             [points addObject:[NSValue valueWithCGPoint:CGPointMake(-self.collectionView.contentInset.left, y)]];
         }
         
-        [points addObject:[NSValue valueWithCGPoint:CGPointMake(self.config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y)]];
+        CGPoint center = CGPointMake(self.config.bottomLabelWidth * 0.5 + idx * self.config.bottomLabelWidth, y);
+        
+        [points addObject:[NSValue valueWithCGPoint:center]];
+    
+        if (idx < self.points.count) {
+            CGFloat cirW = self.config.indicatorCircleWidth;
+            self.points[idx].frame = CGRectMake(center.x - cirW / 2.0, center.y - cirW / 2.0, cirW, cirW);
+        }
         
         if (idx == self.horizontalDatas.count - 1) {
             [points addObject:[NSValue valueWithCGPoint:CGPointMake(maxX, y)]];
@@ -537,6 +447,30 @@
     [CATransaction commit];
 }
 
+- (void)_or_action_circle:(ORLineChartButton *)sender {
+    for (UIButton*btn in _points) {
+        if ([sender isEqual:btn]) {
+            btn.selected = YES;
+        }else{
+            btn.selected = NO;
+        }
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.indicator.center = CGPointMake(sender.center.x, sender.center.y - self.indicator.bounds.size.height);
+        [self _or_setIndictorTitleWithIndex:[self.points indexOfObject:sender]];
+    }];
+}
+
+- (void)_or_setIndictorTitleWithIndex:(NSInteger)index {
+    
+    NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:index];
+    if (!title) {
+        title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%g", self.horizontalDatas[index].value]];
+    }
+    [_indicator or_setTitle:title];
+}
+
 - (void)reloadData {
     
     if (!_dataSource) {
@@ -547,6 +481,15 @@
     
     [self.horizontalDatas removeAllObjects];
     
+    BOOL isIndicator = _config.style == ORLineChartStyleIndicator;
+    
+    self.circleLayer.hidden = !isIndicator;
+    self.indicatorLineLayer.hidden = !isIndicator;
+    if (isIndicator) {
+        [self.points makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.points removeAllObjects];
+    }
+
     if (items == 0) {
         [_collectionView reloadData];
         return;
@@ -562,6 +505,29 @@
         
         [self.horizontalDatas addObject:horizontal];
     }
+    
+    
+    if (_config.style == ORLineChartStyleControl) {
+        
+        if (_points.count > items) {
+            for (NSInteger i = items; i < _points.count; i ++) {
+                ORLineChartButton *btn = _points[i];
+                [btn removeFromSuperview];
+                [_points removeObject:btn];
+            }
+        }else if (_points.count < items) {
+            for (NSInteger i = _points.count; i < items; i ++) {
+                ORLineChartButton *ctrl = [ORLineChartButton new];
+                [_collectionView addSubview:ctrl];
+                [ctrl addTarget:self action:@selector(_or_action_circle:) forControlEvents:UIControlEventTouchUpInside];
+                if (i == 0) {
+                    ctrl.selected = YES;
+                }
+                [_points addObject:ctrl];
+            }
+        }
+    }
+    
     
     NSInteger vertical = [_dataSource numberOfVerticalLinesOfChartView:self];
     
@@ -629,6 +595,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    if (_config.style != ORLineChartStyleIndicator) {
+        return;
+    }
+    
     CGFloat ratio = (scrollView.contentOffset.x + scrollView.contentInset.left) / (scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right - scrollView.bounds.size.width);
     ratio = fmin(fmax(0.0, ratio), 1.0);
     
@@ -642,12 +612,8 @@
     if (index == _lastIndex) {
         return;
     }
-    NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:index];
-    if (!title) {
-        title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%g", self.horizontalDatas[index].value]];
-    }
+    [self _or_setIndictorTitleWithIndex:index];
     _lastIndex = index;
-    [_indicator or_setTitle:title];
     
 }
 
@@ -668,5 +634,7 @@
         }
     }
 }
+
+
 
 @end

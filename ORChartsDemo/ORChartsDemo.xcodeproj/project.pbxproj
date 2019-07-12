@@ -12,7 +12,6 @@
 		4D3BCA3422A5597F00F340BC /* ORRingMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3BCA3322A5597F00F340BC /* ORRingMoreViewController.m */; };
 		891723371F73BB1400181F60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723361F73BB1400181F60 /* main.m */; };
 		8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723391F73BB1400181F60 /* AppDelegate.m */; };
-		8917233D1F73BB1400181F60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8917233C1F73BB1400181F60 /* ViewController.m */; };
 		891723401F73BB1400181F60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8917233E1F73BB1400181F60 /* Main.storyboard */; };
 		891723421F73BB1400181F60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 891723411F73BB1400181F60 /* Assets.xcassets */; };
 		891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891723431F73BB1400181F60 /* LaunchScreen.storyboard */; };
@@ -21,20 +20,12 @@
 		C9536CE922B0A77700C23D62 /* ORLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CCF22B0A77700C23D62 /* ORLineChartView.m */; };
 		C9536CEA22B0A77700C23D62 /* ORLineChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CD022B0A77700C23D62 /* ORLineChartConfig.m */; };
 		C9536CEB22B0A77700C23D62 /* ORLineChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CD122B0A77700C23D62 /* ORLineChartCell.m */; };
-		C9536CEC22B0A77700C23D62 /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CD822B0A77700C23D62 /* UIButton+EnlargeTouchArea.m */; };
-		C9536CED22B0A77700C23D62 /* circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CDB22B0A77700C23D62 /* circle@2x.png */; };
-		C9536CEE22B0A77700C23D62 /* circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CDC22B0A77700C23D62 /* circle@3x.png */; };
-		C9536CEF22B0A77700C23D62 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CDD22B0A77700C23D62 /* circle.png */; };
-		C9536CF022B0A77700C23D62 /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CDE22B0A77700C23D62 /* point.png */; };
-		C9536CF122B0A77700C23D62 /* point@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CDF22B0A77700C23D62 /* point@2x.png */; };
-		C9536CF222B0A77700C23D62 /* point@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9536CE022B0A77700C23D62 /* point@3x.png */; };
-		C9536CF322B0A77700C23D62 /* ORChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE122B0A77700C23D62 /* ORChartView.m */; };
 		C9536CF522B0A77700C23D62 /* ORRingChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE522B0A77700C23D62 /* ORRingChartConfig.m */; };
 		C9536CF622B0A77700C23D62 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9536CE822B0A77700C23D62 /* ORRingChartView.m */; };
-		C9C3CF8D22D70268004600AD /* ORLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CF8C22D70268004600AD /* ORLineViewController.m */; };
+		C9C3CF8D22D70268004600AD /* ORLineMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CF8C22D70268004600AD /* ORLineMoreViewController.m */; };
 		C9FAAE2A22D824B8005E0805 /* ORChartUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FAAE2822D824B8005E0805 /* ORChartUtilities.m */; };
-		C9FAAE2D22D867BE005E0805 /* ORNLChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FAAE2C22D867BE005E0805 /* ORNLChartView.m */; };
-		C9FAAE3022D87A38005E0805 /* ORChartControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FAAE2F22D87A38005E0805 /* ORChartControl.m */; };
+		C9FAAE3022D87A38005E0805 /* ORLineChartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FAAE2F22D87A38005E0805 /* ORLineChartButton.m */; };
+		C9FAAE3322D893AC005E0805 /* ORLineChartValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FAAE3222D893AC005E0805 /* ORLineChartValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +56,6 @@
 		891723361F73BB1400181F60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		891723381F73BB1400181F60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		891723391F73BB1400181F60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8917233B1F73BB1400181F60 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8917233C1F73BB1400181F60 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8917233F1F73BB1400181F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		891723411F73BB1400181F60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		891723441F73BB1400181F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,28 +72,18 @@
 		C9536CD222B0A77700C23D62 /* ORLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORLineChartView.h; sourceTree = "<group>"; };
 		C9536CD322B0A77700C23D62 /* ORLineChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORLineChartCell.h; sourceTree = "<group>"; };
 		C9536CD422B0A77700C23D62 /* ORLineChartConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORLineChartConfig.h; sourceTree = "<group>"; };
-		C9536CD722B0A77700C23D62 /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
-		C9536CD822B0A77700C23D62 /* UIButton+EnlargeTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeTouchArea.m"; sourceTree = "<group>"; };
-		C9536CD922B0A77700C23D62 /* ORChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartView.h; sourceTree = "<group>"; };
-		C9536CDB22B0A77700C23D62 /* circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@2x.png"; sourceTree = "<group>"; };
-		C9536CDC22B0A77700C23D62 /* circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle@3x.png"; sourceTree = "<group>"; };
-		C9536CDD22B0A77700C23D62 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
-		C9536CDE22B0A77700C23D62 /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point.png; sourceTree = "<group>"; };
-		C9536CDF22B0A77700C23D62 /* point@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point@2x.png"; sourceTree = "<group>"; };
-		C9536CE022B0A77700C23D62 /* point@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "point@3x.png"; sourceTree = "<group>"; };
-		C9536CE122B0A77700C23D62 /* ORChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartView.m; sourceTree = "<group>"; };
 		C9536CE522B0A77700C23D62 /* ORRingChartConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingChartConfig.m; sourceTree = "<group>"; };
 		C9536CE622B0A77700C23D62 /* ORRingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartView.h; sourceTree = "<group>"; };
 		C9536CE722B0A77700C23D62 /* ORRingChartConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORRingChartConfig.h; sourceTree = "<group>"; };
 		C9536CE822B0A77700C23D62 /* ORRingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORRingChartView.m; sourceTree = "<group>"; };
-		C9C3CF8B22D70268004600AD /* ORLineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineViewController.h; sourceTree = "<group>"; };
-		C9C3CF8C22D70268004600AD /* ORLineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineViewController.m; sourceTree = "<group>"; };
+		C9C3CF8B22D70268004600AD /* ORLineMoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineMoreViewController.h; sourceTree = "<group>"; };
+		C9C3CF8C22D70268004600AD /* ORLineMoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineMoreViewController.m; sourceTree = "<group>"; };
 		C9FAAE2822D824B8005E0805 /* ORChartUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORChartUtilities.m; sourceTree = "<group>"; };
 		C9FAAE2922D824B8005E0805 /* ORChartUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORChartUtilities.h; sourceTree = "<group>"; };
-		C9FAAE2B22D867BE005E0805 /* ORNLChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORNLChartView.h; sourceTree = "<group>"; };
-		C9FAAE2C22D867BE005E0805 /* ORNLChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORNLChartView.m; sourceTree = "<group>"; };
-		C9FAAE2E22D87A38005E0805 /* ORChartControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORChartControl.h; sourceTree = "<group>"; };
-		C9FAAE2F22D87A38005E0805 /* ORChartControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORChartControl.m; sourceTree = "<group>"; };
+		C9FAAE2E22D87A38005E0805 /* ORLineChartButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartButton.h; sourceTree = "<group>"; };
+		C9FAAE2F22D87A38005E0805 /* ORLineChartButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartButton.m; sourceTree = "<group>"; };
+		C9FAAE3122D893AC005E0805 /* ORLineChartValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartValue.h; sourceTree = "<group>"; };
+		C9FAAE3222D893AC005E0805 /* ORLineChartValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +114,8 @@
 		4D398B2322746B05007DDE80 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C9536CCA22B0A74800C23D62 /* OldLineChartVC */,
 				4DA4CFA422AA40A00058BF28 /* RingChartVC */,
-				C9536CCB22B0A75600C23D62 /* NewLineChartVC */,
+				C9536CCB22B0A75600C23D62 /* LineChartVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,24 +193,15 @@
 			path = ORChartViewUITests;
 			sourceTree = "<group>";
 		};
-		C9536CCA22B0A74800C23D62 /* OldLineChartVC */ = {
-			isa = PBXGroup;
-			children = (
-				8917233B1F73BB1400181F60 /* ViewController.h */,
-				8917233C1F73BB1400181F60 /* ViewController.m */,
-			);
-			path = OldLineChartVC;
-			sourceTree = "<group>";
-		};
-		C9536CCB22B0A75600C23D62 /* NewLineChartVC */ = {
+		C9536CCB22B0A75600C23D62 /* LineChartVC */ = {
 			isa = PBXGroup;
 			children = (
 				4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */,
 				4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */,
-				C9C3CF8B22D70268004600AD /* ORLineViewController.h */,
-				C9C3CF8C22D70268004600AD /* ORLineViewController.m */,
+				C9C3CF8B22D70268004600AD /* ORLineMoreViewController.h */,
+				C9C3CF8C22D70268004600AD /* ORLineMoreViewController.m */,
 			);
-			path = NewLineChartVC;
+			path = LineChartVC;
 			sourceTree = "<group>";
 		};
 		C9536CCC22B0A77700C23D62 /* ORCharts */ = {
@@ -249,60 +218,18 @@
 		C9536CCD22B0A77700C23D62 /* ORLineChart */ = {
 			isa = PBXGroup;
 			children = (
-				C9536CCE22B0A77700C23D62 /* NewLineChart */,
-				C9536CD522B0A77700C23D62 /* OldChart */,
-			);
-			path = ORLineChart;
-			sourceTree = "<group>";
-		};
-		C9536CCE22B0A77700C23D62 /* NewLineChart */ = {
-			isa = PBXGroup;
-			children = (
 				C9536CD222B0A77700C23D62 /* ORLineChartView.h */,
 				C9536CCF22B0A77700C23D62 /* ORLineChartView.m */,
+				C9FAAE3122D893AC005E0805 /* ORLineChartValue.h */,
+				C9FAAE3222D893AC005E0805 /* ORLineChartValue.m */,
 				C9536CD422B0A77700C23D62 /* ORLineChartConfig.h */,
 				C9536CD022B0A77700C23D62 /* ORLineChartConfig.m */,
 				C9536CD322B0A77700C23D62 /* ORLineChartCell.h */,
 				C9536CD122B0A77700C23D62 /* ORLineChartCell.m */,
+				C9FAAE2E22D87A38005E0805 /* ORLineChartButton.h */,
+				C9FAAE2F22D87A38005E0805 /* ORLineChartButton.m */,
 			);
-			path = NewLineChart;
-			sourceTree = "<group>";
-		};
-		C9536CD522B0A77700C23D62 /* OldChart */ = {
-			isa = PBXGroup;
-			children = (
-				C9536CD622B0A77700C23D62 /* categary */,
-				C9536CD922B0A77700C23D62 /* ORChartView.h */,
-				C9536CE122B0A77700C23D62 /* ORChartView.m */,
-				C9FAAE2E22D87A38005E0805 /* ORChartControl.h */,
-				C9FAAE2F22D87A38005E0805 /* ORChartControl.m */,
-				C9536CDA22B0A77700C23D62 /* image */,
-				C9FAAE2B22D867BE005E0805 /* ORNLChartView.h */,
-				C9FAAE2C22D867BE005E0805 /* ORNLChartView.m */,
-			);
-			path = OldChart;
-			sourceTree = "<group>";
-		};
-		C9536CD622B0A77700C23D62 /* categary */ = {
-			isa = PBXGroup;
-			children = (
-				C9536CD722B0A77700C23D62 /* UIButton+EnlargeTouchArea.h */,
-				C9536CD822B0A77700C23D62 /* UIButton+EnlargeTouchArea.m */,
-			);
-			path = categary;
-			sourceTree = "<group>";
-		};
-		C9536CDA22B0A77700C23D62 /* image */ = {
-			isa = PBXGroup;
-			children = (
-				C9536CDB22B0A77700C23D62 /* circle@2x.png */,
-				C9536CDC22B0A77700C23D62 /* circle@3x.png */,
-				C9536CDD22B0A77700C23D62 /* circle.png */,
-				C9536CDE22B0A77700C23D62 /* point.png */,
-				C9536CDF22B0A77700C23D62 /* point@2x.png */,
-				C9536CE022B0A77700C23D62 /* point@3x.png */,
-			);
-			path = image;
+			path = ORLineChart;
 			sourceTree = "<group>";
 		};
 		C9536CE422B0A77700C23D62 /* ORRingChart */ = {
@@ -432,14 +359,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9536CED22B0A77700C23D62 /* circle@2x.png in Resources */,
-				C9536CEE22B0A77700C23D62 /* circle@3x.png in Resources */,
 				891723451F73BB1400181F60 /* LaunchScreen.storyboard in Resources */,
-				C9536CF122B0A77700C23D62 /* point@2x.png in Resources */,
-				C9536CEF22B0A77700C23D62 /* circle.png in Resources */,
 				891723421F73BB1400181F60 /* Assets.xcassets in Resources */,
-				C9536CF222B0A77700C23D62 /* point@3x.png in Resources */,
-				C9536CF022B0A77700C23D62 /* point.png in Resources */,
 				891723401F73BB1400181F60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,20 +387,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9FAAE2A22D824B8005E0805 /* ORChartUtilities.m in Sources */,
-				8917233D1F73BB1400181F60 /* ViewController.m in Sources */,
-				C9FAAE3022D87A38005E0805 /* ORChartControl.m in Sources */,
-				C9FAAE2D22D867BE005E0805 /* ORNLChartView.m in Sources */,
+				C9FAAE3022D87A38005E0805 /* ORLineChartButton.m in Sources */,
+				C9FAAE3322D893AC005E0805 /* ORLineChartValue.m in Sources */,
 				C9536CF622B0A77700C23D62 /* ORRingChartView.m in Sources */,
 				C9536CF522B0A77700C23D62 /* ORRingChartConfig.m in Sources */,
 				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
 				4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */,
-				C9C3CF8D22D70268004600AD /* ORLineViewController.m in Sources */,
-				C9536CF322B0A77700C23D62 /* ORChartView.m in Sources */,
+				C9C3CF8D22D70268004600AD /* ORLineMoreViewController.m in Sources */,
 				C9536CEB22B0A77700C23D62 /* ORLineChartCell.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,
 				4D3BCA3422A5597F00F340BC /* ORRingMoreViewController.m in Sources */,
 				891723371F73BB1400181F60 /* main.m in Sources */,
-				C9536CEC22B0A77700C23D62 /* UIButton+EnlargeTouchArea.m in Sources */,
 				C9536CE922B0A77700C23D62 /* ORLineChartView.m in Sources */,
 				C9536CEA22B0A77700C23D62 /* ORLineChartConfig.m in Sources */,
 			);

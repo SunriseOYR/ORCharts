@@ -10,11 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORChartControl : UIButton
+@interface ORLineChartButton : UIButton
 
-@property (nonatomic, strong) UIColor *orTintColor;
-@property (nonatomic, strong) UIColor *orBackGroundColor;
-
+- (void)or_setTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor;
 
 @end
 

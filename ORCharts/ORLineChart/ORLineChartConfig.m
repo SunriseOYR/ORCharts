@@ -21,6 +21,8 @@
 
 - (void)_or_initData {
     
+    _style = ORLineChartStyleIndicator;
+    
     _chartLineColor = [UIColor orangeColor];
     _shadowLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
@@ -43,7 +45,7 @@
     
     _leftWidth = 40;
     
-    _indicatorCircleWidth = 10;
+    _indicatorCircleWidth = 13;
     _indicatorLineWidth = 0.8;
     _animateDuration = 0;
     

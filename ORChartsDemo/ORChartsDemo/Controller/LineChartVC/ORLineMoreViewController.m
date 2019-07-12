@@ -6,10 +6,10 @@
 //  Copyright © 2019 欧阳荣. All rights reserved.
 //
 
-#import "ORLineViewController.h"
+#import "ORLineMoreViewController.h"
 #import "ORLineChartView.h"
 
-@interface ORLineViewController ()<ORLineChartViewDataSource>
+@interface ORLineMoreViewController ()<ORLineChartViewDataSource>
 
 @property (weak, nonatomic) IBOutlet ORLineChartView *lineChart;
 @property (nonatomic, strong) NSArray *datasource;
@@ -42,7 +42,7 @@
 
 @end
 
-@implementation ORLineViewController
+@implementation ORLineMoreViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

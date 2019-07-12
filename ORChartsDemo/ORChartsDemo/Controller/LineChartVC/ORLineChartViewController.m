@@ -27,7 +27,8 @@
 
     
     ORLineChartView *lineView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 350)];
-    
+    lineView.config.style = ORLineChartStyleControl;
+
     lineView.dataSource = self;
     
     
