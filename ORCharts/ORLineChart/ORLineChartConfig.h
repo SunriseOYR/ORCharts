@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    ORLineChartStyleIndicator,
+    ORLineChartStyleSlider,
     ORLineChartStyleControl,
 } ORLineChartStyle;
 

@@ -21,7 +21,7 @@
 
 - (void)_or_initData {
     
-    _style = ORLineChartStyleIndicator;
+    _style = ORLineChartStyleSlider;
     
     _chartLineColor = [UIColor orangeColor];
     _shadowLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];

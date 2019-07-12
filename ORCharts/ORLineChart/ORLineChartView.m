@@ -481,7 +481,7 @@
     
     [self.horizontalDatas removeAllObjects];
     
-    BOOL isIndicator = _config.style == ORLineChartStyleIndicator;
+    BOOL isIndicator = _config.style == ORLineChartStyleSlider;
     
     self.circleLayer.hidden = !isIndicator;
     self.indicatorLineLayer.hidden = !isIndicator;
@@ -595,7 +595,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    if (_config.style != ORLineChartStyleIndicator) {
+    if (_config.style != ORLineChartStyleSlider) {
         return;
     }
     
