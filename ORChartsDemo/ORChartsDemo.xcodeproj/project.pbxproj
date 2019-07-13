@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */; };
+		4D16BCB5227DBF5D00DBD881 /* ORLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16BCB4227DBF5D00DBD881 /* ORLineViewController.m */; };
 		4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D398B2122746978007DDE80 /* ORRingViewController.m */; };
 		4D3BCA3422A5597F00F340BC /* ORRingMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3BCA3322A5597F00F340BC /* ORRingMoreViewController.m */; };
 		891723371F73BB1400181F60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 891723361F73BB1400181F60 /* main.m */; };
@@ -46,8 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineChartViewController.h; sourceTree = "<group>"; };
-		4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineChartViewController.m; sourceTree = "<group>"; };
+		4D16BCB3227DBF5D00DBD881 /* ORLineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineViewController.h; sourceTree = "<group>"; };
+		4D16BCB4227DBF5D00DBD881 /* ORLineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineViewController.m; sourceTree = "<group>"; };
 		4D398B2022746978007DDE80 /* ORRingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingViewController.h; sourceTree = "<group>"; };
 		4D398B2122746978007DDE80 /* ORRingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORRingViewController.m; sourceTree = "<group>"; };
 		4D3BCA3222A5597F00F340BC /* ORRingMoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingMoreViewController.h; sourceTree = "<group>"; };
@@ -196,8 +196,8 @@
 		C9536CCB22B0A75600C23D62 /* LineChartVC */ = {
 			isa = PBXGroup;
 			children = (
-				4D16BCB3227DBF5D00DBD881 /* ORLineChartViewController.h */,
-				4D16BCB4227DBF5D00DBD881 /* ORLineChartViewController.m */,
+				4D16BCB3227DBF5D00DBD881 /* ORLineViewController.h */,
+				4D16BCB4227DBF5D00DBD881 /* ORLineViewController.m */,
 				C9C3CF8B22D70268004600AD /* ORLineMoreViewController.h */,
 				C9C3CF8C22D70268004600AD /* ORLineMoreViewController.m */,
 			);
@@ -392,7 +392,7 @@
 				C9536CF622B0A77700C23D62 /* ORRingChartView.m in Sources */,
 				C9536CF522B0A77700C23D62 /* ORRingChartConfig.m in Sources */,
 				4D398B2222746978007DDE80 /* ORRingViewController.m in Sources */,
-				4D16BCB5227DBF5D00DBD881 /* ORLineChartViewController.m in Sources */,
+				4D16BCB5227DBF5D00DBD881 /* ORLineViewController.m in Sources */,
 				C9C3CF8D22D70268004600AD /* ORLineMoreViewController.m in Sources */,
 				C9536CEB22B0A77700C23D62 /* ORLineChartCell.m in Sources */,
 				8917233A1F73BB1400181F60 /* AppDelegate.m in Sources */,

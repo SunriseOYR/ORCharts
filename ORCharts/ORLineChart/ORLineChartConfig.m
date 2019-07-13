@@ -25,7 +25,7 @@
     
     _chartLineColor = [UIColor orangeColor];
     _shadowLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
-    _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.6];
+    _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     
     
     _showHorizontalBgline = YES;
@@ -38,12 +38,12 @@
     
     _bottomInset = 10;
     _topInset = 0;
-    
+    _contentMargin = 10;
+    _leftWidth = 40;
+
     _bottomLabelWidth = 50;
     _bottomLabelInset = 10;
-    _contentMargin = 10;
     
-    _leftWidth = 40;
     
     _indicatorCircleWidth = 13;
     _indicatorLineWidth = 0.8;

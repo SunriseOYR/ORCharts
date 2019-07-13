@@ -6,16 +6,16 @@
 //  Copyright © 2019年 OrangesAL. All rights reserved.
 //
 
-#import "ORLineChartViewController.h"
+#import "ORLineViewController.h"
 #import "ORLineChartView.h"
 
-@interface ORLineChartViewController () <ORLineChartViewDataSource>
+@interface ORLineViewController () <ORLineChartViewDataSource>
 
 @property (nonatomic, strong) NSArray *datasource;
 
 @end
 
-@implementation ORLineChartViewController
+@implementation ORLineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

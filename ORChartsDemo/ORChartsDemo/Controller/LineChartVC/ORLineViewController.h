@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORLineChartViewController : UIViewController
+@interface ORLineViewController : UIViewController
 
 @end
 
