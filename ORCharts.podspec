@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '1.1.1'
+  s.version          = '1.0.0'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
@@ -36,19 +36,19 @@ TODO: Add long description of the pod here.
   
   s.subspec 'Util' do |su|
       su.ios.deployment_target = '8.0'
-      su.source_files = "ORCharts/Classes/ORChartUtilities/**/*.{h,m}"
+      su.source_files = 'ORCharts/Classes/ORChartUtilities/**/*.{h,m}'
   end
   s.subspec 'Ring' do |ss|
       ss.ios.deployment_target = '8.0'
-      ss.source_files = "ORCharts/Classes/ORRingChart/**/*.{h,m}"
+      ss.source_files = 'ORCharts/Classes/ORRingChart/**/*.{h,m}'
       ss.public_header_files = 'ORCharts/Classes/ORRingChart/ORRingChartView.h'
-      ss.dependency "ORCharts/Util"
+      ss.dependency 'ORCharts/Util'
   end
   s.subspec 'Line' do |sss|
       sss.ios.deployment_target = '8.0'
-      sss.source_files = "ORCharts/Classes/ORLineChart/**/*.{h,m}"
+      sss.source_files = 'ORCharts/Classes/ORLineChart/**/*.{h,m}'
       sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
-      sss.dependency "ORCharts/Util"
+      sss.dependency 'ORCharts/Util'
   end
   
   # s.resource_bundles = {
