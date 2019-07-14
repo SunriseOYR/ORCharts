@@ -10,11 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#ifndef HEXA
-#define HEXA(_hex_, _alpha_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_)) alpha:(_alpha_)]
-#endif
-
-
 static inline CGFloat ORInterpolation(CGFloat from, CGFloat to, CGFloat ratio){
     return from + (to - from) * ratio;
 }

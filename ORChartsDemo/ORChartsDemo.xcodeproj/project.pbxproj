@@ -48,6 +48,7 @@
 /* Begin PBXFileReference section */
 		4D16BCB3227DBF5D00DBD881 /* ORLineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORLineViewController.h; sourceTree = "<group>"; };
 		4D16BCB4227DBF5D00DBD881 /* ORLineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORLineViewController.m; sourceTree = "<group>"; };
+		4D24656722DAE0E1008C7DC4 /* ORCharts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORCharts.h; sourceTree = "<group>"; };
 		4D398B2022746978007DDE80 /* ORRingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingViewController.h; sourceTree = "<group>"; };
 		4D398B2122746978007DDE80 /* ORRingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORRingViewController.m; sourceTree = "<group>"; };
 		4D3BCA3222A5597F00F340BC /* ORRingMoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORRingMoreViewController.h; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 				C9FAAE2722D824B8005E0805 /* ORChartUtilities */,
 				C9536CCD22B0A77700C23D62 /* ORLineChart */,
 				C9536CE422B0A77700C23D62 /* ORRingChart */,
+				4D24656722DAE0E1008C7DC4 /* ORCharts.h */,
 			);
 			name = ORCharts;
 			path = ../../ORCharts;
