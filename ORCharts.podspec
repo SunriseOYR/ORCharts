@@ -1,47 +1,42 @@
 #
-#  Be sure to run `pod spec lint ORCharts.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
+# Be sure to run `pod lib lint ORCharts.podspec' to ensure this is a
+# valid spec before submitting.
 #
-#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
 
 Pod::Spec.new do |s|
-  s.name         = "ORCharts"
-  s.version      = "1.0.0"
-  s.ios.deployment_target = '9.0'
-  s.summary      = "A iOS Kit which would adapt screen by XIB and Storyboard  better， and  use better  for XIB  and Storyboard。"
-  #s.description  = <<-DESC
-  #                 DESC
+  s.name             = 'ORCharts'
+  s.version          = '1.1.0'
+  s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
-  s.homepage     = "https://github.com/SunriseOYR/ORCharts"
-  s.license      = { :type => "MIT", :file => "LICENSE" }
-  s.author             = "Oranges and lemons"
-  s.social_media_url   = "https://www.jianshu.com/p/317a79890984"
-  s.source       = { :git => "https://github.com/SunriseOYR/ORCharts.git", :tag => "v#{s.version}" }
-  s.source_files  = "ORCharts","ORCharts/**/*"
-  s.public_header_files = 'ORCharts/ORCharts.h'
-  s.requires_arc = true
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.subspec 'Util' do |su|
-    su.ios.deployment_target = '9.0'
-    su.source_files = "ORCharts/ORChartUtilities/**/*.{h,m}"
-    su.requires_arc = true
-  end
- s.subspec 'Ring' do |ss|
-    ss.ios.deployment_target = '9.0'
-    ss.source_files = "ORCharts/ORRingChart/**/*.{h,m}"
-    ss.public_header_files = 'ORCharts/ORRingChart/ORRingChartView.h'
-    ss.dependency "ORCharts/Util"
-    ss.requires_arc = true
-  end
- s.subspec 'Line' do |sss|
-    sss.ios.deployment_target = '9.0'
-    sss.source_files = "ORCharts/ORLineChart/**/*.{h,m}"
-    sss.public_header_files = 'ORCharts/ORLineChart/ORLineChartView.h'
-    sss.dependency "ORCharts/Util"
-    sss.requires_arc = true
+  s.description      = <<-DESC
+TODO: Add long description of the pod here.
+                       DESC
 
-  end
+  s.homepage         = 'https://github.com/SunriseOYR/ORCharts'
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Oranges and lemons' => 'sunrise_oy@163.com' }
+  s.source           = { :git => 'https://github.com/SunriseOYR/ORCharts.git', :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.ios.deployment_target = '8.0'
+
+  s.source_files = 'ORCharts/Classes/**/*'
+  
+  # s.resource_bundles = {
+  #   'ORCharts' => ['ORCharts/Assets/*.png']
+  # }
+
+  # s.public_header_files = 'Pod/Classes/**/*.h'
+  # s.frameworks = 'UIKit', 'MapKit'
+  # s.dependency 'AFNetworking', '~> 2.3'
 end

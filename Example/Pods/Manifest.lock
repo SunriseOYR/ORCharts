@@ -1,0 +1,16 @@
+PODS:
+  - ORCharts (0.1.0)
+
+DEPENDENCIES:
+  - ORCharts (from `../`)
+
+EXTERNAL SOURCES:
+  ORCharts:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ORCharts: af3f863204a17710a1a1421fd667545c037c2156
+
+PODFILE CHECKSUM: 164365fbe16bb8d73a78d749d34c32d7e1ee2bb8
+
+COCOAPODS: 1.7.4

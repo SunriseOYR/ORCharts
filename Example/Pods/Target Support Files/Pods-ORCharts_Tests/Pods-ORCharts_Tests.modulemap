@@ -1,0 +1,6 @@
+framework module Pods_ORCharts_Tests {
+  umbrella header "Pods-ORCharts_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

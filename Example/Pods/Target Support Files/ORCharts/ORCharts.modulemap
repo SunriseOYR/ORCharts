@@ -1,0 +1,6 @@
+framework module ORCharts {
+  umbrella header "ORCharts-umbrella.h"
+
+  export *
+  module * { export * }
+}
