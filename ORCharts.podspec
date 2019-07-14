@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+TODO: A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph
                        DESC
 
   s.homepage         = 'https://github.com/SunriseOYR/ORCharts'

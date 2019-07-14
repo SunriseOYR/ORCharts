@@ -1,8 +1,8 @@
 {
   "name": "ORCharts",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "summary": "A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph",
-  "description": "TODO: Add long description of the pod here.",
+  "description": "TODO: A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph",
   "homepage": "https://github.com/SunriseOYR/ORCharts",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/SunriseOYR/ORCharts.git",
-    "tag": "1.1.0"
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "8.0"
@@ -36,7 +36,7 @@
       "source_files": "ORCharts/Classes/ORRingChart/**/*.{h,m}",
       "public_header_files": "ORCharts/Classes/ORRingChart/ORRingChartView.h",
       "dependencies": {
-        "Util": [
+        "ORCharts/Util": [
 
         ]
       }
@@ -49,7 +49,7 @@
       "source_files": "ORCharts/Classes/ORLineChart/**/*.{h,m}",
       "public_header_files": "ORCharts/Classes/ORLineChart/ORLineChartView.h",
       "dependencies": {
-        "Util": [
+        "ORCharts/Util": [
 
         ]
       }

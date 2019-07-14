@@ -386,12 +386,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ORCharts_Example/Pods-ORCharts_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ORCharts/ORCharts.framework",
-				"${BUILT_PRODUCTS_DIR}/Util/Util.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ORCharts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Util.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
