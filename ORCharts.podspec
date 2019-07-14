@@ -32,6 +32,25 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'ORCharts/Classes/**/*'
   
+  s.public_header_files = 'ORCharts/Classes/ORCharts.h'
+  
+  s.subspec 'Util' do |su|
+      su.ios.deployment_target = '8.0'
+      su.source_files = "ORCharts/Classes/ORChartUtilities/**/*.{h,m}"
+  end
+  s.subspec 'Ring' do |ss|
+      ss.ios.deployment_target = '8.0'
+      ss.source_files = "ORCharts/Classes/ORRingChart/**/*.{h,m}"
+      ss.public_header_files = 'ORCharts/Classes/ORRingChart/ORRingChartView.h'
+      ss.dependency 'Util'
+  end
+  s.subspec 'Line' do |sss|
+      sss.ios.deployment_target = '8.0'
+      sss.source_files = "ORCharts/Classes/ORLineChart/**/*.{h,m}"
+      sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
+      sss.dependency 'Util'
+  end
+  
   # s.resource_bundles = {
   #   'ORCharts' => ['ORCharts/Assets/*.png']
   # }

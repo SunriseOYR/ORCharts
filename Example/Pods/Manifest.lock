@@ -1,15 +1,29 @@
 PODS:
-  - ORCharts (0.1.0)
+  - ORCharts (1.1.0):
+    - ORCharts/Line (= 1.1.0)
+    - ORCharts/Ring (= 1.1.0)
+    - ORCharts/Util (= 1.1.0)
+  - ORCharts/Line (1.1.0):
+    - Util
+  - ORCharts/Ring (1.1.0):
+    - Util
+  - ORCharts/Util (1.1.0)
+  - Util (0.11)
 
 DEPENDENCIES:
   - ORCharts (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Util
 
 EXTERNAL SOURCES:
   ORCharts:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ORCharts: af3f863204a17710a1a1421fd667545c037c2156
+  ORCharts: 1ecf4242856cc16a03ca5f47ab7eab11573d8b2a
+  Util: 2d9f1d048d3c13a5fe4f8e75bcbb2e85a976baea
 
 PODFILE CHECKSUM: 164365fbe16bb8d73a78d749d34c32d7e1ee2bb8
 

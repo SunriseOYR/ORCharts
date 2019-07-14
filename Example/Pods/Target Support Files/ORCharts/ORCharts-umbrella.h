@@ -11,14 +11,9 @@
 #endif
 
 #import "ORCharts.h"
-#import "ORChartUtilities.h"
-#import "ORLineChartButton.h"
-#import "ORLineChartCell.h"
-#import "ORLineChartConfig.h"
-#import "ORLineChartValue.h"
 #import "ORLineChartView.h"
-#import "ORRingChartConfig.h"
 #import "ORRingChartView.h"
+#import "ORChartUtilities.h"
 
 FOUNDATION_EXPORT double ORChartsVersionNumber;
 FOUNDATION_EXPORT const unsigned char ORChartsVersionString[];
