@@ -42,13 +42,13 @@ TODO: Add long description of the pod here.
       ss.ios.deployment_target = '8.0'
       ss.source_files = "ORCharts/Classes/ORRingChart/**/*.{h,m}"
       ss.public_header_files = 'ORCharts/Classes/ORRingChart/ORRingChartView.h'
-      ss.dependency 'Util'
+      ss.dependency "ORCharts/Util"
   end
   s.subspec 'Line' do |sss|
       sss.ios.deployment_target = '8.0'
       sss.source_files = "ORCharts/Classes/ORLineChart/**/*.{h,m}"
       sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
-      sss.dependency 'Util'
+      sss.dependency "ORCharts/Util"
   end
   
   # s.resource_bundles = {
