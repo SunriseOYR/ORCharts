@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORLineChartView : UIView
 
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDelegate> delegate;
 
 @property (nonatomic, readonly) ORLineChartConfig *config;
 

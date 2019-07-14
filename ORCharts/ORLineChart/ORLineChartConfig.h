@@ -59,6 +59,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat bottomLabelInset;
 
 
+//show shadow line. default YES
+@property (nonatomic, assign) BOOL showShadowLine;
 //show vertical bgLine. default YES
 @property (nonatomic, assign) BOOL showVerticalBgline;
 //show horizontal bgLine. default YES
@@ -69,6 +71,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL isBreakLine;
 
 
+//indicator content inset. default 7
+@property (nonatomic, assign) CGFloat indicatorContentInset;
 //indicator circle width. default 13
 @property (nonatomic, assign) CGFloat indicatorCircleWidth;
 //indicator line width. default 0.8
@@ -78,8 +82,10 @@ typedef enum : NSUInteger {
 //line color of indicator. default chartLineColor
 @property (nonatomic, copy) UIColor * indicatorLineColor;
 
+
 //The duration of animation, If set to 0, there is no animation. default 0
 @property (nonatomic, assign) NSTimeInterval animateDuration;
+
 
 //image of indicator control. only style == ORLineChartStyleControl. default nil
 @property (nonatomic, strong) UIImage *indicatorControlImage;
@@ -97,18 +103,25 @@ typedef enum : NSUInteger {
 //return the number of values.
 - (NSInteger)numberOfHorizontalDataOfChartView:(ORLineChartView *)chartView;
 
+//return the value at index
 - (CGFloat)chartView:(ORLineChartView *)chartView valueForHorizontalAtIndex:(NSInteger)index;
 
 @optional
 
-- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index;
-
+//return the number of lines. default 5
 - (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView;
 
+//return the title of horizontal label.
 - (NSString *)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
 
+//return the horizontal label attrbutes.
 - (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView;
+
+//return the vertical label attrbutes.
 - (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView;
+
+//return the attributed string of indicater. only style == ORLineChartStyleSlider
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index;
 
 @end
 
@@ -117,8 +130,10 @@ typedef enum : NSUInteger {
 
 @optional
 
+//Called after the user did select the value. only style == ORLineChartStyleControl
 - (void)chartView:(ORLineChartView *)chartView didSelectValueAtIndex:(NSInteger)index;
 
+//Called after the indicator did change the value. only style == ORLineChartStyleSlider
 - (void)chartView:(ORLineChartView *)chartView indicatorDidChangeValueAtIndex:(NSInteger)index;
 
 @end

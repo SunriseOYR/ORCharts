@@ -16,7 +16,12 @@
 
 - (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView {return 5;};
 
-- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {return nil;};
+- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"MM-dd";
+    NSDate *date = [[NSDate date] dateByAddingTimeInterval:index * 24 * 60 * 60];
+    return [formatter stringFromDate:date];
+};
 
 - (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView {
     return @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
@@ -26,6 +31,9 @@
 }
 
 - (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index {return nil;}
+
+- (void)chartView:(ORLineChartView *)chartView didSelectValueAtIndex:(NSInteger)index {}
+- (void)chartView:(ORLineChartView *)chartView indicatorDidChangeValueAtIndex:(NSInteger)index {}
 
 @end
 
@@ -70,11 +78,11 @@
     [self.layer insertSublayer:_shadowLayer atIndex:0];
 }
 
-- (void)or_setTitle:(NSAttributedString *)title {
+- (void)or_setTitle:(NSAttributedString *)title inset:(CGFloat)inset {
     _label.attributedText = title;
     [_label sizeToFit];
-    CGFloat width = _label.bounds.size.width + 10;
-    CGFloat height = _label.bounds.size.height + 10;
+    CGFloat width = _label.bounds.size.width + inset * 2;
+    CGFloat height = _label.bounds.size.height + inset * 2 + 3.78;
     self.bounds = CGRectMake(0, 0, width, height);
     _label.center = CGPointMake(width / 2.0, (height - 3.78) / 2.0);
     
@@ -128,7 +136,7 @@
 @property (nonatomic, assign) CGFloat bottomTextHeight;
 
 
-@property (nonatomic,strong)NSMutableArray <ORLineChartButton *>*points;//数据源btn
+@property (nonatomic,strong)NSMutableArray <ORLineChartButton *>*controls;
 
 
 @end
@@ -196,12 +204,8 @@
         gradientLayer.locations = @[@(0.5f)];
         gradientLayer;
     });
-//    [_collectionView.layer addSublayer:_gradientLayer];
-    
     _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
     _closeLayer.fillColor = [UIColor blueColor].CGColor;
-
-//    _gradientLayer.mask = _closeLayer;
     
     CALayer *baseLayer = [CALayer layer];
     [baseLayer addSublayer:_gradientLayer];
@@ -248,7 +252,7 @@
 }
 
 - (void)_or_initData {
-    _points = [NSMutableArray array];
+    _controls = [NSMutableArray array];
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
     _config = [ORLineChartConfig new];
@@ -260,6 +264,7 @@
     _shadowLineLayer.strokeColor = _config.shadowLineColor.CGColor;
     _lineLayer.lineWidth = _config.chartLineWidth;
     _shadowLineLayer.lineWidth = _config.chartLineWidth * 0.8;
+    _shadowLineLayer.hidden = !_config.showShadowLine;
     
     CGFloat cirw = _config.indicatorCircleWidth - _config.chartLineWidth;
     _circleLayer.frame = (CGRect){{0,0},{cirw,cirw}};
@@ -285,10 +290,21 @@
     _indicator.backgroundColor = _config.indicatorTintColor;
     _indicatorLineLayer.backgroundColor = _config.indicatorLineColor.CGColor;
 
-    [_points enumerateObjectsUsingBlock:^(ORLineChartButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_controls enumerateObjectsUsingBlock:^(ORLineChartButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj or_setTintColor:self.config.indicatorTintColor backgroundColor:self.backgroundColor];
         obj.layer.cornerRadius = self.config.indicatorCircleWidth / 2.0;
-        obj.layer.borderWidth = self.config.chartLineWidth;
+        
+        if (self.config.indicatorControlImage) {
+            [obj setImage:self.config.indicatorControlImage forState:UIControlStateNormal];
+            [obj setImage:self.config.indicatorControlSelectedImage forState:UIControlStateSelected];
+            obj.layer.borderWidth = 0;
+            [obj or_setTintColor:[UIColor clearColor] backgroundColor:[UIColor clearColor]];
+
+        }else {
+            obj.layer.borderWidth = self.config.chartLineWidth;
+            [obj or_setTintColor:self.config.indicatorTintColor backgroundColor:self.backgroundColor];
+        }
+        
     }];
     
     
@@ -369,9 +385,9 @@
         
         [points addObject:[NSValue valueWithCGPoint:center]];
     
-        if (idx < self.points.count) {
+        if (idx < self.controls.count) {
             CGFloat cirW = self.config.indicatorCircleWidth;
-            self.points[idx].frame = CGRectMake(center.x - cirW / 2.0, center.y - cirW / 2.0, cirW, cirW);
+            self.controls[idx].frame = CGRectMake(center.x - cirW / 2.0, center.y - cirW / 2.0, cirW, cirW);
         }
         
         if (idx == self.horizontalDatas.count - 1) {
@@ -397,7 +413,6 @@
     [_circleLayer removeAnimationForKey:@"or_circleMove"];
     [_circleLayer addAnimation:[self _or_positionAnimationWithPath:[ainmationPath.copy CGPath]] forKey:@"or_circleMove"];
     
-//    CGFloat indecaterHeight = _indicator.bounds.size.height;
     _animationLayer.timeOffset = 0.0;
     [ainmationPath applyTransform:CGAffineTransformMakeTranslation(0, - indecaterHeight)];
     [_animationLayer removeAnimationForKey:@"or_circleMove"];
@@ -412,7 +427,6 @@
         [_lineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:_config.animateDuration] forKey:nil];
         [_shadowLineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:_config.animateDuration] forKey:nil];
         
-        //    _gradientLayer.anchorPoint = CGPointMake(0, 0.5);
         CABasicAnimation *anmi1 = [CABasicAnimation animation];
         anmi1.keyPath = @"bounds.size.width";
         anmi1.duration = _config.animateDuration;
@@ -448,7 +462,7 @@
 }
 
 - (void)_or_action_circle:(ORLineChartButton *)sender {
-    for (UIButton*btn in _points) {
+    for (UIButton*btn in _controls) {
         if ([sender isEqual:btn]) {
             btn.selected = YES;
         }else{
@@ -456,10 +470,14 @@
         }
     }
     
+    NSInteger index = [_controls indexOfObject:sender];
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.indicator.center = CGPointMake(sender.center.x, sender.center.y - self.indicator.bounds.size.height);
-        [self _or_setIndictorTitleWithIndex:[self.points indexOfObject:sender]];
+        [self _or_setIndictorTitleWithIndex:index];
     }];
+    
+    [_delegate chartView:self didSelectValueAtIndex:index];
 }
 
 - (void)_or_setIndictorTitleWithIndex:(NSInteger)index {
@@ -468,7 +486,7 @@
     if (!title) {
         title = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%g", self.horizontalDatas[index].value]];
     }
-    [_indicator or_setTitle:title];
+    [_indicator or_setTitle:title inset:_config.indicatorContentInset];
 }
 
 - (void)reloadData {
@@ -486,8 +504,8 @@
     self.circleLayer.hidden = !isIndicator;
     self.indicatorLineLayer.hidden = !isIndicator;
     if (isIndicator) {
-        [self.points makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [self.points removeAllObjects];
+        [_controls makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [_controls removeAllObjects];
     }
 
     if (items == 0) {
@@ -509,21 +527,21 @@
     
     if (_config.style == ORLineChartStyleControl) {
         
-        if (_points.count > items) {
-            for (NSInteger i = items; i < _points.count; i ++) {
-                ORLineChartButton *btn = _points[i];
+        if (_controls.count > items) {
+            for (NSInteger i = items; i < _controls.count; i ++) {
+                ORLineChartButton *btn = _controls[i];
                 [btn removeFromSuperview];
-                [_points removeObject:btn];
+                [_controls removeObject:btn];
             }
-        }else if (_points.count < items) {
-            for (NSInteger i = _points.count; i < items; i ++) {
+        }else if (_controls.count < items) {
+            for (NSInteger i = _controls.count; i < items; i ++) {
                 ORLineChartButton *ctrl = [ORLineChartButton new];
                 [_collectionView addSubview:ctrl];
                 [ctrl addTarget:self action:@selector(_or_action_circle:) forControlEvents:UIControlEventTouchUpInside];
                 if (i == 0) {
                     ctrl.selected = YES;
                 }
-                [_points addObject:ctrl];
+                [_controls addObject:ctrl];
             }
         }
     }
@@ -557,14 +575,14 @@
     if (!lastTitle) {
         lastTitle = self.leftLabels.firstObject.attributedText;
     }
-    [_indicator or_setTitle:lastTitle];
+    [_indicator or_setTitle:lastTitle inset:_config.indicatorContentInset];
     CGFloat rightInset = MAX((_indicator.bounds.size.width - _config.bottomLabelWidth) / 2.0 + _config.contentMargin, 0);
     
     NSAttributedString *title = [_dataSource chartView:self attributedStringForIndicaterAtIndex:0];
     if (!title) {
         title = self.leftLabels.firstObject.attributedText;
     }
-    [_indicator or_setTitle:title];
+    [_indicator or_setTitle:title inset:_config.indicatorContentInset];
     CGFloat leftInset = MAX((_indicator.bounds.size.width - _config.bottomLabelWidth) / 2.0 + _config.contentMargin, 0);
 
     self.collectionView.contentInset = UIEdgeInsetsMake(0, leftInset, 0, rightInset);
@@ -614,7 +632,7 @@
     }
     [self _or_setIndictorTitleWithIndex:index];
     _lastIndex = index;
-    
+    [_delegate chartView:self indicatorDidChangeValueAtIndex:index];
 }
 
 - (void)setDataSource:(id<ORLineChartViewDataSource>)dataSource {    

@@ -28,6 +28,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottowLayout;
 
+@property (nonatomic, assign) BOOL showShadowLine;
 @property (nonatomic, assign) BOOL showVerticalBgline;
 @property (nonatomic, assign) BOOL showHorizontalBgline;
 @property (nonatomic, assign) BOOL dottedBGLine;
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) UIColor *indicatorTintColor;
 @property (nonatomic, strong) UIColor *indicatorLineColor;
 
+@property (nonatomic, assign) ORLineChartStyle style;
 
 @end
 
@@ -54,6 +56,7 @@
 //    [_ringChart reloadData];
     
     
+    _showShadowLine = _lineChart.config.showShadowLine;
     _showVerticalBgline = _lineChart.config.showVerticalBgline;
     _showHorizontalBgline = _lineChart.config.showHorizontalBgline;
     _dottedBGLine = _lineChart.config.dottedBGLine;
@@ -71,12 +74,12 @@
     [_lineChart reloadData];
 
     
-    _bottowLayout.constant = -400;
+    _bottowLayout.constant = -350;
     [self.view layoutIfNeeded];
 }
 - (IBAction)action_showConfig:(id)sender {
     
-    _bottowLayout.constant == 0 ? (_bottowLayout.constant = -400) : (_bottowLayout.constant = 0);
+    _bottowLayout.constant == 0 ? (_bottowLayout.constant = -350) : (_bottowLayout.constant = 0);
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
@@ -125,6 +128,10 @@
     
 }
 
+- (IBAction)action_chartStyle:(UISegmentedControl *)sender {
+    _style = sender.selectedSegmentIndex;
+}
+
 
 - (IBAction)action_clockwise:(UISwitch *)sender {
     
@@ -140,6 +147,9 @@
             break;
         case 3:
             _isBreakLine = sender.isOn;
+            break;
+        case 4:
+            _showShadowLine = sender.isOn;
             break;
         default:
             break;
@@ -192,7 +202,9 @@
 
 - (IBAction)action_config:(id)sender {
     
+    _lineChart.config.style = _style;
     
+    _lineChart.config.showShadowLine = _showShadowLine;
     _lineChart.config.showVerticalBgline = _showVerticalBgline;
     _lineChart.config.showHorizontalBgline = _showHorizontalBgline;
     _lineChart.config.dottedBGLine = _dottedBGLine;
@@ -231,13 +243,18 @@
     return [_datasource[index] doubleValue];
 }
 
-- (id)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index {
-    return @"06-11";
+- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index {
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"value:%g", [_datasource[index] doubleValue]]];
+    return string;
 }
 
-- (NSAttributedString *)chartView:(ORLineChartView *)chartView attributedStringForIndicaterAtIndex:(NSInteger)index {
-    NSAttributedString *string = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"current v:%g", [_datasource[index] doubleValue]]];
-    return string;
+#pragma mark - ORLineChartViewDataSource
+- (void)chartView:(ORLineChartView *)chartView didSelectValueAtIndex:(NSInteger)index {
+    NSLog(@"did select index %ld and value  is %g", index, [_datasource[index] doubleValue]);
+}
+
+- (void)chartView:(ORLineChartView *)chartView indicatorDidChangeValueAtIndex:(NSInteger)index {
+    NSLog(@"indicater did change index %ld and value  is %g", index, [_datasource[index] doubleValue]);
 }
 
 

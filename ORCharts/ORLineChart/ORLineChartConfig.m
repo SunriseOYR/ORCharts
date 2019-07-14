@@ -28,6 +28,7 @@
     _bgLineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     
     
+    _showShadowLine = YES;
     _showHorizontalBgline = YES;
     _showVerticalBgline = YES;
     _dottedBGLine = YES;
@@ -44,7 +45,7 @@
     _bottomLabelWidth = 50;
     _bottomLabelInset = 10;
     
-    
+    _indicatorContentInset = 7;
     _indicatorCircleWidth = 13;
     _indicatorLineWidth = 0.8;
     _animateDuration = 0;
