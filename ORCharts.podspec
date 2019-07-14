@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
