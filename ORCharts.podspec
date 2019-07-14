@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ TODO: A lightweight, easy-to-use lightweight library of charts, including ring, 
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'ORCharts/Classes/**/*'
+  # s.source_files = 'ORCharts/Classes/**/*'
   
   s.public_header_files = 'ORCharts/Classes/ORCharts.h'
   
