@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '2.0.3'
+  s.version          = '2.0.4'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ TODO: A lightweight, easy-to-use lightweight library of charts, including ring, 
 
   # s.source_files = 'ORCharts/Classes/**/*'
   
-  s.public_header_files = 'ORCharts/Classes/ORCharts.h'
+  #s.public_header_files = 'ORCharts/Classes/ORCharts.h'
   
   s.subspec 'Util' do |su|
       su.ios.deployment_target = '8.0'
@@ -41,13 +41,13 @@ TODO: A lightweight, easy-to-use lightweight library of charts, including ring, 
   s.subspec 'Ring' do |ss|
       ss.ios.deployment_target = '8.0'
       ss.source_files = 'ORCharts/Classes/ORRingChart/**/*.{h,m}'
-      ss.public_header_files = 'ORCharts/Classes/ORRingChart/ORRingChartView.h'
+      # ss.public_header_files = 'ORCharts/Classes/ORRingChart/ORRingChartView.h'
       ss.dependency 'ORCharts/Util'
   end
   s.subspec 'Line' do |sss|
       sss.ios.deployment_target = '8.0'
       sss.source_files = 'ORCharts/Classes/ORLineChart/**/*.{h,m}'
-      sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
+      # sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
       sss.dependency 'ORCharts/Util'
   end
   

@@ -10,8 +10,12 @@
 #endif
 #endif
 
-#import "ORCharts.h"
+#import "ORLineChartButton.h"
+#import "ORLineChartCell.h"
+#import "ORLineChartConfig.h"
+#import "ORLineChartValue.h"
 #import "ORLineChartView.h"
+#import "ORRingChartConfig.h"
 #import "ORRingChartView.h"
 #import "ORChartUtilities.h"
 

@@ -128,8 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				4D24656F22DAE953008C7DC4 /* ORRingViewController.h */,
-				4D24657022DAE953008C7DC4 /* ORRingMoreViewController.h */,
 				4D24657122DAE953008C7DC4 /* ORRingViewController.m */,
+				4D24657022DAE953008C7DC4 /* ORRingMoreViewController.h */,
 				4D24657222DAE953008C7DC4 /* ORRingMoreViewController.m */,
 			);
 			path = RingChartVC;

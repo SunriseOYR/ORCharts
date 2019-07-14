@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		04B0DBB6AA3FEFBA3FC4A6B99A7F04FA /* ORLineChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EAC936611AD2359D06D63B777611DA /* ORLineChartCell.m */; };
-		0AF1D556FEB005BE136F398199B27FE9 /* ORLineChartConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 2103C8B9AE90C538CF9688EBAC24626A /* ORLineChartConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0B64C3A5BCC4D6E176A5CA9983D08C44 /* ORChartUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BC783E39BEEA869C5722DA7F578F9412 /* ORChartUtilities.m */; };
 		137087AC1A6F10D46AFC4F82ED99B8A4 /* ORLineChartValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5ED9DF63A158A9EF67A9A2769531D5 /* ORLineChartValue.m */; };
 		157A4EF590170B3F56C661C393110CEE /* Pods-ORCharts_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AE954EF40A1CC664B2461145BFA30228 /* Pods-ORCharts_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,21 +15,22 @@
 		22EF7BFB3D8178BCAC525045D4C80C94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		27D7CA455CEABB9D093057B348EDEF73 /* ORRingChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC7AB0D490C5F1CE75A779306983F40E /* ORRingChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DA37EDCF1ABB04B4CCB0FE4648744A3 /* ORCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3811414A3D23AFEEB54E7B91E7F4661E /* ORCharts-dummy.m */; };
-		482960F8C3DFAE4C8A4A2E20BF3834CD /* ORLineChartCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FFF79CC541537CFC9B0EDEEF7AC5B9 /* ORLineChartCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		41E68D07136A2E148CD1853A8D6B0087 /* ORLineChartButton.h in Headers */ = {isa = PBXBuildFile; fileRef = F99AF7670C80C88BEEEE606C80B2E007 /* ORLineChartButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		487B065738426C173A2E6A9AFFAE9D24 /* ORLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7EEDF16E24D6451613AF14F9FE102 /* ORLineChartView.m */; };
 		4A218C5749CF502B6F97761E719C4B81 /* ORChartUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D485628FD87741FA3A03160ACDF5350 /* ORChartUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5861615BCF047E3C8CF8DC5CC4527356 /* ORLineChartButton.h in Headers */ = {isa = PBXBuildFile; fileRef = F99AF7670C80C88BEEEE606C80B2E007 /* ORLineChartButton.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		66E39C18C05B95D83359D262585C6929 /* ORLineChartConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 2103C8B9AE90C538CF9688EBAC24626A /* ORLineChartConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A2391F3587A51FEE5AE210A3ACE4F0E /* ORCharts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FCFFA4406A3C3870DCF19185D8D1BECE /* ORCharts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CF67B1265131755F438F3881D47850A /* ORLineChartCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FFF79CC541537CFC9B0EDEEF7AC5B9 /* ORLineChartCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F94A6A5E785445C25BC7699B3FF73D1 /* ORRingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 179C9158B21FC4AB8BD1163522A76598 /* ORRingChartView.m */; };
+		885120F886EEE5D2C77062720F104B3D /* ORRingChartConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 96F40128ACC85B654D604054D9BE95B0 /* ORRingChartConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CAF1A24BF735B4ADF2C9C58A76EBF52 /* Pods-ORCharts_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF0A7E71E5048382E42A2A75EAB7555 /* Pods-ORCharts_Example-dummy.m */; };
-		B2F7239DF9F7F9135C98852E728351A1 /* ORRingChartConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 96F40128ACC85B654D604054D9BE95B0 /* ORRingChartConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A233948511FD0D743A18FBBC2BB22C43 /* ORLineChartValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 80DD7328665F9F977C3EFC33ECD7AB85 /* ORLineChartValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B398E261FB330322E64969055190767F /* Pods-ORCharts_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF838311121533048218B1AD02DE05F /* Pods-ORCharts_Tests-dummy.m */; };
 		B51FBFA766A5B333B05B61F84D941FC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		B90ABC6FAE8EFE46091FC0E6AB1DA11C /* ORLineChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA59A1A3D2BACFB174BE307C085628E /* ORLineChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE3BBD8EF3E99988A80A74F5AC0D7BEA /* Pods-ORCharts_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 73111C8559D0C38121E1F42E4E336FFF /* Pods-ORCharts_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF2E7659DC18971A9BC9F5CB80C39BCE /* ORLineChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DD16F01326E393371E7437C116F08F7B /* ORLineChartConfig.m */; };
 		C80C11E19E074C5EBC2BF16BCF4C8F8B /* ORRingChartConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C238D84F48CC3E09733144BB9D624312 /* ORRingChartConfig.m */; };
-		E232BF47A81C49958061CE0EFF8B9360 /* ORLineChartValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 80DD7328665F9F977C3EFC33ECD7AB85 /* ORLineChartValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F17372099261564B69B2C701ECD9B8BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -299,12 +299,12 @@
 			files = (
 				6A2391F3587A51FEE5AE210A3ACE4F0E /* ORCharts-umbrella.h in Headers */,
 				4A218C5749CF502B6F97761E719C4B81 /* ORChartUtilities.h in Headers */,
-				5861615BCF047E3C8CF8DC5CC4527356 /* ORLineChartButton.h in Headers */,
-				482960F8C3DFAE4C8A4A2E20BF3834CD /* ORLineChartCell.h in Headers */,
-				0AF1D556FEB005BE136F398199B27FE9 /* ORLineChartConfig.h in Headers */,
-				E232BF47A81C49958061CE0EFF8B9360 /* ORLineChartValue.h in Headers */,
+				41E68D07136A2E148CD1853A8D6B0087 /* ORLineChartButton.h in Headers */,
+				6CF67B1265131755F438F3881D47850A /* ORLineChartCell.h in Headers */,
+				66E39C18C05B95D83359D262585C6929 /* ORLineChartConfig.h in Headers */,
+				A233948511FD0D743A18FBBC2BB22C43 /* ORLineChartValue.h in Headers */,
 				B90ABC6FAE8EFE46091FC0E6AB1DA11C /* ORLineChartView.h in Headers */,
-				B2F7239DF9F7F9135C98852E728351A1 /* ORRingChartConfig.h in Headers */,
+				885120F886EEE5D2C77062720F104B3D /* ORRingChartConfig.h in Headers */,
 				27D7CA455CEABB9D093057B348EDEF73 /* ORRingChartView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

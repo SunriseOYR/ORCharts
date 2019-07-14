@@ -1,13 +1,13 @@
 PODS:
-  - ORCharts (2.0.2):
-    - ORCharts/Line (= 2.0.2)
-    - ORCharts/Ring (= 2.0.2)
-    - ORCharts/Util (= 2.0.2)
-  - ORCharts/Line (2.0.2):
+  - ORCharts (2.0.3):
+    - ORCharts/Line (= 2.0.3)
+    - ORCharts/Ring (= 2.0.3)
+    - ORCharts/Util (= 2.0.3)
+  - ORCharts/Line (2.0.3):
     - ORCharts/Util
-  - ORCharts/Ring (2.0.2):
+  - ORCharts/Ring (2.0.3):
     - ORCharts/Util
-  - ORCharts/Util (2.0.2)
+  - ORCharts/Util (2.0.3)
 
 DEPENDENCIES:
   - ORCharts (from `../`)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ORCharts: 0523eaa6bd7c2ac658779754067fefc0d31bb78e
+  ORCharts: 2db6753a115007c97332a205ccfa8ed6782d8efe
 
 PODFILE CHECKSUM: 164365fbe16bb8d73a78d749d34c32d7e1ee2bb8
 
