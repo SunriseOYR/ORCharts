@@ -16,7 +16,9 @@
 ![RingChart](https://upload-images.jianshu.io/upload_images/5192751-6b13744cc1b9926d.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/440)
 
 ### LineChart
-![RingChart](https://upload-images.jianshu.io/upload_images/5192751-b6d50aa3c98a58d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/440)
+|    Slider    |    Contral    |
+|--------------|-------------|
+|![003.gif](https://upload-images.jianshu.io/upload_images/5192751-3f68f4db547e98e3.gif?imageMogr2/auto-orient/strip)|![004.gif](https://upload-images.jianshu.io/upload_images/5192751-cc2abfaa9d6a4330.gif?imageMogr2/auto-orient/strip)|
 
 
 # <a id="installation"></a>Installation
@@ -47,10 +49,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ### LineConfig
 |    Slider    |    Contral    |
 |--------------|-------------|
-
+|![003.gif](https://upload-images.jianshu.io/upload_images/5192751-3f68f4db547e98e3.gif?imageMogr2/auto-orient/strip)|![004.gif](https://upload-images.jianshu.io/upload_images/5192751-cc2abfaa9d6a4330.gif?imageMogr2/auto-orient/strip)|
 
 ## License
 
 ORCharts is available under the MIT license. See the LICENSE file for more info.
 
-## [中文简书](https://www.jianshu.com/p/317a79890984)
+### [中文简书](https://www.jianshu.com/p/317a79890984)
