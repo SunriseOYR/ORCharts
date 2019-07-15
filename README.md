@@ -5,25 +5,52 @@
 [![License](https://img.shields.io/cocoapods/l/ORCharts.svg?style=flat)](https://cocoapods.org/pods/ORCharts)
 [![Platform](https://img.shields.io/cocoapods/p/ORCharts.svg?style=flat)](https://cocoapods.org/pods/ORCharts)
 
-## Example
+## Table of contents
+* [Screenshots](#screenshots)
+* [Installation](#installation)
+* [Example](#example)
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+# <a id="screenshots"></a>Screenshots 
 
-## Requirements
+### RingChart
+![RingChart](https://upload-images.jianshu.io/upload_images/5192751-6b13744cc1b9926d.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/440)
 
-## Installation
+### LineChart
+![RingChart](https://upload-images.jianshu.io/upload_images/5192751-b6d50aa3c98a58d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/440)
 
-ORCharts is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
 
+# <a id="installation"></a>Installation
+
+#### ORCharts
 ```ruby
 pod 'ORCharts'
 ```
+#### Only Ring
 
-## Author
+```ruby
+pod 'ORCharts/Ring'  
+```
+#### Only Line
 
-sunrise_oy@163.com, sunrise_oy@163.com
+```ruby
+pod 'ORCharts/Line'  
+```
+
+# <a id="example"></a>Example 
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+### RingConfig
+![Config](https://upload-images.jianshu.io/upload_images/5192751-0a70eb88d3829d58.gif?imageMogr2/auto-orient/strip)  
+
+
+### LineConfig
+|    Slider    |    Contral    |
+|--------------|-------------|
+
 
 ## License
 
 ORCharts is available under the MIT license. See the LICENSE file for more info.
+
+## [中文简书](https://www.jianshu.com/p/317a79890984)
