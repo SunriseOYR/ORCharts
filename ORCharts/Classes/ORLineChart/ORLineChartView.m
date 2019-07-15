@@ -503,8 +503,13 @@
     
     BOOL isIndicator = _config.style == ORLineChartStyleSlider;
     
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     _circleLayer.hidden = !isIndicator;
-    self.indicatorLineLayer.hidden = !isIndicator;
+    _indicatorLineLayer.hidden = !isIndicator;
+    [CATransaction commit];
+
     if (isIndicator) {
         [_controls makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [_controls removeAllObjects];

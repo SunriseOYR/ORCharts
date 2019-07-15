@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ORCharts'
-  s.version          = '2.0.4'
+  s.version          = '2.0.5'
   s.summary          = 'A lightweight, easy-to-use lightweight library of charts, including ring, pie, pie, line, and graph'
 
 # This description is used to generate tags and improve search results.
@@ -49,13 +49,6 @@ TODO: A lightweight, easy-to-use lightweight library of charts, including ring, 
       sss.source_files = 'ORCharts/Classes/ORLineChart/**/*.{h,m}'
       # sss.public_header_files = 'ORCharts/Classes/ORLineChart/ORLineChartView.h'
       sss.dependency 'ORCharts/Util'
-  end
-  
-  # s.resource_bundles = {
-  #   'ORCharts' => ['ORCharts/Assets/*.png']
-  # }
+  end  
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
