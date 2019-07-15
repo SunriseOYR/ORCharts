@@ -24,10 +24,10 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    _datas = @[@(12), @(2),@(49),@(23),@(37),@(12),@(18),@(8),@(5),@(12),@(16.348)];
+    _datas = @[@(12), @(2),@(49.7),@(27.4),@(37),@(22),@(29.7),@(27.4),@(35.8),@(23.5),@(18),@(8),@(5),@(12),@(16.3)];
 
     
-    _lineChartView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 350)];
+    _lineChartView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350)];
 
     _lineChartView.dataSource = self;
     _lineChartView.delegate = self;
@@ -51,10 +51,10 @@
         [array addObject:[NSString stringWithFormat:@"%ld",(long)num]];
     }
     
-    _datas = [array copy];
+//    _datas = [array copy];
 
     _lineChartView.config.style = _lineChartView.config.style == ORLineChartStyleSlider ? ORLineChartStyleControl : ORLineChartStyleSlider;
-    _lineChartView.config.gradientColors = @[[[UIColor or_randomColor] colorWithAlphaComponent:0.3],[[UIColor or_randomColor] colorWithAlphaComponent:0.3]];
+//    _lineChartView.config.gradientColors = @[[[UIColor or_randomColor] colorWithAlphaComponent:0.3],[[UIColor or_randomColor] colorWithAlphaComponent:0.3]];
     
     [_lineChartView reloadData];
 }
@@ -78,13 +78,13 @@
     return string;
 }
 
-- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView {
-    return @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor redColor]};
-}
-
-- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView {
-    return @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor blueColor]};
-}
+//- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForVerticalOfChartView:(ORLineChartView *)chartView {
+//    return @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor redColor]};
+//}
+//
+//- (NSDictionary<NSAttributedStringKey,id> *)labelAttrbutesForHorizontalOfChartView:(ORLineChartView *)chartView {
+//    return @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor blueColor]};
+//}
 
 #pragma mark - ORLineChartViewDelegate
 - (void)chartView:(ORLineChartView *)chartView didSelectValueAtIndex:(NSInteger)index {

@@ -410,10 +410,12 @@
     [points removeObjectAtIndex:0];
     UIBezierPath *ainmationPath = [ORChartUtilities or_pathWithPoints:points isCurve:isCurve];
     
+    _animationLayer.timeOffset = 0.0;
+    _circleLayer.timeOffset = 0.0;
+    
     [_circleLayer removeAnimationForKey:@"or_circleMove"];
     [_circleLayer addAnimation:[self _or_positionAnimationWithPath:[ainmationPath.copy CGPath]] forKey:@"or_circleMove"];
     
-    _animationLayer.timeOffset = 0.0;
     [ainmationPath applyTransform:CGAffineTransformMakeTranslation(0, - indecaterHeight)];
     [_animationLayer removeAnimationForKey:@"or_circleMove"];
     [_animationLayer addAnimation:[self _or_positionAnimationWithPath:ainmationPath.CGPath] forKey:@"or_circleMove"];
@@ -501,7 +503,7 @@
     
     BOOL isIndicator = _config.style == ORLineChartStyleSlider;
     
-    self.circleLayer.hidden = !isIndicator;
+    _circleLayer.hidden = !isIndicator;
     self.indicatorLineLayer.hidden = !isIndicator;
     if (isIndicator) {
         [_controls makeObjectsPerformSelector:@selector(removeFromSuperview)];
