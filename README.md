@@ -86,12 +86,10 @@ reloadData when data or config changed, see more usage and config in example
 
 To run the example project.
 
-### RingConfig
-![Config](https://upload-images.jianshu.io/upload_images/5192751-0a70eb88d3829d58.gif?imageMogr2/auto-orient/strip)  
+|    Ring    |    Line    |
+|--------------|-------------|
+|   ![Config](https://upload-images.jianshu.io/upload_images/5192751-0a70eb88d3829d58.gif?imageMogr2/auto-orient/strip)   |   ![101.gif](https://upload-images.jianshu.io/upload_images/5192751-00b5849cfb364bc4.gif?imageMogr2/auto-orient/strip)   |
 
-
-### LineConfig
-![101.gif](https://upload-images.jianshu.io/upload_images/5192751-00b5849cfb364bc4.gif?imageMogr2/auto-orient/strip)
 
 
 ## License
