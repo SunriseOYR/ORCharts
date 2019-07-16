@@ -13,7 +13,7 @@
     NSInteger _randowValue;
 }
 
-@property (nonatomic, strong) ORRingChartView *ringView;
+@property (nonatomic, strong) ORRingChartView *ringChartView;
 
 @end
 
@@ -26,24 +26,19 @@
     _randowValue = 8;
     self.view.backgroundColor = [UIColor blackColor];
     
-    ORRingChartView *ringView = [ORRingChartView new];
+    _ringChartView = [[ORRingChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 375)];
+    _ringChartView.dataSource = self;
+    [self.view addSubview:_ringChartView];
     
-    ringView.config.neatInfoLine = YES;
-    
-    ringView.dataSource = self;
-    ringView.frame = CGRectMake(0, 0, 375, 375);
-    ringView.center = self.view.center;
-    
-    
-    [self.view addSubview:ringView];
-    
-    self.ringView = ringView;
+    _ringChartView.center = self.view.center;
+//    _ringChartView.config.neatInfoLine = YES;
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    self.ringView.style = arc4random() % 3;
+    _ringChartView.style = arc4random() % 3;
     _randowValue = arc4random() % 10 + 1;
-    [self.ringView reloadData];
+    [_ringChartView reloadData];
 }
 
 - (NSInteger)numberOfRingsOfChartView:(ORRingChartView *)chartView {
