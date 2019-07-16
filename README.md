@@ -83,7 +83,7 @@ reloadData when data or config changed, see more usage and config in example
 ```
 ```objc
 [_lineChartView reloadData];
-
+```
 ## dataSource && delegate && config
 Refer to the Example Or Click the link below
 
