@@ -9,7 +9,6 @@
 * [Screenshots](#screenshots)
 * [Installation](#installation)
 * [Setup](#setup)
-* [Example](#example)
 
 # <a id="screenshots"></a>Screenshots 
 
@@ -17,9 +16,18 @@
 ![RingChart](https://upload-images.jianshu.io/upload_images/5192751-6b13744cc1b9926d.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/440)
 
 ### LineChart
-|    Slider    |    Contral    |
+|    Slider    |    Control    |
 |--------------|-------------|
-|![003.gif](https://upload-images.jianshu.io/upload_images/5192751-3f68f4db547e98e3.gif?imageMogr2/auto-orient/strip)|![004.gif](https://upload-images.jianshu.io/upload_images/5192751-cc2abfaa9d6a4330.gif?imageMogr2/auto-orient/strip)|
+|![Slider](https://upload-images.jianshu.io/upload_images/5192751-3f68f4db547e98e3.gif?imageMogr2/auto-orient/strip)|![Control](https://upload-images.jianshu.io/upload_images/5192751-cc2abfaa9d6a4330.gif?imageMogr2/auto-orient/strip)|
+
+
+### Example Config
+
+To run the example project.
+
+|    Ring    |    Line    |
+|--------------|-------------|
+|   ![Config](https://upload-images.jianshu.io/upload_images/5192751-0a70eb88d3829d58.gif?imageMogr2/auto-orient/strip)   |   ![101.gif](https://upload-images.jianshu.io/upload_images/5192751-00b5849cfb364bc4.gif?imageMogr2/auto-orient/strip)   |
 
 
 # <a id="installation"></a>Installation
@@ -67,8 +75,7 @@ _lineChartView.delegate = self;
 ```
 <br/>
 
-## Usage and Config
-
+## reloadData
 reloadData when data or config changed, see more usage and config in example
 
 ```objc
@@ -76,19 +83,12 @@ reloadData when data or config changed, see more usage and config in example
 ```
 ```objc
 [_lineChartView reloadData];
-```
-|    Ring    |    Line    |
-|--------------|-------------|
-|![RingChart](https://upload-images.jianshu.io/upload_images/5192751-e88a923effc934aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)|![LineChart](https://upload-images.jianshu.io/upload_images/5192751-d4cdc88168b6b00b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)|
 
+## dataSource && delegate && config
+Refer to the Example Or Click the link below
 
-# <a id="example"></a>Example 
-
-To run the example project.
-
-|    Ring    |    Line    |
-|--------------|-------------|
-|   ![Config](https://upload-images.jianshu.io/upload_images/5192751-0a70eb88d3829d58.gif?imageMogr2/auto-orient/strip)   |   ![101.gif](https://upload-images.jianshu.io/upload_images/5192751-00b5849cfb364bc4.gif?imageMogr2/auto-orient/strip)   |
+* [ORCharts:Ring](https://www.jianshu.com/p/317a79890984)
+* [ORCharts:Line](https://www.jianshu.com/p/a571ae110ba5)
 
 
 
