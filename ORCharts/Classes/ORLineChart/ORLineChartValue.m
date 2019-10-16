@@ -60,22 +60,20 @@
     _middle = (max - min) / 2.0;
     
     NSMutableArray *array = [NSMutableArray array];
-    NSInteger average = 0;
+    CGFloat average = 0;
     
     if (min > 0 && max > 10) {
-        
+        _isDecimal = NO;
         min = floorf(min / 10.0) * 10;
         max = ceilf(max / 10.0) * 10;
         average = ceilf((max - min) / (separate - 1.0));
     }else {
         average = (max - min) / (separate - 2.0);
-        if (average - (int)average > 0.5) {
-            average += 1;
-        }
+        _isDecimal = YES;
     }
     
     for (int i = 0; i < separate; i ++) {
-        [array addObject:@(min + i * (int)average)];
+        [array addObject:@(min + i * average)];
     }
     
     _min = min;

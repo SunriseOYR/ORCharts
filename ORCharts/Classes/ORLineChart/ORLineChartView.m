@@ -574,7 +574,10 @@
     }
     
     [self.leftLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", self.lineChartValue.separatedValues[idx]] attributes:[self.dataSource labelAttrbutesForVerticalOfChartView:self]];
+        
+        NSString *value = self.lineChartValue.isDecimal ? [NSString stringWithFormat:@"%.2lf", self.lineChartValue.separatedValues[idx].doubleValue] : [NSString stringWithFormat:@"%.0lf", self.lineChartValue.separatedValues[idx].doubleValue];
+        
+        obj.attributedText = [[NSAttributedString alloc] initWithString:value attributes:[self.dataSource labelAttrbutesForVerticalOfChartView:self]];
     }];
     
     
