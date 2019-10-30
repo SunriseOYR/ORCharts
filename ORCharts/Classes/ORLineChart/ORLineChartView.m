@@ -256,6 +256,7 @@
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
     _config = [ORLineChartConfig new];
+    _defaultSelectIndex = -1;
 }
 
 - (void)_or_configChart {
@@ -464,6 +465,11 @@
 }
 
 - (void)_or_action_circle:(ORLineChartButton *)sender {
+    [self _or_action_circle:sender animated:YES];
+}
+
+- (void)_or_action_circle:(ORLineChartButton *)sender animated:(BOOL)animated {
+    
     for (UIButton*btn in _controls) {
         if ([sender isEqual:btn]) {
             btn.selected = YES;
@@ -474,11 +480,17 @@
     
     NSInteger index = [_controls indexOfObject:sender];
     
-    [UIView animateWithDuration:0.2 animations:^{
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.indicator.center = CGPointMake(sender.center.x, sender.center.y - self.indicator.bounds.size.height);
+            [self _or_setIndictorTitleWithIndex:index];
+        }];
+    }else {
         self.indicator.center = CGPointMake(sender.center.x, sender.center.y - self.indicator.bounds.size.height);
         [self _or_setIndictorTitleWithIndex:index];
-    }];
-    
+    }
+        
+    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
     [_delegate chartView:self didSelectValueAtIndex:index];
 }
 
@@ -603,6 +615,35 @@
 
     
     [self _or_configChart];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self showDataAtIndex:self.defaultSelectIndex animated:NO];
+    });
+}
+
+- (void)showDataAtIndex:(NSInteger)index animated:(BOOL)animated {
+    
+    if (index >= self.horizontalDatas.count) {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    
+    if (self.config.style == ORLineChartStyleSlider) {
+        
+        UICollectionViewLayoutAttributes *attr = [_collectionView layoutAttributesForItemAtIndexPath:indexPath];
+        
+        if (_collectionView.contentSize.width - attr.frame.size.width == 0) {
+            return;
+        }
+
+        CGFloat offset = (attr.center.x - attr.frame.size.width / 2.0) * (_collectionView.contentSize.width  + _collectionView.contentInset.left + _collectionView.contentInset.right - _collectionView.bounds.size.width) / (_collectionView.contentSize.width - attr.frame.size.width)- _collectionView.contentInset.left;
+        
+        [_collectionView setContentOffset:CGPointMake(offset, 0) animated:animated];
+    }else {
+        [self _or_action_circle:self.controls[index] animated:animated];
+    }
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -663,6 +704,13 @@
     }
 }
 
-
+- (void)setDefaultSelectIndex:(NSInteger)defaultSelectIndex {
+    if (_defaultSelectIndex != defaultSelectIndex) {
+        _defaultSelectIndex = defaultSelectIndex;
+        if (_dataSource) {
+            [self reloadData];
+        }
+    }
+}
 
 @end

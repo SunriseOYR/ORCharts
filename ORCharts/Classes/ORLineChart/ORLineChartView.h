@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet __nullable id<ORLineChartViewDelegate> delegate;
 
 @property (nonatomic, readonly) ORLineChartConfig *config;
-
+@property (nonatomic, assign) NSInteger defaultSelectIndex;
 
 - (void)reloadData;
-
+- (void)showDataAtIndex:(NSInteger)index animated:(BOOL)animated;
 @end
 
 
