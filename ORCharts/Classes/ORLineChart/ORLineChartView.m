@@ -201,7 +201,7 @@
         gradientLayer.startPoint = CGPointMake(0, 0);
         gradientLayer.endPoint = CGPointMake(0, 1);
         gradientLayer.masksToBounds = YES;
-        gradientLayer.locations = @[@(0.5f)];
+//        gradientLayer.locations = @[@(0.5f)];
         gradientLayer;
     });
     _closeLayer = [ORChartUtilities or_shapelayerWithLineWidth:1 strokeColor:nil];
