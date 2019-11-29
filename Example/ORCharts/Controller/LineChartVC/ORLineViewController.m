@@ -96,6 +96,12 @@
     return @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor blueColor]};
 }
 
+////custom left values
+//- (CGFloat)chartView:(ORLineChartView *)chartView valueOfVerticalSeparateAtIndex:(NSInteger)index {
+//    NSArray *number1 = @[@(0),@(0.2),@(0.4),@(0.6),@(0.8),@(0.10)];
+//    return [number1[index] doubleValue];
+//}
+
 #pragma mark - ORLineChartViewDelegate
 - (void)chartView:(ORLineChartView *)chartView didSelectValueAtIndex:(NSInteger)index {
     NSLog(@"did select index %ld and value  is %g", index, [_datas[index] doubleValue]);

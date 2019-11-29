@@ -111,6 +111,9 @@ typedef enum : NSUInteger {
 //return the number of lines. default 5
 - (NSInteger)numberOfVerticalLinesOfChartView:(ORLineChartView *)chartView;
 
+//return the verticalValue at index
+- (CGFloat)chartView:(ORLineChartView *)chartView valueOfVerticalSeparateAtIndex:(NSInteger)index;
+
 //return the title of horizontal label.
 - (NSString *)chartView:(ORLineChartView *)chartView titleForHorizontalAtIndex:(NSInteger)index;
 

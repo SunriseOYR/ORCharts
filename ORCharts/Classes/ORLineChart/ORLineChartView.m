@@ -565,10 +565,19 @@
         }
     }
     
-    
     NSInteger vertical = [_dataSource numberOfVerticalLinesOfChartView:self];
     
-    _lineChartValue = [[ORLineChartValue alloc] initWithHorizontalData:self.horizontalDatas numberWithSeparate:vertical];
+    if ([self.dataSource respondsToSelector:@selector(chartView:valueOfVerticalSeparateAtIndex:)]) {
+        
+        NSMutableArray *values = [NSMutableArray arrayWithCapacity:vertical];
+        
+        for (int i = 0; i < vertical; i ++) {
+            [values addObject:@([self.dataSource chartView:self valueOfVerticalSeparateAtIndex:i])];
+        }
+        _lineChartValue = [[ORLineChartValue alloc] initWithData:values];
+    }else {
+        _lineChartValue = [[ORLineChartValue alloc] initWithHorizontalData:self.horizontalDatas numberWithSeparate:vertical];
+    }
     
     if (self.leftLabels.count > vertical) {
         for (NSInteger i = vertical; i < _leftLabels.count; i ++) {

@@ -15,6 +15,40 @@
     NSInteger _separate;
 }
 
+- (instancetype)initWithData:(NSMutableArray<NSNumber *> *)values {
+    self = [super init];
+    if (self) {
+        
+        if (values.count <= 1) {
+            _separatedValues = values;
+            _max = values.firstObject.doubleValue;
+            _min = _max;
+            _middle = _min;
+            _isDecimal = YES;
+            _isDecimal = _max < 10;
+            return self;
+        }
+        
+        
+        BOOL bFinish = YES; //是否发生数据交换
+        for (NSInteger i = 1; i<= values.count && bFinish; i++) {
+            bFinish = NO;
+            for (NSInteger y = values.count-1; y>=i; y--) {
+                if ([values[y] doubleValue] < [values[y - 1] doubleValue]) {
+                    [values exchangeObjectAtIndex:y-1 withObjectAtIndex:y];
+                    bFinish = YES;
+                }
+            }
+        }
+        _separatedValues = values.copy;
+        _max = values.lastObject.doubleValue;
+        _min = values.firstObject.doubleValue;;
+        _middle = (_max - _min) / 2.0;
+        _isDecimal = !(_min > 0 && _max > 10);
+    }
+    return self;
+}
+
 - (instancetype)initWithData:(NSArray<NSNumber *> *)values numberWithSeparate:(NSInteger)separate customMin:(CGFloat)min
 {
     self = [super init];
