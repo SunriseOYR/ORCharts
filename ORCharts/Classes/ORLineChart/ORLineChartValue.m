@@ -29,7 +29,6 @@
             return self;
         }
         
-        
         BOOL bFinish = YES; //是否发生数据交换
         for (NSInteger i = 1; i<= values.count && bFinish; i++) {
             bFinish = NO;

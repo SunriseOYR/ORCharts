@@ -570,7 +570,6 @@
     if ([self.dataSource respondsToSelector:@selector(chartView:valueOfVerticalSeparateAtIndex:)]) {
         
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:vertical];
-        
         for (int i = 0; i < vertical; i ++) {
             [values addObject:@([self.dataSource chartView:self valueOfVerticalSeparateAtIndex:i])];
         }
