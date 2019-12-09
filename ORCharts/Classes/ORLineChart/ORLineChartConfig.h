@@ -38,6 +38,8 @@ typedef enum : NSUInteger {
 
 //gradientColors of chart. default red alpha 0.3 and blue alpha 0.3
 @property (nonatomic, copy) NSArray<UIColor *> *gradientColors;
+//locations of gradientColor. default nil
+@property (nonatomic, copy) NSArray *gradientLocations;
 @property (nonatomic, copy, readonly) NSArray *gradientCGColors;
 
 //bottom inset of chartView. default 10

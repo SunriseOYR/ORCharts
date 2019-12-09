@@ -32,7 +32,6 @@
     
     _ringChartView.center = self.view.center;
 //    _ringChartView.config.neatInfoLine = YES;
-
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

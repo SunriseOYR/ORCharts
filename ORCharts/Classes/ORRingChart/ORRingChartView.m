@@ -124,11 +124,15 @@
     ringWidth = MAX(ringWidth, 10);
     ringWidth = MIN(ringWidth, width / 2.0);
     
-    if (self.style == ORRingChartStyleFan || self.style == ORRingChartStylePie) {
+    if (self.style == ORRingChartStyleFan) {
         ringWidth = width / 2.0;
         if (_centerInfoView) {
             [_centerInfoView removeFromSuperview];
         }
+    }
+    
+    if (self.style == ORRingChartStylePie && _centerInfoView == nil) {
+        ringWidth = width / 2.0;
     }
 
     CGFloat insetRingWidth = self.style == ORRingChartStylePie ? 0 : ringWidth;

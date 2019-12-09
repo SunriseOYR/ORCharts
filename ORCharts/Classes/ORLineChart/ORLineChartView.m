@@ -274,6 +274,7 @@
     _circleLayer.strokeColor = _config.chartLineColor.CGColor;
     
     _gradientLayer.colors = _config.gradientCGColors;
+    _gradientLayer.locations = _config.gradientLocations;
     
     _bgLineLayer.strokeColor = _config.bgLineColor.CGColor;
     _bgLineLayer.lineDashPattern = @[@(1.5), @(_config.dottedBGLine ? 3 : 0)];
