@@ -636,6 +636,10 @@
         return;
     }
     
+    if (_collectionView.contentSize.width < _collectionView.bounds.size.width) {
+        return;
+    }
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     
     if (self.config.style == ORLineChartStyleSlider) {

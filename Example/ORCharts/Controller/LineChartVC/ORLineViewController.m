@@ -25,13 +25,17 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     _datas = @[@(0.12), @(0.2),@(0.497),@(0.274),@(0.37),@(0.22),@(0.297),@(0.274),@(0.358),@(0.235),@(0.18),@(0.8),@(0.5),@(0.12),@(0.163)];
+//    _datas = @[@(0.12), @(0.2),@(0.497),@(0.274)];
+
     
     _lineChartView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350)];
-    
-    _lineChartView.defaultSelectIndex = 3;
+    _lineChartView.config.gradientLocations = @[@(0.8), @(0.9)];
+
+    _lineChartView.defaultSelectIndex = 1;
 
     _lineChartView.dataSource = self;
     _lineChartView.delegate = self;
+    
         
     [self.view addSubview:_lineChartView];
     _lineChartView.center = self.view.center;
