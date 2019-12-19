@@ -644,7 +644,6 @@
         
         if (_collectionView.contentSize.width < _collectionView.bounds.size.width) {
             
-            
             CGFloat ratio = attr.frame.origin.x / (_collectionView.contentSize.width - attr.frame.size.width);
             ratio = fmin(fmax(0.0, ratio), 1.0);
             
@@ -652,7 +651,11 @@
             _animationLayer.timeOffset = ratio;
             _indicator.center = _animationLayer.presentationLayer.position;
             [self _or_updateIndcaterLineFrame];
-
+            if (index != _lastIndex) {
+                [self _or_setIndictorTitleWithIndex:index];
+                _lastIndex = index;
+                [_delegate chartView:self indicatorDidChangeValueAtIndex:index];
+            }
             return;
         }
         
