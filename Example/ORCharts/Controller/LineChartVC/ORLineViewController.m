@@ -45,9 +45,10 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
 //    _lineChartView.config.style = _lineChartView.config.style == ORLineChartStyleSlider ? ORLineChartStyleControl : ORLineChartStyleSlider;
-//    [_lineChartView reloadData];
+    [_lineChartView reloadData];
 
-    [_lineChartView showDataAtIndex:arc4random() % _datas.count animated:YES];
+//    [_lineChartView showDataAtIndex:arc4random() % _datas.count animated:YES];
+
     return;
     
     /*

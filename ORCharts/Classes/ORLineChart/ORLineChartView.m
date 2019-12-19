@@ -194,8 +194,6 @@
     _bottomLineLayer = [CAShapeLayer layer];
     [self.layer addSublayer:_bottomLineLayer];
     
-    
-    
     _gradientLayer = ({
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.startPoint = CGPointMake(0, 0);
@@ -326,9 +324,7 @@
                                            _config.topInset,
                                            self.bounds.size.width - _config.leftWidth,
                                            self.bounds.size.height - _config.topInset - _config.bottomInset);
-    
-    
-    
+        
     _gradientLayer.frame = CGRectMake(0, 0, 0, self.collectionView.bounds.size.height);
     
     CGFloat indecaterHeight = _indicator.bounds.size.height;
@@ -422,10 +418,13 @@
     [_animationLayer removeAnimationForKey:@"or_circleMove"];
     [_animationLayer addAnimation:[self _or_positionAnimationWithPath:ainmationPath.CGPath] forKey:@"or_circleMove"];
 
-    CGPoint fistValue = [points.firstObject CGPointValue];
-    _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
-    [self _or_updateIndcaterLineFrame];
-
+    
+    if (_defaultSelectIndex == 0) {        
+        CGPoint fistValue = [points.firstObject CGPointValue];
+        _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
+        [self _or_updateIndcaterLineFrame];
+    }
+    
     
     if (_config.animateDuration > 0) {
         [_lineLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:_config.animateDuration] forKey:nil];
@@ -510,12 +509,13 @@
         return;
     }
     
+    _lastIndex = -1;
+    
     NSInteger items = [_dataSource numberOfHorizontalDataOfChartView:self];
     
     [self.horizontalDatas removeAllObjects];
     
     BOOL isIndicator = _config.style == ORLineChartStyleSlider;
-    
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
@@ -532,7 +532,6 @@
         [_collectionView reloadData];
         return;
     }
-    
     
     for (int i = 0; i < items; i ++) {
         
@@ -625,7 +624,7 @@
     
     [self _or_configChart];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showDataAtIndex:self.defaultSelectIndex animated:NO];
     });
 }
