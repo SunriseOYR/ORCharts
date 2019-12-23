@@ -254,7 +254,7 @@
     _leftLabels = [NSMutableArray array];
     _horizontalDatas = [NSMutableArray array];
     _config = [ORLineChartConfig new];
-    _defaultSelectIndex = -1;
+    _defaultSelectIndex = 0;
 }
 
 - (void)_or_configChart {
@@ -406,6 +406,9 @@
     
     [points removeLastObject];
     [points removeObjectAtIndex:0];
+    
+    _circleLayer.position = [points.lastObject CGPointValue];
+
     UIBezierPath *ainmationPath = [ORChartUtilities or_pathWithPoints:points isCurve:isCurve];
     
     _animationLayer.timeOffset = 0.0;
@@ -419,7 +422,7 @@
     [_animationLayer addAnimation:[self _or_positionAnimationWithPath:ainmationPath.CGPath] forKey:@"or_circleMove"];
 
     
-    if (_defaultSelectIndex == 0) {        
+    if (_defaultSelectIndex == 0 || points.count <= 1) {
         CGPoint fistValue = [points.firstObject CGPointValue];
         _indicator.center = CGPointMake(fistValue.x, fistValue.y - indecaterHeight);
         [self _or_updateIndcaterLineFrame];
