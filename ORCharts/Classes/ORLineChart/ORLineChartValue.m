@@ -43,7 +43,7 @@
         _max = values.lastObject.doubleValue;
         _min = values.firstObject.doubleValue;;
         _middle = (_max - _min) / 2.0;
-        _isDecimal = !(_min > 0 && _max > 10);
+        _isDecimal = (_max - _min) < 10;
     }
     return self;
 }
@@ -95,7 +95,7 @@
     NSMutableArray *array = [NSMutableArray array];
     CGFloat average = 0;
     
-    if (min > 0 && max > 10) {
+    if ((max - min) > 10) {
         _isDecimal = NO;
         min = floorf(min / 10.0) * 10;
         max = ceilf(max / 10.0) * 10;
