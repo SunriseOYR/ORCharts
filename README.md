@@ -96,4 +96,4 @@ Refer to the Example Or Click the link below
 
 ORCharts is available under the MIT license. See the LICENSE file for more info.
 
-### [中文简书](https://www.jianshu.com/p/317a79890984)
+### [中文简书](https://www.jianshu.com/p/6f65bf7dfbbf)
