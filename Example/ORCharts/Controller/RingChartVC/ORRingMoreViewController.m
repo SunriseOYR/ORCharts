@@ -184,7 +184,7 @@
         label.font = [UIFont systemFontOfSize:11];
         label.textColor = [UIColor redColor];
     }
-    label.text = [NSString stringWithFormat:@"Value：%.02f", [_datasource[index] floatValue]];
+    label.text = [NSString stringWithFormat:@"%.02f", [_datasource[index] floatValue]];
     [label sizeToFit];
     return label;
 }
@@ -196,7 +196,7 @@
         label.font = [UIFont systemFontOfSize:11];
         label.textColor = [UIColor lightGrayColor];
     }
-    label.text = [NSString stringWithFormat:@"Index：%zd", index];
+    label.text = [NSString stringWithFormat:@"Index:%zd", index];
     [label sizeToFit];
     return label;
 }

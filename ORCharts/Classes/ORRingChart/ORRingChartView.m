@@ -7,7 +7,7 @@
 //
 
 #import "ORRingChartView.h"
-#import "ORChartUtilities.h"
+#import "ORChartUtilities+ORRing.h"
 
 @implementation NSObject (ORRingChartView)
 
@@ -17,6 +17,7 @@
 - (UIView *)viewForRingCenterOfChartView:(ORRingChartView *)chartView {return nil;}
 - (UIView *)chartView:(ORRingChartView *)chartView viewForTopInfoAtRingIndex:(NSInteger)index {return nil;}
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index {return nil;}
+- (UIView *)chartView:(ORRingChartView *)chartView viewForRingInfoAtRingIndex:(NSInteger)index {return nil;}
 
 @end
 
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) CALayer *infoLinePointLayer;
 @property (nonatomic, strong) UIView *topInfoView;
 @property (nonatomic, strong) UIView *bottomInfoView;
+@property (nonatomic, strong) UIView *ringInfoView;
 
 @property (nonatomic, assign) CGFloat startAngle;
 @property (nonatomic, assign) CGFloat endAngle;
@@ -149,44 +151,62 @@
         obj.ringLineLayer.position = position;
         obj.ringLineLayer.path = path;
         
-        
-        CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:self.config.infoLineMargin inMargin:self.config.infoLineInMargin breakMargin:self.config.infoLineBreakMargin neatLine:self.config.neatInfoLine checkBlock:^CGFloat(CGPoint breakPoint) {
-            
-            if (idx > 0) {
-                ORRingConfig *config = self.ringConfigs[idx - 1];
+        if (obj.ringInfoView) {
+//            CGFloat angle =  obj.endAngle;
+            CGFloat middAngle = [ORChartUtilities or_middleAngleWithStartAngle:obj.startAngle endAngle:obj.endAngle];
+
+            if (insetRingWidth > 0) {
                 
-                if (CGRectGetMinX(config.topInfoView.frame) > centerX && breakPoint.x > centerX) {
+                CGFloat insetAngle = (insetRingWidth / width) * M_PI_2;
+                middAngle = self.config.clockwise ? [ORChartUtilities or_angle:middAngle byAddAngle:insetAngle] : [ORChartUtilities or_differAngleWithSubtractionAngle:middAngle subtractedAngle:insetAngle];
+            }
+            
+            CGPoint ringInfoCenter = [ORChartUtilities or_centerWithRect:bounds angle:middAngle ringWidth:ringWidth];
+            ringInfoCenter = [obj.ringLineLayer convertPoint:ringInfoCenter toLayer:self.layer];
+            obj.ringInfoView.center = ringInfoCenter;
+            [self bringSubviewToFront:obj.ringInfoView];
+        }
+        
+        
+        if (obj.bottomInfoView || obj.topInfoView) {
+            CGPathRef linePath = [ORChartUtilities or_breakLinePathWithRawRect:self.bounds circleWidth:width ringWidth:insetRingWidth startAngle:obj.startAngle endAngle:obj.endAngle margin:self.config.infoLineMargin inMargin:self.config.infoLineInMargin breakMargin:self.config.infoLineBreakMargin neatLine:self.config.neatInfoLine clockWise:self.config.clockwise checkBlock:^CGFloat(CGPoint breakPoint) {
+                
+                if (idx > 0) {
+                    ORRingConfig *config = self.ringConfigs[idx - 1];
                     
-                    CGFloat inset = obj.topInfoView.bounds.size.height + self.config.infoViewMargin - (breakPoint.y - CGRectGetMaxY(config.bottomInfoView.frame));
-                    if (inset > 0) {
-                        return inset;
-                    }
-                }else if (CGRectGetMinX(config.topInfoView.frame) < centerX && breakPoint.x < centerX) {
-                    
-                    CGFloat inset = obj.bottomInfoView.bounds.size.height + self.config.infoViewMargin - (CGRectGetMinY(config.topInfoView.frame) - breakPoint.y);
-                    if (inset > 0) {
-                        return -inset;
+                    if (CGRectGetMinX(config.topInfoView.frame) > centerX && breakPoint.x > centerX) {
+                        
+                        CGFloat inset = obj.topInfoView.bounds.size.height + self.config.infoViewMargin - (breakPoint.y - CGRectGetMaxY(config.bottomInfoView.frame));
+                        if (inset > 0) {
+                            return inset;
+                        }
+                    }else if (CGRectGetMinX(config.topInfoView.frame) < centerX && breakPoint.x < centerX) {
+                        
+                        CGFloat inset = obj.bottomInfoView.bounds.size.height + self.config.infoViewMargin - (CGRectGetMinY(config.topInfoView.frame) - breakPoint.y);
+                        if (inset > 0) {
+                            return -inset;
+                        }
                     }
                 }
-            }
-            return 0;
-        } detailInfoBlock:^(CGPoint edgePoint, CGPoint endPoint) {
-            
-            obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - self.config.pointWidth / 2.0, endPoint.y - self.config.pointWidth / 2.0, self.config.pointWidth, self.config.pointWidth);
-            obj.infoLinePointLayer.cornerRadius = self.config.pointWidth / 2.0;
+                return 0;
+            } detailInfoBlock:^(CGPoint edgePoint, CGPoint endPoint) {
+                
+                obj.infoLinePointLayer.frame = CGRectMake(endPoint.x - self.config.pointWidth / 2.0, endPoint.y - self.config.pointWidth / 2.0, self.config.pointWidth, self.config.pointWidth);
+                obj.infoLinePointLayer.cornerRadius = self.config.pointWidth / 2.0;
 
-            CGRect frame = obj.topInfoView.frame;
-            CGFloat fx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - frame.size.width : edgePoint.x;
-            frame.origin = CGPointMake(fx, edgePoint.y - self.config.infoViewMargin - frame.size.height);
-            obj.topInfoView.frame = frame;
+                CGRect frame = obj.topInfoView.frame;
+                CGFloat fx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - frame.size.width : edgePoint.x;
+                frame.origin = CGPointMake(fx, edgePoint.y - self.config.infoViewMargin - frame.size.height);
+                obj.topInfoView.frame = frame;
 
-            CGRect bottomFrame = obj.bottomInfoView.frame;
-            CGFloat bfx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - bottomFrame.size.width : edgePoint.x;
-            bottomFrame.origin = CGPointMake(bfx, edgePoint.y + self.config.infoViewMargin);
-            obj.bottomInfoView.frame = bottomFrame;
-            
-        }].CGPath;
-        obj.infoLineLayer.path = linePath;
+                CGRect bottomFrame = obj.bottomInfoView.frame;
+                CGFloat bfx = edgePoint.x > self.bounds.size.width / 2.0 ? edgePoint.x - bottomFrame.size.width : edgePoint.x;
+                bottomFrame.origin = CGPointMake(bfx, edgePoint.y + self.config.infoViewMargin);
+                obj.bottomInfoView.frame = bottomFrame;
+                
+            }].CGPath;
+            obj.infoLineLayer.path = linePath;
+        }
         
         if (self.config.animateDuration > 0) {
             [shapeLayer addAnimation:[ORChartUtilities or_strokeAnimationWithDurantion:self.config.animateDuration] forKey:nil];
@@ -293,12 +313,12 @@
         
         UIView *topInfoView = [_dataSource chartView:self viewForTopInfoAtRingIndex:i];
         UIView *bottomInfoView = [_dataSource chartView:self viewForBottomInfoAtRingIndex:i];
-        
+        UIView *ringInfoView = [_dataSource chartView:self viewForRingInfoAtRingIndex:i];
+
         if (topInfoView && ![topInfoView isEqual:config.topInfoView]) {
             [config.topInfoView removeFromSuperview];
             config.topInfoView = topInfoView;
             [self addSubview:config.topInfoView];
-            //缓存数组 --待定
         }
         
         if (bottomInfoView && ![bottomInfoView isEqual:config.bottomInfoView]) {
@@ -307,6 +327,11 @@
             [self addSubview:config.bottomInfoView];
         }
         
+        if (ringInfoView && ![ringInfoView isEqual:config.ringInfoView]) {
+            [config.ringInfoView removeFromSuperview];
+            config.ringInfoView = ringInfoView;
+            [self addSubview:config.ringInfoView];
+        }
 
         _maxMarginWidthSum = MAX(MAX(config.topInfoView.bounds.size.width, config.bottomInfoView.bounds.size.width), _maxMarginWidthSum);
         _maxMarginHeightSum = MAX(config.topInfoView.bounds.size.height + config.bottomInfoView.bounds.size.height, _maxMarginHeightSum);
@@ -341,6 +366,7 @@
         [self _or_addLayerstWithconfig:config];
     }
     
+    
     UIView *centerView = [_dataSource viewForRingCenterOfChartView:self];
     if (centerView && (![centerView isEqual:_centerInfoView] || !centerView.superview)) {
         [_centerInfoView removeFromSuperview];
@@ -365,6 +391,13 @@
 - (UIView *)dequeueBottomInfoViewAtIndex:(NSInteger)index {
     if (index < self.ringConfigs.count) {
         return self.ringConfigs[index].bottomInfoView;
+    }
+    return nil;
+}
+
+- (UIView *)dequeueRingInfoViewAtIndex:(NSInteger)index {
+    if (index < self.ringConfigs.count) {
+        return self.ringConfigs[index].ringInfoView;
     }
     return nil;
 }

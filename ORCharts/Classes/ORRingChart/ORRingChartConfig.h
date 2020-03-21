@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORRingChartConfig : NSObject
 
-//The direction in chart.
+//The direction in chart. default YES
 @property (nonatomic, assign) BOOL clockwise;
 
 //neatInfoLine. if YES infoLines alignment chartview, if NO infoLines has same width. default NO
@@ -89,6 +89,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 //return the bottom info view. you need to set the bounds
 - (UIView *)chartView:(ORRingChartView *)chartView viewForBottomInfoAtRingIndex:(NSInteger)index;
+
+//return the ring info view. you need to set the bounds
+- (UIView *)chartView:(ORRingChartView *)chartView viewForRingInfoAtRingIndex:(NSInteger)index;
+
 
 @end
 
