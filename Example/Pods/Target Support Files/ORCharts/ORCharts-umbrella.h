@@ -15,6 +15,7 @@
 #import "ORLineChartConfig.h"
 #import "ORLineChartValue.h"
 #import "ORLineChartView.h"
+#import "ORChartUtilities+ORRing.h"
 #import "ORRingChartConfig.h"
 #import "ORRingChartView.h"
 #import "ORChartUtilities.h"
