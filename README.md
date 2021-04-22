@@ -64,9 +64,11 @@ _ringChartView.dataSource = self;
 [self.view addSubview:_ringChartView];
 ```
 <br/>
+
 ```objc
 @property (nonatomic, strong) ORLineChartView *lineChartView;
 ```
+
 ```objc
 _lineChartView = [[ORLineChartView alloc] initWithFrame:CGRectMake(0, 0, 375, 350)];
 _lineChartView.dataSource = self;
